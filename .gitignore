@@ -8,6 +8,12 @@ python_apps
 #other
 *.sublime-workspace
 nohup.*
+/students
+
 __*
+.*
+!/.gitignore
+
 *.zip
+
 
