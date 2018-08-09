@@ -16,7 +16,7 @@
 		//python
 		// "python.venvPath": "./.venv/",
 		// "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
-		"python.pythonPath": "${workspaceFolder}/.venv/bin/python",
+		"python.pythonPath": "/home/nemsys/.pyenv/versions/3.6.5/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pep8Enabled": false,
 		"python.linting.flake8Enabled": true,
