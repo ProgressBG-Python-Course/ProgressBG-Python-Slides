@@ -22,6 +22,8 @@
 	<![endif]-->
 	<!-- CUSTOM -->
 	<base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -76,10 +78,10 @@
 <section><h2>Introduction</h2>
 	<section><h3>What is Django?</h3>
 		<blockquote cite="https://www.djangoproject.com/">Django is a high-level Python <span class="note">Web framework</span> that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source</blockquote>
-		<p><a href="https://www.djangoproject.com/">Official Django Project Site</a></p>		
+		<p><a href="https://www.djangoproject.com/">Official Django Project Site</a></p>
 	</section>
 	<section><h3>What is a Web Framework</h3>
-		<dl class="fa">			
+		<dl class="fa">
 			<dt>A web framework is a collection of modules that allows you to create applications or websites from an existing source, instead of from scratch</dt>
 			<dd>admin panels</dd>
 			<dd>authentication support</dd>
@@ -108,7 +110,7 @@
 	<section><h3>Creating the project structure</h3>
 		<pre><code rel="Terminal" class="shell" data-noescape>
 			$ cd myprojects
-			$ django-admin startproject ToDoApp			 
+			$ django-admin startproject ToDoApp
 		</code></pre>
 		<p style="text-align: left; font-size: 0.8em">A folder ToDoApp will be created into myprojects folder. It is just a a container for the project (it does not matter anything to Django) and we can safely rename it as  ToDoAppProject. We also would like to rename <i>mysite</i> with <b>ToDoApp</b></p>
 		<pre><code rel="Output" class="shell" data-noescape>
@@ -119,10 +121,10 @@
 			    ├── settings.py
 			    ├── urls.py
 			    └── wsgi.py
-		</code></pre>		
+		</code></pre>
 	</section>
 	<section><h3>Project Structure Content</h3>
-		<dl class="fa" style="font-size: 0.8em">			
+		<dl class="fa" style="font-size: 0.8em">
 			<dt><span class="note">manage.py</span>: A command-line utility that lets you interact with this Django project in various ways.</dt>
 			<dt><span class="note">ToDoApp/</span>: this folder is the actual Python package for your project. Its name is the Python package name you'll need to use to import anything inside it</dt>
 			<dt><span class="note">ToDoApp/__init__.py</span>: An empty file that tells Python that this directory should be considered a Python package.</dt>
@@ -325,11 +327,11 @@
 		</code></pre>
 		<pre><code rel="Output" class="shell" data-noescape>
 			CREATE TABLE "ToDoListComponent_task" (
-				"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
-				"title" varchar(100) NOT NULL, 
-				"description" text NOT NULL, 
-				"created" datetime NOT NULL, 
-				"due" datetime NOT NULL, 
+				"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+				"title" varchar(100) NOT NULL,
+				"description" text NOT NULL,
+				"created" datetime NOT NULL,
+				"due" datetime NOT NULL,
 				"end" datetime NOT NULL);
 			COMMIT;
 		</code></pre>
@@ -361,13 +363,13 @@
 		<pre><code rel="Output" class="shell" data-noescape>
 			Username (leave blank to use 'nemsys'): admin
 			Email address: admin@test.me
-			Password: 
-			Password (again): 
+			Password:
+			Password (again):
 			This password is too short. It must contain at least 8 characters.
 			This password is too common.
 			This password is entirely numeric.
-			Password: 
-			Password (again): 
+			Password:
+			Password (again):
 			Superuser created successfully.
 		</code></pre>
 	</section>
@@ -378,7 +380,7 @@
 		</dl>
 		<pre><code rel="Terminal" class="shell" data-noescape>
 			$ python manage.py runserver
-		</code></pre>	
+		</code></pre>
 		<dl class="fa">
 			<dt>Go to <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">http://127.0.0.1:8000/admin/login/?next=/admin/</a></dt>
 		</dl>
@@ -610,7 +612,7 @@
 		</dl>
 	</section>
 </section>
-<!-- 
+<!--
 <section id="hw"><h1>Exercises</h1></section>
 <section><h2>Task1: Task1Title</h2>
 	<section><h3>The Task</h3>

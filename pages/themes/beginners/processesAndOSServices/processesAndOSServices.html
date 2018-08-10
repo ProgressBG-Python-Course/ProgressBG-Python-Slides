@@ -22,6 +22,8 @@
 	<![endif]-->
 	<!-- CUSTOM -->
 	<base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -91,7 +93,7 @@
 		<pre><code rel="Python" class="python">
 			# execute 'date +%H:%M:%S' by Python:
 			>>> import subprocess
-			>>> 
+			>>>
 			>>> subprocess.call(["date", "+%H:%M:%S"])
 			0
 		</code></pre>
@@ -99,7 +101,7 @@
 	<section><h3>subprocess.check_output(<em>args</em>)</h3>
 		<dl class="fa">
 			<dt>Run command with arguments and return its output</dt>
-			<dt>If the return code was non-zero it raises a CalledProcessError</dt>	
+			<dt>If the return code was non-zero it raises a CalledProcessError</dt>
 		</dl>
 		<pre><code rel="Python" class="python">
 			# execute 'date +%H:%M:%S' and get output:
@@ -108,13 +110,13 @@
 			>>> output = subprocess.check_output(["date", "+%H:%M:%S"])
 			>>> output
 			b'15:33:16\n'
-	
+
 			# decode the bytestring to ascii
 			>>> output_ascii = output.decode('ascii')
 			>>> output_ascii
 			'15:33:16\n'
 
-			# strip leading and trailing spaces:			
+			# strip leading and trailing spaces:
 			>>> output_ascii.strip()
 			'15:33:16'
 		</code></pre>
@@ -128,7 +130,7 @@
 				"""open a terminal with a custom profile in the given directory"""
 				cmd = "gnome-terminal"
 				args = (
-					"--window-with-profile",profile, 
+					"--window-with-profile",profile,
 					"--working-directory",directory
 				)
 
@@ -144,7 +146,7 @@
 
 			def open_vscode(directory):
 				"""open VS Code editor and load given directory"""
-				cmd = "code"	
+				cmd = "code"
 
 				subprocess.call([cmd, directory])
 
@@ -160,14 +162,14 @@
 			import subprocess
 
 			def load_browser(profile, url):
-				"""open Chrome browser in new window, 
-				   with the given user profile and loads the specified URLs				  
+				"""open Chrome browser in new window,
+				   with the given user profile and loads the specified URLs
 				"""
 				cmd = "google-chrome"
 				args = "--new-window --profile-directory=" + "'{:s}' {:s}".format(profile, url)
 
-				subprocess.call(cmd + " " + args, shell=True)	
-				
+				subprocess.call(cmd + " " + args, shell=True)
+
 
 			urls_to_load = [
 				"https://mail.google.com",
@@ -183,10 +185,10 @@
 		<dl class="fa">
 			<dt><a href="https://docs.python.org/3/library/subprocess.html">subprocess @python3 docs</a></dt>
 		</dl>
-	</section>	
+	</section>
 </section>
 
-<!-- 
+<!--
 <section id="hw"><h1>Exercises</h1></section>
 <section><h2>Task1: Task1Title</h2>
 	<section><h3>The Task</h3>

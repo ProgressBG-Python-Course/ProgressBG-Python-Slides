@@ -21,7 +21,7 @@
 	<script src="lib/js/html5shiv.js"></script>
 	<![endif]-->
 
-	<!-- CUSTOM -->	
+	<!-- CUSTOM -->
 	<style type="text/css">
 		.reveal section iframe{
 			text-align: center;
@@ -31,6 +31,8 @@
 
 	</style>
 	<base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -77,7 +79,7 @@
 		<div class="company">
 			 <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova on LinkedIn</a></div>
 		</div>
-	</section>	
+	</section>
 </section>
 
 <section><h2>PIP - the Python Package Manager</h2>
@@ -91,7 +93,7 @@
 	<section style="font-size: 0.8em"><h3>pip basic commands</h3>
 		<dl class="fa">
 			<dt>get help on pip:</dt>
-			<dd class="code">pip help</dd>			
+			<dd class="code">pip help</dd>
 			<dt>list installed packages:</dt>
 			<dd class="code">pip list</dd>
 			<dt>install a package from PyPI:</dt>
@@ -118,7 +120,7 @@
 		<dl class="fa">
 			<dt>Python apps usually depends on many modules(packages), which depends on other packages, and very often - from a specific version of a package.</dt>
 			<dt>Many system tools also depends on specific versions of installed Python packages.</dt>
-			<dt class="note">You don't want to pollute your system's Python environment!</dt>			
+			<dt class="note">You don't want to pollute your system's Python environment!</dt>
 		</dl>
 	</section>
 	<section><h3>Virtual environment - What?</h3>
@@ -134,13 +136,13 @@
 			<dt>A dependency and virtual environments manager combined into one.</dt>
 			<dt>Automatically creates and manages a virtualenv for your projects.</dt>
 			<dt><a href="https://pypi.python.org/pypi/pipenv">The officially recommended Python packaging tool</a></dt>
-			<dt>Functionally similar to npm and other modern package managers.</dt>						
+			<dt>Functionally similar to npm and other modern package managers.</dt>
 		</dl>
-	</section>	
+	</section>
 	<section><h3>Pipenv - Install</h3>
 		<pre><code rel="Terminal" class="bash">
 			$ pip install --user pipenv
-		</code></pre>		
+		</code></pre>
 	</section>
 	<section><h3>Pipenv - manage virtualenv</h3>
 		<pre><code rel="Terminal" class="bash">
@@ -151,12 +153,12 @@
 
 				### Spawn a shell within the virtualenv
 				$ pipenv shell
-				Spawning environment shell...				
+				Spawning environment shell...
 
 				### Exit the virtualenv
 				(course_intro-SmgljMaj) $ exit
 				exit
-				$ 
+				$
 
 				### Output virtualenv information
 				$ pipenv --venv
@@ -177,8 +179,8 @@
 			### remove package
 			$ pipenv uninstall requests
 			Uninstalling requests-2.18.4
-		</code></pre>			
-	</section>	
+		</code></pre>
+	</section>
 	<section><h3>List as a graph the installed packages for the given virtualenv</h3>
 		<pre><code rel="Terminal" class="bash">
 			$ pipenv graph
@@ -206,7 +208,7 @@
 			exit
 		</code></pre>
 		<p>Or type <kbd>ctrl-d</kbd></p>
-		<p>Or close your terminal windows :)</p>		
+		<p>Or close your terminal windows :)</p>
 	</section>
 	<section><h3>Useful video</h3>
 		<p><a href="https://www.youtube.com/watch?v=tRmmjlVHzno">Intro to Pipenv - A Package Manager for Python</a> by <a href="https://www.youtube.com/channel/UC-QDfvrRIDB6F0bIO4I4HkQ">Pretty Printed</a></p>
@@ -243,13 +245,13 @@ CodingEntrepreneurs</a></p>
 			plt.grid(True)
 			plt.savefig("test.png")
 			plt.show()
-		</code></pre>	
-		<p class="smallest">example from: <a href="https://matplotlib.org/examples/pylab_examples/simple_plot.html">matplotlib.org</a></p>	
-	</section>	
+		</code></pre>
+		<p class="smallest">example from: <a href="https://matplotlib.org/examples/pylab_examples/simple_plot.html">matplotlib.org</a></p>
+	</section>
 	<section><h3>Prepare terminal</h3>
 		<dl class="fa">
 			<dt>Open a terminal window and navigate to your project root folder.</dt>
-			<dt>Make sure you are in it:</dt>					
+			<dt>Make sure you are in it:</dt>
 		</dl>
 		<pre><code rel="Terminal" class="shell">
 			# navigate...
@@ -262,14 +264,14 @@ CodingEntrepreneurs</a></p>
 	</section>
 	<section><h3>Run the program</h3>
 		<p>try to run the simple_plot.py program</p>
-		<pre><code rel="Terminal" class="bash">			
+		<pre><code rel="Terminal" class="bash">
 			$ python simple_plot.py
 			Traceback (most recent call last):
 			  File "simple_plot.py", line 1, in &lt;module&gt;
 			    import matplotlib.pyplot as plt
 			ImportError: No module named matplotlib.pyplot
 		</code></pre>
-		<p>Yes, an error occurs, because we do not have the required module (matplotlib) installed</p>		
+		<p>Yes, an error occurs, because we do not have the required module (matplotlib) installed</p>
 	</section>
 	<section><h3>Install dependencies in a virtual environment</h3>
 		<p class="note">We will install the required modules in a safe virtual environment by pipenv!</p>
@@ -283,7 +285,7 @@ CodingEntrepreneurs</a></p>
 		</code></pre>
 	</section>
 	<section><h3>Activate the virtual environment</h3>
-		<dl class="fa">			
+		<dl class="fa">
 			<pre><code rel="Terminal" class="bash">
 				$ pipenv shel
 				  Spawning environment shell...
@@ -294,7 +296,7 @@ CodingEntrepreneurs</a></p>
 		<dl class="fa">
 			<dt>Run the simple_plot.py program:</dt>
 			<pre><code rel="Terminal" class="bash">
-				python simple_plot.py 
+				python simple_plot.py
 			</code></pre>
 			<dt>It should run now - a windows with simple plots wil be opened: <br>
 				<a href="images/simple_plot.py_output.png"><img src="images/simple_plot.py_output.png"></a>
@@ -309,7 +311,7 @@ CodingEntrepreneurs</a></p>
 <section><h2>pipenv with VS Code</h2>
 	<section><h3>Get the virtual environment's python path:</h3>
 			<pre><code rel="Bash" class="bash">
-				# navigate to project folder			
+				# navigate to project folder
 				$ cd your/root/project/folder
 
 				# get into pipenv shell
@@ -319,10 +321,10 @@ CodingEntrepreneurs</a></p>
 				# get python path and copy it
 				(my_project-hUoR8K1v) $ which python
 					/home/nemsys/.local/share/virtualenvs/my_project-hUoR8K1v/bin/python
-			</code></pre>			
+			</code></pre>
 	</section>
 	<section><h3>Set the virtual environment's python path for vs code</h3>
-			<dl class="fa">				
+			<dl class="fa">
 				<dt>Open VS Code project workspace settings.</dt>
 				<dd><kbd>ctrl+shift+p</kbd> and find <code>Preferences: Open Workspace Settings</code></dd>
 				<dd>search for <code>python.pythonPath</code> in left panel</dd>
@@ -357,9 +359,9 @@ CodingEntrepreneurs</a></p>
 
 <section id="hw">
 	<section><h1>HW</h1></section>
-	<section id="task1"><h3>simple_plot with matplotlib</h3>	
-		<dl>Look again at the "<a href="#example_simple_plot_with_matplotlib">Example: simple_plot with matplotlib</a>" and repeat the steps on your machine, such that the program "simple_plot.py"  will run without errors</dl>			
-	</section>	
+	<section id="task1"><h3>simple_plot with matplotlib</h3>
+		<dl>Look again at the "<a href="#example_simple_plot_with_matplotlib">Example: simple_plot with matplotlib</a>" and repeat the steps on your machine, such that the program "simple_plot.py"  will run without errors</dl>
+	</section>
 </section>
 
 <section class="disclaimer" data-background="/ProgressBG-Python/outfit/images/for_slides/the_end_on_sand.jpg">

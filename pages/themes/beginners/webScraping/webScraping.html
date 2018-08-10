@@ -22,6 +22,8 @@
 	<![endif]-->
 	<!-- CUSTOM -->
 	<base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -115,7 +117,7 @@
 				bs_parser = BeautifulSoup(page, 'html.parser')
 				products_html = bs_parser.find('ul', 'products')
 
-				for product in products_html.find_all("article"):	
+				for product in products_html.find_all("article"):
 					try:
 						name = product.select("div h2")[0].string
 					except:
@@ -125,7 +127,7 @@
 						price = product.select("div tspan")[0].string
 					except:
 						price = None
-						
+
 					products.append((name,int(price)))
 		</code></pre>
 	</section>

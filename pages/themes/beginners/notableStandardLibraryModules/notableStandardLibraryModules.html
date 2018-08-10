@@ -22,6 +22,8 @@
   <![endif]-->
   <!-- CUSTOM -->
   <base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
   <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -90,14 +92,14 @@
       _importer_cache', 'platform', 'prefix', 'set_coroutine_wrapper', 'setcheckinterval', 'setdlopenflags', 'setprofile', 'setrecursionlimit', 'setswitchinterval', 'settrac
       e', 'stderr', 'stdin', 'stdout', 'thread_info', 'version', 'version_info', 'warnoptions']
     </code></pre>
-  </section>  
+  </section>
   <section><h3>get current version number of Python</h3>
     <p><code>sys.version</code>, <code>sys.version_info</code></p>
     <pre><code rel="Terminal" class="python" data-noescape>
       >>> import sys
 
       >>> print(sys.version)
-      3.5.2 (default, Nov 23 2017, 16:37:01) 
+      3.5.2 (default, Nov 23 2017, 16:37:01)
       [GCC 5.4.0 20160609]
 
       >>> print(sys.version_info)
@@ -114,14 +116,14 @@
         print("Python 3 is running")
     </code></pre>
     <pre><code rel="Terminal" class="bash" data-noescape>
-      $ python2.7 sys.version_info.py 
+      $ python2.7 sys.version_info.py
       Python 2 is running
     </code></pre>
     <pre><code rel="Terminal" class="bash" data-noescape>
-      $ python3.6 sys.version_info.py 
+      $ python3.6 sys.version_info.py
       Python 3 is running
     </code></pre>
-  </section>  
+  </section>
   <section><h3>get interpreter absolute path</h3>
     <p><code>sys.executable</code></p>
     <pre><code rel="Terminal" class="bash" data-noescape>
@@ -134,12 +136,12 @@
     <dl class="fa">
       <dt><code>sys.path</code></dt>
       <dd>A list of strings that specifies the search path for modules. Initialized from the environment variable PYTHONPATH, plus an installation-dependent default.</dd>
-    </dl>   
+    </dl>
     <pre><code rel="Terminal" class="bash" data-noescape>
       >>> import sys
       >>> for i in sys.path:
-      ...     print(i)  
-      ... 
+      ...     print(i)
+      ...
       /home/nemsys/.local/bin
       /usr/lib/python35.zip
       /usr/lib/python3.5
@@ -154,13 +156,13 @@
     <p><code>sys.getsizeof()</code></p>
     <pre><code rel="Terminal" class="bash" data-noescape>
       >>> import sys
-      >>> 
+      >>>
       >>> print(sys.getsizeof(2))
-      28  
+      28
       >>> print(sys.getsizeof(range(1)))
       48
       print(sys.getsizeof(range(1000000)))
-      48    
+      48
       >>> print(sys.getsizeof([1,2,3,4,5]))
       104
       >>> print(sys.getsizeof((1,2,3,4,5)))
@@ -204,7 +206,7 @@
       print('Argument List:', sys.argv)
     </code></pre>
     <pre><code rel="Terminal" class="bash" data-noescape>
-      $ python argv_examples.py 
+      $ python argv_examples.py
       Argument List: ['argv_examples.py']
     </code></pre>
     <pre><code rel="Terminal" class="bash" data-noescape>
@@ -266,7 +268,7 @@
       name__', '__package__', '__spec__', '_dummy_scandir', '_execvpe', '_exists', '_exit', '_fwalk', '_get_exports_list', '_putenv', '_spawnvef', '_unsetenv', '_wrap_close'
       , 'abort', 'access', 'altsep', 'chdir', 'chmod', 'chown', 'chroot', 'close', 'closerange', 'confstr', 'confstr_names', 'cpu_count', 'ctermid', 'curdir', 'defpath', 'de
       vice_encoding', 'devnull', 'dup', 'dup2', 'environ', 'environb', 'errno', 'error', 'execl', 'execle', 'execlp', 'execlpe', 'execv', 'execve', 'execvp', 'execvpe', 'ext
-      sep', 'fchdir', 'fchmod', 'fchown', 'fdatasync', 'fdopen', 'fork', 'forkpty', 'fpathconf', 'fsdecode', 'fsencode', 'fstat', 'fstatvfs', 'fsync', 'ftruncate', 'fwalk', 
+      sep', 'fchdir', 'fchmod', 'fchown', 'fdatasync', 'fdopen', 'fork', 'forkpty', 'fpathconf', 'fsdecode', 'fsencode', 'fstat', 'fstatvfs', 'fsync', 'ftruncate', 'fwalk',
       'get_blocking', 'get_exec_path', 'get_inheritable', 'get_terminal_size', 'getcwd', 'getcwdb', 'getegid', 'getenv', 'getenvb', 'geteuid', 'getgid', 'getgrouplist', 'get
       groups', 'getloadavg', 'getlogin', 'getpgid', 'getpgrp', 'getpid', 'getppid', 'getpriority', 'getresgid', 'getresuid', 'getsid', 'getuid', 'getxattr', 'initgroups', 'i
       satty', 'kill', 'killpg', 'lchown', 'linesep', 'link', 'listdir', 'listxattr', 'lockf', 'lseek', 'lstat', 'major', 'makedev', 'makedirs', 'minor', 'mkdir', 'mkfifo', '
@@ -277,11 +279,11 @@
       riority', 'setregid', 'setresgid', 'setresuid', 'setreuid', 'setsid', 'setuid', 'setxattr', 'spawnl', 'spawnle', 'spawnlp', 'spawnlpe', 'spawnv', 'spawnve', 'spawnvp',
        'spawnvpe', 'st', 'stat', 'stat_float_times', 'stat_result', 'statvfs', 'statvfs_result', 'strerror', 'supports_bytes_environ', 'supports_dir_fd', 'supports_effective
       _ids', 'supports_fd', 'supports_follow_symlinks', 'symlink', 'sync', 'sys', 'sysconf', 'sysconf_names', 'system', 'tcgetpgrp', 'tcsetpgrp', 'terminal_size', 'times', '
-      times_result', 'truncate', 'ttyname', 'umask', 'uname', 'uname_result', 'unlink', 'unsetenv', 'urandom', 'utime', 'wait', 'wait3', 'wait4', 'waitid', 'waitid_result', 
+      times_result', 'truncate', 'ttyname', 'umask', 'uname', 'uname_result', 'unlink', 'unsetenv', 'urandom', 'utime', 'wait', 'wait3', 'wait4', 'waitid', 'waitid_result',
       'waitpid', 'walk', 'write', 'writev']
     </code></pre>
-  </section>  
-  
+  </section>
+
   <section><h1><code class="note">shutil</code></h1></section>
   <section><h2><code class="note">shutil</code></h2>
     <section><h3>Overview</h3>

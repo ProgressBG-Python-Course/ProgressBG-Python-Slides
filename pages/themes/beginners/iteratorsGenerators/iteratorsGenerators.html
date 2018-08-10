@@ -22,6 +22,8 @@
 	<![endif]-->
 	<!-- CUSTOM -->
 	<base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -181,7 +183,7 @@
 			  	# yield is almost like return, but it freezes the execution
 			  	yield num
 			  	num += 1
-			 
+
 			my_numbers = numbers_generator(1,10)
 			# iterate over our generator:
 			for i in my_numbers:
@@ -217,7 +219,7 @@
 		<pre><code rel="Python" class="shell" data-noescape>
 			def even_numbers_generator(start,end):
 			  # write your code here
-			 
+
 			for i in even_numbers_generator(1,10):
 				print(i)
 
@@ -228,13 +230,13 @@
 			#8
 			#10
 		</code></pre>
-	</section>	
+	</section>
 </section>
 <section><h2>Cyrillic letter generator</h2>
 	<section><h3>The Task</h3>
 		<dl class="fa">
 			<dt>Define a generator function which will yield a Cyrillic letter, starting from 'А', to 'Я'</dt>
-			<dt>You can get a letter form its code, using the chr() built-in function, as shown in next example</dt>			
+			<dt>You can get a letter form its code, using the chr() built-in function, as shown in next example</dt>
 		</dl>
 		<pre><code rel="Python" class="python">
 			print( chr(1040) )

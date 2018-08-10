@@ -22,6 +22,8 @@
   <![endif]-->
   <!-- CUSTOM -->
   <base target="_blank">
+  <link rel="icon" type="image/png" href="/ProgressBG-Python/images/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="/ProgressBG-Python/images/favicons/favicon-96.png">
 </head>
 <body>
   <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
@@ -107,12 +109,12 @@
 <section><h1>Parsing JSON</h1></section>
 <section><h2>Parsing JSON</h2>
   <section><h3>Overview</h3>
-    <dl class="fa">     
+    <dl class="fa">
       <dt><abbr>JSON</abbr><dfn id="CSV"><span>Java</span><span>Script</span><span>Object</span><span>Notation</span></dfn></dt>
     </dl>
     <div>
       <blockquote cite="href="https://en.wikipedia.org/wiki/JSON"">JSON is an open-standard file format that uses human-readable text to transmit data objects consisting of <span class="note">attribute–value pairs and array data</span> types (or any other serializable value)</blockquote><a href="https://en.wikipedia.org/wiki/JSON">JSON @wikipedia</a>
-    </div>    
+    </div>
   </section>
   <section><h3>Overview - Examples</h3>
     <p>examples of JSON data: <a href="http://json-schema.org/examples.html">Examples @JSON Schema</a></p>
@@ -149,13 +151,13 @@
       <dt><code>json.loads() function</code></dt>
       <dt>Deserialize s (a str, bytes or bytearray instance containing a JSON document) to a Python object using next <a href="https://docs.python.org/3/library/json.html#json-to-py-table">conversion table</a>.</dt>
     </dl>
-  </section>  
+  </section>
   <section><h3><code>json.loads()</code> example</h3>
     <pre><code rel="Python" class="python">
       import json
       from operator import itemgetter
 
-      json_str = """ 
+      json_str = """
         [
             {
                 "name": "apple",
@@ -176,7 +178,7 @@
       #read json from string
       json_data = json.loads(json_str)
 
-      # print the list sorted by "price" 
+      # print the list sorted by "price"
       for i in sorted(json_data,key=itemgetter("price")):
         print(i)
     </code></pre>
@@ -268,7 +270,7 @@
 <section><h1>Parsing CSV</h1></section>
 <section><h2>Parsing CSV</h2>
   <section><h3>Overview</h3>
-    <dl class="fa">     
+    <dl class="fa">
       <dt><abbr>CSV</abbr><dfn id="CSV"><span>Comma</span><span>Separated</span><span>Values</span></dfn></dt>
       <dt>the most common import and export format for spreadsheets and databases.</dt>
       <dt>For CSV parsing Python provides the built-in csv module </dt>
@@ -302,8 +304,8 @@
 <section><h1>Parsing XML</h1></section>
 <section><h2>Parsing XML</h2>
 	<section><h3>Overview</h3>
-		<dl class="fa">   		  
-		  <dt><abbr>XML</abbr><dfn id="CSV">e<span>Xtensible</span><span>Markup</span><span>Language</span></dfn></dt>		  
+		<dl class="fa">
+		  <dt><abbr>XML</abbr><dfn id="CSV">e<span>Xtensible</span><span>Markup</span><span>Language</span></dfn></dt>
 		</dl>
 		<blockquote> (XML) is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable.</blockquote>
 		<a href="https://en.wikipedia.org/wiki/XML">XML @wikipedia</a>
@@ -321,30 +323,30 @@
 	</section>
 	<section><h3>Parsing XML data - example</h3>
 		<pre><code rel="sample_data.xml" class="python">
-			&lt;data&gt;  
+			&lt;data&gt;
 			    &lt;items&gt;
 			        &lt;item atr1=&quot;value1&quot;&gt;item1 data&lt;/item&gt;
 			        &lt;item atr2=&quot;value2&quot;&gt;item2 data&lt;/item&gt;
 			    &lt;/items&gt;
-			&lt;/data&gt;  
+			&lt;/data&gt;
 		</code></pre>
 	</section>
 	<section><h3>Parsing XML data - example</h3>
 		<pre><code rel="Python" class="python">
-			import xml.etree.ElementTree as ET  
-			tree = ET.parse('sample_data.xml')  
+			import xml.etree.ElementTree as ET
+			tree = ET.parse('sample_data.xml')
 			root = tree.getroot()
 
 
 			# print items attributes
-			print('\nAll attributes:')  
-			for elem in root:  
+			print('\nAll attributes:')
+			for elem in root:
 			    for subelem in elem:
 			        print(subelem.attrib)
 
 			# print items data
-			print('\nAll item data:')  
-			for elem in root:  
+			print('\nAll item data:')
+			for elem in root:
 			    for subelem in elem:
 			        print(subelem.text)
 		</code></pre>
@@ -359,7 +361,7 @@
       <dt>Make a program, that will extract from these data only the "<span class="note">title</span>", "<span class="note">author</span>" and "<span class="note">url</span>" fields for the books labeled as "<span class="note">Advanced</span>", and will print the extracted information, as shown in <a href="Task_and_HW/get_books_by_category/output.txt">sample output</a>
       </dt>
     </dl>
-  </section>  
+  </section>
 </section>
 
 <section><h3>Submission</h3>
