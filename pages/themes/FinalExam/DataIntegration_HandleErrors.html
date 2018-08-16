@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DataIntegration_HandleErrors</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- css & themes include -->
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/outfit/css/themes/dark.css" id="theme">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-Python-Slides/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-Python-Slides/lib/reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- CUSTOM -->
+    <base target="_blank">
+</head>
+<body>
+    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+        <div class="top_links">
+            <a class="home_link" href="/ProgressBG-Python-Slides/pages/agenda/agenda.html#DataIntegration_HandleErrors" target="_top"><i class="fa fa-home"></i></a>
+            <span class="help_link" href="#"><i class="fa fa-question"></i></span>
+            <div class="help_text">
+                <div class="note">Keyboard shortcuts:</div>
+                <div><span>N/Спейс</span><span>Next Slide</span></div>
+                <div><span>P</span><span>Previous Slide</span></div>
+                <div><span>O</span><span>Slides Overview</span></div>
+                <div><span>ctrl+left click</span><span>Zoom Element</span></div>
+                <div class="print-howto"><br>If you want print version => add '<code>?print-pdf</code>' <br> at the end of slides URL (remove '#' fragment) and then print. <br>
+                Like: https://wwwcourses.github.io/...CourseIntro.html?print-pdf </div>
+            </div>
+        </div>
+        <div class="footer theme_switch">
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/dark.css'); return false;">Dark</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/light.css'); return false;">Light</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/projector.css'); return false;">Projector</a>
+        </div>
+        <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Handling errors during data integration</h1></section>
+<section data-transition="zoom">
+    <!-- linkedin badge -->
+    <!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
+    <section class="copyright" data-transition="zoom">
+        <div class="note">
+            <p>Created for</p>
+        </div>
+        <div class="company">
+            <a href="http://progressbg.net/програмиране-с-python-2/">
+            <img style="height:80%" src="/ProgressBG-Python-Slides/outfit/images/logos/ProgressBG_logo_529_127.png">
+            </a>
+        </div>
+        <div class="author">
+            <span class="note">Iva E. Popova, 2016-2024,</span>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        </div>
+    </section>
+    <section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+        <div class="company">
+             <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova on LinkedIn</a></div>
+        </div>
+    </section>
+</section>
+
+
+<section class="main-section-title" id="HandlingErrorsDuringDataIntegration"><h1>Introduction</h1></section>
+<section class="sub-sections"><h2>Introduction</h2>
+    <section><h3>Importance of Error Handling</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Unhandled errors during Data Integration can lead to:</dt>
+            <dd><b>Data corruption</b>: Unhandled errors can cause partial updates to the data stores, leading to inconsistencies and corruption. For instance, if an error occurs without proper rollback mechanisms in place during a multi-step update across different databases, some updates may be committed while others are not, leaving the data in an inconsistent state. </dd>
+            <dd><b>Failed data pipelines</b>: Unhandled errors within any stage of these pipelines can halt their operation, preventing the completion of critical data processing tasks. For example, a failed ETL (Extract, Transform, Load) job due to uncaught exceptions might stop the flow of data into a data warehouse, leading to gaps in the data that affect downstream analytics and reporting</dd>
+            <dd><b>Downtime and lost productivity</b>: When data integration tasks fail, significant downtime can occur as teams work to diagnose the problem, implement fixes, and rerun the processes. This downtime not only delays the availability of fresh data for analysis and operations but also diverts IT and data team resources away from their core activities, leading to lost productivity and potentially missed business opportunities</dd>
+            <dd><b>Incorrect insights and decisions</b>: Decisions made on the basis of inaccurate or incomplete data can have far-reaching consequences, from minor inefficiencies to major strategic missteps. For instance, a financial institution making lending decisions based on incomplete or corrupted credit risk data could face increased default rates and financial losses.</dd>
+        </dl>
+    </section>
+    <section><h3>Common errors during Data Integration</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Even with careful planning, data integration often has errors due to:</dt>
+            <dd><b>Runtime errors</b> such as division by zero</dd>
+            <dd><b>Data quality issues</b> such as missing values, inconsistencies, duplicate records, or incorrect data types</dd>
+            <dd><b>Schema changes</b> such as changes in table definitions, data types, or relationships between data entities</dd>
+            <dd><b>Logical errors in transformations</b> when the data transformation logic is incorrect or does not produce the expected result</dd>
+            <dd><b>Network problems</b> such as interruptions, latency, or bandwidth limitations</dd>
+            <dd><b>External system errors</b> arise from issues in dependent services or APIs, such as service downtime, API rate limiting, or changes in API contracts</dd>
+        </dl>
+
+    </section>
+</section>
+
+<section class="main-section-title" id="Introduction"><h1>Handling Errors During Data Integration</h1></section>
+<section class="sub-sections"><h2>Handling Runtime Errors</h2>
+    <section id="HandlingRuntimeErrors"><h3>Handling Runtime Errors</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Runtime errors occur during the execution phase of a program, often triggered by invalid operations such as division by zero, accessing elements outside the bounds of a list, or other violations of programming logic that cannot be detected at compile time. Handling these requires robust error checking and exception handling mechanisms in place to catch and respond to such errors appropriately, ensuring the application can recover or proceed with alternate logic.</dt>
+            <dt>Example:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 72vh;">
+                def process_data(filename):
+                    try:
+                        # Open the file for reading
+                        with open(filename, 'r') as data_file:
+                            contents = data_file.readlines()
+
+                        # Perform some processing on the data (assume this is complex)
+                        processed_data = transform_data(contents)
+
+                        # Write results to a new file
+                        with open('results.txt', 'w') as output_file:
+                            output_file.writelines(processed_data)
+
+                    except FileNotFoundError:
+                        print(f"Error: File '{filename}' not found.")
+                        return  # Or provide an alternate data source
+
+                    except PermissionError:
+                        print(f"Error: Insufficient permissions to access '{filename}'.")
+                        return  # Or request elevated permissions
+
+                    except OSError as e:  # Catch other potential I/O errors
+                        print(f"General I/O error occurred: {e}")
+
+                # ... (Rest of your application)
+
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Handling Data quality issues</h2>
+    <section id="HandlingDataQualityIssues"><h3>Handling Data quality issues</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Data quality issues such as missing values, inconsistencies, duplicate records, or incorrect data types can significantly impact the outcomes of data integration processes.</dt>
+            <dt>These issues require comprehensive validation, cleaning, and preprocessing steps to ensure the accuracy and integrity of the integrated data.</dt>
+            <dt>Example:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 72vh;">
+                import pandas as pd
+                from datetime import datetime
+
+                # Sample data simulating loaded data
+                data = {
+                    "customer_name": ["Ivan Petrov", None, "Maria Ivanova", "Aleksandar Dimitrov", "Maria Ivanova"],
+                    "email": ["ivan.petrov@example.com", "maria.ivanova@example.com", None, "aleksandar.dimitrov@example.com", "maria.ivanova@example.com"],
+                    "account_creation_date": ["2023-01-01", "2023-01-02", "2023-01-03", "01/04/2023", "2023-01-03"]
+                }
+
+                df = pd.DataFrame(data)
+
+                # Handling missing values
+                # Drop rows where either 'customer_name' or 'email' is missing
+                df.dropna(subset=["customer_name", "email"], inplace=True)
+
+                # Handling duplicates
+                # Remove duplicate rows based on 'customer_name' and 'email', keeping the first occurrence
+                df.drop_duplicates(subset=["customer_name", "email"], keep='first', inplace=True)
+
+                # Handling date formats
+                # Convert 'account_creation_date' to a uniform datetime format
+                df["account_creation_date"] = pd.to_datetime(df["account_creation_date"], format='mixed')
+
+                print(df)
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Handling Schema changes</h2>
+    <section id="HandlingSchemaChanges"><h3>Handling Schema changes</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Schema changes refer to alterations in the structure of data sources, such as changes in table definitions, data types, or relationships between data entities. These changes can break existing integration pipelines, necessitating dynamic or adaptive integration processes capable of handling such changes gracefully without manual intervention.</dt>
+            <dt>Handling schema changes dynamically requires a flexible approach, often involving metadata inspection and conditional logic to adapt to changes in data structure.</dt>
+            <dt>Example:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 73vh;">
+                import pandas as pd
+
+                # Function to load data while adapting to schema changes
+                def load_and_adapt_data(filepath):
+                    # Load the data
+                    df = pd.read_csv(filepath)
+
+                    # Define the expected schema as a list of expected columns
+                    expected_columns = ['customer_id', 'name', 'email', 'signup_date']
+
+                    # Check for missing columns in the loaded data and add them if necessary
+                    missing_columns = set(expected_columns) - set(df.columns)
+                    for column in missing_columns:
+                        df[column] = None  # Add missing columns with default value of None
+
+                    # Remove unexpected columns that are not in the expected schema
+                    for column in df.columns:
+                        if column not in expected_columns:
+                            df.drop(column, axis=1, inplace=True)
+
+                    # Optionally, adjust data types of columns
+                    # For example, ensuring 'signup_date' is a datetime type
+                    df['signup_date'] = pd.to_datetime(df['signup_date'], errors='coerce')
+
+                    # Return the adapted DataFrame
+                    return df
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Handling Logical errors in transformations</h2>
+    <section id="HandlingLogicalErrorsInTransformations"><h3>Handling Logical errors in transformations</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Logical errors in transformations occur when the data transformation logic is incorrect or does not produce the expected result.</dt>
+            <dt>These errors are often the hardest to detect and require thorough testing, validation, and logging to ensure that it accurately reflects the desired data mappings and operations.</dt>
+        </dl>
+    </section>
+    <section><h3>Example</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Let's have a transformation function with a logical error:</dt>
+            <pre><code rel="transform.py" class="python" style="min-height: 1vh;">
+                # transform.py
+                import pandas as pd
+                import logging
+
+                # Setup basic configuration for logging
+                logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+                # Transformation function with a logical error
+                def calculate_transaction_volume(df):
+                    # Incorrect logic for demonstration purposes
+                    df['transaction_volume'] = df['quantity'] + df['unit_price']
+                    logging.info("Transaction volume calculated.")
+                    return df
+            </code></pre>
+            <dt>And here is the test function:</dt>
+            <pre><code rel="test_transform.py" class="python" style="min-height: 1vh;">
+                # test_transform.py
+                import pandas as pd
+                from transform import calculate_transaction_volume
+
+                def sample_data():
+                    data = {
+                        'transaction_id': [1, 2, 3],
+                        'quantity': [2, 5, 3],
+                        'unit_price': [10, 8, 12]
+                    }
+                    df = pd.DataFrame(data)
+                    return df
+
+                def test_calculate_transaction_volume(sample_data):
+                    # Calculate transaction volume
+                    result_df = calculate_transaction_volume(sample_data)
+                    # Assert that transaction_volume is calculated correctly
+                    for _, row in result_df.iterrows():
+                        expected_volume = row['quantity'] * row['unit_price']
+                        assert row['transaction_volume'] == expected_volume, f"Transaction volume calculated incorrectly for transaction_id={row['transaction_id']}"
+            </code></pre>
+            <dt>We run the test on command line by:</dt>
+            <pre><code rel="Terminal" class="bash">
+                pytest test_transform.py
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Handling Network problems</h2>
+    <section id="HandlingNetworkProblems"><h3>Handling Network problems</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Network problems such as interruptions, latency, or bandwidth limitations can affect the timely and reliable transfer of data between systems in a distributed environment.</dt>
+            <dt>Implementing retry mechanisms, ensuring data is transmitted securely, and optimizing data payloads are critical considerations in mitigating network-related issues.</dt>
+        </dl>
+    </section>
+    <section><h3>Implementing Retry Mechanisms</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>In Python we can use the requests library along with its Retry and HTTPAdapter classes to implement a retry mechanism for HTTP requests.</dt>
+            <dt>The backoff_factor determines the delay between retries to avoid overwhelming the server.</dt>
+            <dt>Example:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 72vh;">
+                import requests
+                from requests.adapters import HTTPAdapter
+                from requests.packages.urllib3.util.retry import Retry
+
+                def requests_retry_session(retries=3, backoff_factor=0.3, status_forcelist=(500, 502, 504), session=None):
+                    session = session or requests.Session()
+                    retry = Retry(
+                        total=retries,
+                        read=retries,
+                        connect=retries,
+                        backoff_factor=backoff_factor,
+                        status_forcelist=status_forcelist,
+                    )
+                    adapter = HTTPAdapter(max_retries=retry)
+                    session.mount('http://', adapter)
+                    session.mount('https://', adapter)
+                    return session
+
+                try:
+                    response = requests_retry_session().get('https://example.com')
+                    response.raise_for_status()
+                except requests.exceptions.HTTPError as e:
+                    print(f"HTTPError: {e}")
+                except requests.exceptions.ConnectionError as e:
+                    print(f"ConnectionError: {e}")
+                except requests.exceptions.Timeout as e:
+                    print(f"Timeout: {e}")
+                except requests.exceptions.RequestException as e:
+                    print(f"Error: {e}")
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Optimizing Data Payloads</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Large data payloads can exacerbate network issues, leading to increased latency or failures. Optimizing payloads ensures efficient use of bandwidth and reduces transmission times</dt>
+            <dt>Optimization Techniques:</dt>
+            <dd><b>Compressions</b>: Use compression algorithms (like gzip) to reduce the size of the data being transmitted.</dd>
+            <dd><b>Batchings</b>: Accumulate small data pieces into larger batches to reduce the overhead of multiple requests.</dd>
+            <dd><b>Streamlinings Data</b>: Remove unnecessary data elements to minimize the size of each data packet. For APIs, this might mean requesting only the specific fields needed from an endpoint.</dd>
+            <dt>Example of Data Compression with Requests</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import requests
+                import gzip
+
+                def compress_payload(data):
+                    return gzip.compress(data.encode('utf-8'))
+
+                headers = {'Content-Encoding': 'gzip'}
+                payload = compress_payload('{"key": "value"}')
+
+                response = requests.post('https://example.com', data=payload, headers=headers)
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Handling External system errors</h2>
+    <section id="HandlingExternalSystemErrors"><h3>Handling External system errors</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>External system errors arise from issues in dependent services or APIs, such as service downtime, API rate limiting, or changes in API contracts.</dt>
+            <dt>Handling these errors involves implementing fallback logic, such as using cached data or alternative data sources, and designing systems to be resilient to such external failures.</dt>
+            <dt>Example: using cached data to handle requests when the external service is unavailable</dt>
+            <dd>We will use the redis caching library as our caching solution</dd>
+            <pre><code rel="Python" class="python" style="min-height: 72vh;">
+                import requests
+                import redis
+                import json
+
+                # Initialize the Redis client
+                redis_client = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+
+                def get_external_data(url):
+                    cache_key = f"url_cache:{url}"
+                    try:
+                        # Attempt to fetch fresh data
+                        response = requests.get(url, timeout=5)  # 5-second timeout
+                        response.raise_for_status()
+
+                        # Cache the fresh data with an expiration time (e.g., 3600 seconds)
+                        redis_client.setex(cache_key, 3600, response.text)
+
+                        return response.json()
+                    except (requests.exceptions.HTTPError, requests.exceptions.Timeout) as e:
+                        # On error, fallback to cached data if available
+                        cached_response = redis_client.get(cache_key)
+                        if cached_response is not None:
+                            return json.loads(cached_response)  # Parse the JSON data from the cache
+                        else:
+                            # If no cache is available, re-raise the exception or handle it as needed
+                            print(f"Failed to fetch data and no cache available: {e}")
+                            raise
+
+                # Example usage
+                url = "https://api.example.com/data"
+                data = get_external_data(url)
+                print(data)
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
+<section class="disclaimer" data-background="/ProgressBG-Python-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
+     <p>These slides are based on</p>
+     <p>customised version of </p>
+     <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+     <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+        </div>
+    </div>
+    <!-- Custom processing -->
+    <script src="/ProgressBG-Python-Slides/outfit/js/slides.js"></script>
+    <!-- external scripts -->
+    <script src="/ProgressBG-Python-Slides/lib/reveal.js/lib/js/head.min.js"></script>
+    <script src="/ProgressBG-Python-Slides/lib/reveal.js/js/reveal.js"></script>
+     <!-- init reveal -->
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        var highlightjsTabSize = '  ';
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            history: true,
+            center: true,
+            width: 1920,
+            height: 1280,
+            // Bounds for smallest/largest possible scale to apply to content
+            // minScale: .5,
+            maxScale: 1,
+            // slide transition
+            transition: 'concave', // none/fade/slide/convex/concave/zoom
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+            // shift+mouse click to zoom in/out element
+            zoomKey: 'ctrl',
+            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            // transition: Reveal.getQueryHash().transition || 'default'
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure(); hljs.initHighlightingOnLoad(); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>debug</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- css & themes include -->
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/outfit/css/themes/light.css" id="theme">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-Python-Slides/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-Python-Slides/lib/reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- CUSTOM -->
+    <base target="_blank">
+</head>
+<body>
+    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+        <div class="top_links">
+            <a class="home_link" href="/ProgressBG-Python-Slides/pages/agenda/agenda.html#debug" target="_top"><i class="fa fa-home"></i></a>
+            <span class="help_link" href="#"><i class="fa fa-question"></i></span>
+            <div class="help_text">
+                <div class="note">Keyboard shortcuts:</div>
+                <div><span>N/Спейс</span><span>Next Slide</span></div>
+                <div><span>P</span><span>Previous Slide</span></div>
+                <div><span>O</span><span>Slides Overview</span></div>
+                <div><span>ctrl+left click</span><span>Zoom Element</span></div>
+                <div class="print-howto"><br>If you want print version => add '<code>?print-pdf</code>' <br> at the end of slides URL (remove '#' fragment) and then print. <br>
+                Like: https://wwwcourses.github.io/...CourseIntro.html?print-pdf </div>
+            </div>
+        </div>
+        <div class="footer theme_switch">
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/dark.css'); return false;">Dark</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/light.css'); return false;">Light</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/projector.css'); return false;">Projector</a>
+        </div>
+        <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Debugging Python applications</h1></section>
+<section data-transition="zoom">
+    <!-- linkedin badge -->
+    <!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
+    <section class="copyright" data-transition="zoom">
+        <div class="note">
+            <p>Created for</p>
+        </div>
+        <div class="company">
+            <a href="http://progressbg.net/програмиране-с-python-2/">
+            <img style="height:80%" src="/ProgressBG-Python-Slides/outfit/images/logos/ProgressBG_logo_529_127.png">
+            </a>
+        </div>
+        <div class="author">
+            <span class="note">Iva E. Popova, 2016-2024,</span>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        </div>
+    </section>
+    <section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+        <div class="company">
+             <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova on LinkedIn</a></div>
+        </div>
+    </section>
+</section>
+
+<section class="main-section-title" id="IntroductionToDebugging"><h1>Introduction to Debugging</h1></section>
+<section class="sub-sections"><h2>Introduction to Debugging</h2>
+    <section id="introduction_to_debugging">
+        <dl class="fa" style="min-width:80vw">
+            <dt>What is Debugging?</dt>
+            <dd>Debugging is the process of identifying and fixing errors, or bugs, in software code.</dd>
+
+            <dt>Importance of Debugging</dt>
+            <dd>Effective debugging ensures that software functions correctly, improving reliability and user satisfaction.</dd>
+
+            <dt>Common Causes of Bugs</dt>
+            <dd>Bugs can arise from syntax errors, logical errors, or unexpected behavior of libraries and dependencies.</dd>
+        </dl>
+    </section>
+</section>
+
+<section class="main-section-title" id="debugging_python_applications"><h1>Debugging with print and logging</h1></section>
+<section class="sub-sections"><h2>Debugging with Print Statements</h2>
+    <section id="using_print_statements">
+        <dl class="fa">
+            <dt>You can trace your code by putting a print statements in the problematic places</dt>
+            <dt>Pros:</dt>
+            <dd>Easy to use</dd>
+            <dt>Cons:</dt>
+            <dd>You have to remove them in production ready code</dd>
+            <dd>Too much useless typing</dd>
+            <dt>Example: </dt>
+            <dd>Consider a function that calculates the factorial of a number. Adding print statements can help identify issues:</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                def factorial(n):
+                    result = 1
+                    for i in range(1, n+1):
+                        result *= i
+
+                        # trace the values of i and result:
+                        print(f"i: {i}, result: {result}")
+
+                    return result
+
+                print(factorial(5))
+
+                # i: 1, result: 1
+                # i: 2, result: 2
+                # i: 3, result: 6
+                # i: 4, result: 24
+                # i: 5, result: 120
+                # 120
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Debugging with Logging module</h2>
+    <section id="using_logging_module"><h3>Overview</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The logging module provides a flexible framework for logging messages from Python applications.</dt>
+            <dt>While print statements and debugger tools like pdb are helpful for inspecting code execution during development, logging offers a more systematic and flexible approach to tracking the flow of execution, identifying errors, and monitoring the behavior of an application in production environments. Here's why logging is beneficial for debugging:</dt>
+            <dd><b>Persistent Output</b>: Unlike print statements, which output information to the console during runtime, logging allows you to store messages in files or other destinations, providing a persistent record of the application's behavior. This is particularly useful for debugging issues that occur intermittently or in production environments where real-time monitoring is necessary.</dd>
+            <dd><b>Multiple Log</b> Levels: The logging module in Python supports different log levels (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL), allowing you to categorize messages based on their severity. This enables developers to focus on relevant information during debugging while filtering out less important details.</dd>
+            <dd><b>Configuration Options</b>: Python's logging module provides extensive configuration options, allowing you to customize log formatting, output destinations (e.g., files, streams, sockets), and filtering mechanisms. This flexibility makes it easy to adapt logging to different debugging scenarios and environments.</dd>
+            <dd><b>Integration with Libraries</b>: Many third-party libraries and frameworks in the Python ecosystem use the logging module for their own logging purposes. By leveraging a consistent logging approach across your entire application stack, you can streamline debugging and troubleshooting efforts, especially in complex projects with multiple dependencies.</dd>
+        </dl>
+    </section>
+    <section><h3>Example: log to file </h3>
+        <dl class="fa" style="min-width:80vw">
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import logging
+
+                # Configure logging
+                logging.basicConfig(filename='factorial.log', level=logging.DEBUG)
+
+                def factorial(n):
+                    result = 1
+                    for i in range(1, n+1):
+                        result *= i
+                        logging.debug(f"i: {i}, result: {result}")
+                    return result
+
+                print(factorial(5))
+            </code></pre>
+            <dt>Here is the content of "factorial.log":</dt>
+            <pre><code rel="factorial.log" class="bash">
+                DEBUG:root:i: 1, result: 1
+                DEBUG:root:i: 2, result: 2
+                DEBUG:root:i: 3, result: 6
+                DEBUG:root:i: 4, result: 24
+                DEBUG:root:i: 5, result: 120
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Example: output messages to both a log file and the console:</h3>
+        <dl class="fa" style="min-width:80vw">
+            <pre><code rel="Python" class="python" style="min-height: 83vh;">
+                import logging
+
+                # Configure logging to output messages to both console and file
+                logging.basicConfig(level=logging.DEBUG,
+                                    handlers=[
+                                        logging.FileHandler('example.log'), # write log messages to a file
+                                        logging.StreamHandler()]            # output log messages to the console
+                                    )
+
+                def factorial(n):
+                    result = 1
+                    for i in range(1, n+1):
+                        result *= i
+                        logging.debug(f"i: {i}, result: {result}")
+                    return result
+
+                def main():
+                    logging.info("Starting factorial calculation...")
+
+                    result = factorial(5)
+
+                    logging.info(f"Factorial of 5 is: {result}")
+
+                if __name__ == "__main__":
+                    main()
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Logging Levels and their Hierarchy</h2>
+    <section id="logging_levels"><h3>Logging Levels</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>DEBUG</dt>
+            <dd>Detailed information, typically of interest only when diagnosing problems.</dd>
+
+            <dt>INFO</dt>
+            <dd>Confirmation that things are working as expected.</dd>
+
+            <dt>WARNING</dt>
+            <dd>An indication that something unexpected happened, but the software is still functioning as expected.</dd>
+
+            <dt>ERROR</dt>
+            <dd>A more serious problem that might cause the application to malfunction.</dd>
+
+            <dt>CRITICAL</dt>
+            <dd>A critical error that could lead to application failure.</dd>
+        </dl>
+    </section>
+    <section id="logging_hierarchy"><h3>Logging Hierarchy</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The levels are hierarchically ordered from least severe (DEBUG) to most severe (CRITICAL).</dt>
+            <dd>DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL</dd>
+            <dt>By setting the logging level, messages of that level and higher in the hierarchy will be logged.</dt>
+            <dt>Example</dt>
+            <dd>If the logging level is set to WARNING, only messages with WARNING level and above will be logged.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 55vh;">
+                import logging
+
+                # Configure logging to output messages to console
+                logging.basicConfig(level=logging.WARNING)
+
+                # Log messages at different levels
+                logging.debug("Debug message - Detailed information for debugging purposes")
+                logging.info("Info message - Confirmation that things are working as expected")
+                logging.warning("Warning message - Something unexpected happened, but the software is still functioning")
+                logging.error("Error message - A more serious problem that might cause the application to malfunction")
+                logging.critical("Critical message - A critical error that could lead to application failure")
+
+
+                # WARNING:root:Warning message - Something unexpected happened, but the software is still functioning
+                # ERROR:root:Error message - A more serious problem that might cause the application to malfunction
+                # CRITICAL:root:Critical message - A critical error that could lead to application failure
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Logging Format</h2>
+    <section id="logging_format_definition">
+        <dl class="fa" style="min-width:80vw">
+            <dt>The Logging Format controls the structure and style of log messages, including timestamp, log level, and message content.</dt>
+            <dt>Developers can customize the logging format according to their specific requirements by specifying the desired components and their arrangement using format placeholders.</dt>
+            <dt>Typical elements include timestamp, log level, module name, function name, and message content.</dt>
+
+            <dt>Example - set up logging with a custom format:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import logging
+
+                # Configure logging with custom format
+                logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+
+                # Log messages
+                logging.debug("Debug message")
+                logging.info("Info message")
+                logging.warning("Warning message")
+                logging.error("Error message")
+                logging.critical("Critical message")
+            </code></pre>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Modular Logging</h2>
+    <section id="modular_logging_definition">
+        <dl class="fa" style="min-width:80vw">
+            <dt>Modular logging is a logging approach where each module uses its own logger object to emit log messages.</dt>
+            <dt>In large applications, different modules may need independent logging behavior, such as setting different logging levels, formatting, and output destinations.  </dt>
+            <dt>You can create a Logger instance, use the getLogger() function from the logging module.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 60vh;">
+                """ Module: database.py """
+                import logging
+
+                # Initialize logger
+                logger = logging.getLogger('database')
+                logger.setLevel(logging.WARNING)
+
+                # Configure console handler
+                console_handler = logging.StreamHandler()
+
+                # Configure formatter
+                formatter = logging.Formatter('%(name)s:%(levelname)s:%(message)s')
+                console_handler.setFormatter(formatter)
+
+                # Add console handler to logger
+                logger.addHandler(console_handler)
+
+                # Log messages using the logger
+                logger.debug('Debug message')
+                logger.info('Info message')
+                logger.warning('Warning message')
+                logger.error('Error message')
+                logger.critical('Critical message')
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
+
+<section><h1>Debug Python with VS Code</h1></section>
+<section><h2>Debug Python with VS Code</h2>
+    <section><h3>Overview</h3>
+        <dl class="fa">
+            <dt>The <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</a> supports debugging of a number of types of Python applications, including the following general capabilities:</dt>
+            <dd><b>Breakpoints</b>: Set breakpoints in your code to pause execution and inspect variables.</dd>
+            <dd><b>Step Through Code</b>: Step through your code line by line using step into, step over, and step out commands.</dd>
+            <dd><b>Watch and Variables</b>: View and monitor variable values in real-time using watch and variables views.</dd>
+            <dd><b>Debug Console</b>: Execute Python code and evaluate expressions interactively in the debug console.</dd>
+            <dt>Reference: <a href="https://code.visualstudio.com/docs/python/debugging">Python debugging in VS Code</a></dt>
+        </dl>
+    </section>
+    <section><h3>Start Debugger</h3>
+        <dl class="fa">
+            <dt>You can start VS Code debugger by:</dt>
+            <dd>Pressing <kbd>F5</kbd> or</dd>
+            <dd>From Activity Panel cick on "Run and Debug" icon</dd>
+            <dt>When you start VS Code Debugger for the first time, or if you don't yet have any configurations defined, you'll see a button to Run and Debug and a link to create a configuration (launch.json) file:</dt>
+            <dt>A configuration drives VS Code's behavior during a debugging session. Configurations are defined in a launch.json file that's stored in a .vscode folder in your workspace.</dt>
+            <dt>If you're only interested in debugging a Python script, the simplest way is to select the down-arrow next to the run button on the editor and select Python Debugger: Debug Python File.</dt>
+            <dt>Reference: <a href="https://code.visualstudio.com/docs/python/debugging#_initialize-configurations">Initialize configurations</a></dt>
+        </dl>
+    </section>
+    <section><h3>Debug actions</h3>
+        <dl class="fa">
+            <table>
+                <tr><th>Command</th><th>Keyboard Shortcut</th></tr>
+                <tr><td>Continue / Pause</td><td>F5</td></tr>
+                <tr><td>Step Over</td><td>F10</td></tr>
+                <tr><td>Step Into</td><td>F11</td></tr>
+                <tr><td>Step Out</td><td>Shift+F11</td></tr>
+                <tr><td>Restart</td><td>Ctrl+Shift+F5</td></tr>
+                <tr><td>Stop</td><td>Shift+F5</td></tr>
+            </table>
+            <dt>Reference: <a href="https://code.visualstudio.com/docs/editor/debugging#_debug-actions">Debug actions</a></dt>
+        </dl>
+    </section>
+    <section><h3>Breakpoints</h3>
+        <dl class="fa">
+            <dt>Breakpoints can be toggled by clicking on the editor margin</dt>
+            <dt>Clicking with right mouse button on the editor margin allows to add "Normal Breakpoint", "Conditional Breakpoint", "Log Point"</dt>
+            <dd>Conditional Breakpoints will be hit whenever the expression evaluates to true</dd>
+            <dt>Finer breakpoint control (enable/disable/reapply) can be done in the Debug view's BREAKPOINTS section</dt>
+            <dt>Breakpoints in the editor margin are normally shown as red filled circles.</dt>
+            <dt>Reference: <a href="https://code.visualstudio.com/docs/editor/debugging#_breakpoints">Breakpoints</a></dt>
+        </dl>
+    </section>
+    <section><h3>Data inspection</h3>
+        <dl class="fa">
+            <dt>Variables can be inspected in the VARIABLES section of the Debug view or by hovering over their source in the editor.</dt>
+            <dt>Variables and expression evaluation is relative to the selected stack frame in the CALL STACK section.</dt>
+            <dt>Reference: <a href="https://code.visualstudio.com/docs/editor/debugging#_data-inspection">Data inspection</a></dt>
+            <a href="images/data_inspection.png"><img src="images/data_inspection.png"></a>
+        </dl>
+    </section>
+</section>
+
+<section><h1 class="advanced">pdb - The Python Debugger</h1></section>
+<section><h2 class="advanced">pdb - The Python Debugger</h2>
+    <section id="using_debugger"><h3>Overview</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>pdb defines an interactive source code debugger for Python programs at the source line level</dt>
+            <dt>Pros:</dt>
+            <dd>you can use it on remote servers running Python</dd>
+            <dt>Cons:</dt>
+            <dd>requires time to master</dd>
+
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import pdb
+
+                def factorial(n):
+                    result = 1
+                    for i in range(1, n+1):
+                        pdb.set_trace()  # Start debugging session
+                        result *= i
+                    return result
+
+                print(factorial(5))
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
+
+
+<section class="main-section-title" id="unittest_debugging"><h1>Debugging Best Practices</h1></section>
+<section class="sub-sections"><h2>Writing Unit Tests</h2>
+    <section id="unittest_intro"><h3>What is Unit Testing?</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Definition</dt>
+            <dd>Unit testing is a software testing technique where individual units or components of a software application are tested in isolation to ensure their correctness.</dd>
+
+            <dt>Benefits</dt>
+            <dd>Unit tests help detect and prevent bugs early in the development process, improve code quality, and facilitate code refactoring and maintenance.</dd>
+
+            <dt>unittest Module</dt>
+            <dd>In Python, the unittest module provides a framework for writing and running unit tests.</dd>
+        </dl>
+    </section>
+    <section id="writing_unittests"><h3>Writing Unit Tests in Pyhton</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>TestCase Class</dt>
+            <dd>Test cases are defined by subclassing unittest.TestCase.</dd>
+
+            <dt>Test Methods</dt>
+            <dd>Each test case can have one or more test methods that verify specific behaviors or functionalities of the code being tested.</dd>
+
+            <dt>Assertions</dt>
+            <dd>Assertions are used to verify expected outcomes and compare actual results with expected values.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import unittest
+
+                def add(x, y):
+                    return x + y
+
+                class TestAddFunction(unittest.TestCase):
+                    def test_add_positive_numbers(self):
+                        self.assertEqual(add(2, 3), 5)
+
+                    def test_add_negative_numbers(self):
+                        self.assertEqual(add(-2, -3), -5)
+
+                    def test_add_mixed_numbers(self):
+                        self.assertEqual(add(2, -3), -1)
+
+                if __name__ == &#39;__main__&#39;:
+                    # If the script is run directly (not imported as a module), the unit tests are executed with:
+                    unittest.main()
+
+                # ...
+                # ----------------------------------------------------------------------
+                # Ran 3 tests in 0.000s
+
+                # OK
+            </code></pre>
+        </dl>
+    </section>
+    <section id="running_unittests"><h3>Running Unit Tests</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Command Line</dt>
+            <dd>Unit tests can be executed from the command line using the `unittest` module's test discovery mechanism.</dd>
+
+            <dt>Example</dt>
+            <dd>Suppose we have a Python module named `test_example.py` containing unit test classes and methods:</dd>
+
+            <!-- -------------- Optional code block for programming code --------------- -->
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import unittest
+
+                class TestExample(unittest.TestCase):
+                    def test_something(self):
+                        self.assertEqual(1 + 1, 2)
+
+                if __name__ == '__main__':
+                    unittest.main()
+            </code></pre>
+
+            <dt>Command Line</dt>
+            <dd>To run the unit tests from the command line:</dd>
+            <dd>`python -m unittest test_example.py`</dd>
+
+            <dt>IDE Integration</dt>
+            <dd>Most IDEs, such as Visual Studio Code, provide built-in support for running and debugging unit tests.</dd>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Using Version Control (git)</h2>
+    <section><h3>Overview</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Version control systems like Git enable tracking changes, facilitating collaboration and error recovery.</dt>
+            <dt>Branching in Git is a powerful feature that allows developers to create separate lines of development within a repository. One common use case of branching for debugging purposes is when you encounter a bug in your codebase that needs to be fixed without disrupting the main development workflow</dt>
+            <dt>Example - Create a Git Repository and Debug Branch:</dt>
+
+            <pre><code rel="Terminal" class="bash" data-noescape>
+                # Initialize Git repository
+                git init
+
+                # Add files to staging area
+                git add .
+
+                # Commit changes into default branch (main)
+                git commit -m &quot;Initial commit&quot;
+
+                # Create and switch to a new branch named "debug-authentication" specifically for debugging the authentication issue.
+                git checkout -b debug-authentication
+            </code></pre>
+            <dt>Once the bug has been successfully debugged and fixed in the debug-authentication branch, you have two options:</dt>
+            <dd>If the changes are effective and have been thoroughly tested, you can merge the debug-authentication branch into the main development branch (master or develop).</dd>
+            <pre><code rel="Terminal" class="bash">
+                git checkout main
+                git merge debug-authentication
+            </code></pre>
+            <dd>If the changes are not effective or if you decide to take a different approach, you can discard the debug-authentication branch without affecting the main codebase.</dd>
+            <pre><code rel="Terminal" class="bash">
+                git checkout main
+                git branch -D debug-authentication
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
+
+
+
+<!-- <section><h1>Resources</h1></section>
+<section><h2>Resources</h2>
+    <section>
+
+    </section>
+    <section><h3>Videos</h3>
+
+    </section>
+</section> -->
+
+<!--
+<section id="hw"><h1>Exercises</h1></section>
+<section><h2>Task1</h2>
+    <section><h3>The Task</h3>
+
+    </section>
+</section>
+
+<section><h3>Submission</h3>
+    <dl class="fa">
+        <dt>Please, prefix your filenames/archive with your name initials, before sending.</dt>
+        <dd>For instance: <b>iep_task1.py</b> or <b>iep_tasks.rar</b></dd>
+        <dt>Send files to <a href="mailto:progressbg.python.course@gmail.com?Subject=HW: debug">progressbg.python.course@gmail.com</a></dt>
+    </dl>
+</section>
+
+ -->
+
+<section class="disclaimer" data-background="/ProgressBG-Python-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
+     <p>These slides are based on</p>
+     <p>customised version of </p>
+     <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+     <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+        </div>
+    </div>
+    <!-- Custom processing -->
+    <script src="/ProgressBG-Python-Slides/outfit/js/slides.js"></script>
+    <!-- external scripts -->
+    <script src="/ProgressBG-Python-Slides/lib/reveal.js/lib/js/head.min.js"></script>
+    <script src="/ProgressBG-Python-Slides/lib/reveal.js/js/reveal.js"></script>
+     <!-- init reveal -->
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        var highlightjsTabSize = '  ';
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            history: true,
+            center: true,
+            width: 1920,
+            height: 1280,
+            // Bounds for smallest/largest possible scale to apply to content
+            // minScale: .5,
+            maxScale: 1,
+            // slide transition
+            transition: 'concave', // none/fade/slide/convex/concave/zoom
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+            // shift+maous click to zoom in/out element
+            zoomKey: 'ctrl',
+            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            // transition: Reveal.getQueryHash().transition || 'default'
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure(); hljs.initHighlightingOnLoad(); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>

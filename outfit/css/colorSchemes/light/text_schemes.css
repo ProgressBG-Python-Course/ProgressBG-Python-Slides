@@ -43,8 +43,9 @@
     font-weight: bold;
 }
 .reveal .note{
-    font-style: italic;
+    /* font-style: italic; */
     color: #ef9a9a;
+    padding:0 .2em;
 }
 .reveal .keyconcept, .reveal .keyword{
     color: #C5E1A5;
@@ -88,4 +89,8 @@
     line-height: 1.2;
 }
 
+.reveal .advanced i{
+  color: #EEA8A8;
+  font-size: .8em;
+}
 

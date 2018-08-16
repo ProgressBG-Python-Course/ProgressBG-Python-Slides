@@ -1,79 +1,205 @@
+"use strict";
+
+// DOM cache
+var articles = document.querySelectorAll(".themes>article")
+var themes = document.querySelectorAll('.themes>article>section');
+var subThemes = document.querySelectorAll('.themes>article>section>ol');
+var toggleButtonsDiv = document.querySelector('.toggleButtons');
+let toggleButtonsTopOffset = toggleButtonsDiv.offsetTop;
+
+var hours_per_day = 4;
+themes.shown = true;
+subThemes.shown = false;
+
+
 window.onload = function(){
     init();
 }
 function init(){
-    var sub_themes_nodes = document.getElementsByClassName('iep_syllabus_sub_themes');
     attachEvents();
+    setThemeURL();
+    setThemeHours();
     calcTotalHours();
     calcTotalDays();
-    hideAllNodes( sub_themes_nodes );
+    // hideAllNodes(themes);
+    hideAllNodes(subThemes);
+
+    if (document.documentElement.clientWidth > 700) {
+        calcSectionHours();
+    }
 }
 function attachEvents(){
-    // get elements to attach events to
-    var themesItems = document.querySelectorAll('.iep_syllabus_themes>li');
+    // onclick to themes/sub-themes titles:
+    var titleNodes = document.querySelectorAll('.themes>article>h1, .themes>article h3');
+    // console.log("titleNodes:", titleNodes);
+    for (let i = 0; i < titleNodes.length; i++) {
+        let titleNode = titleNodes[i];
 
-    for (var i = 0, len = themesItems.length; i < len; i++) {
-        var themeItem = themesItems[i];
+        // do not add click on empty lists and remove the arrow class on that title:
+        if(titleNode.nextElementSibling.tagName === "OL" && titleNode.nextElementSibling.children.length === 0){
+            titleNode.className = "";
+            continue;
+        }
 
-        // animate slides icon to grab attention:
-        themeItem.addEventListener( "mouseover", function(){
-            grabAttnetion(this.querySelector("a.ready"));
-        } );
-        themeItem.addEventListener( "mouseout", function(){
-            freeAttnetion(this.querySelector("a.ready"));
-        } );
-
-        // show hide subthemes on click
-        themeItem.children[0].addEventListener( "click", function(){
-            showHideNode(this.nextElementSibling)
+        // but add to all others
+        titleNode.addEventListener( "click", function(){
+            showHideNodes(getNextSiblings(this));
         });
+    };
+
+    // onclick to toggleThemes
+    var toggleThemes = document.querySelectorAll('.toggleThemes');
+    for (let i = 0; i < toggleThemes.length; i++) {
+        let element = toggleThemes[i];
+        element.addEventListener( "click", function(){
+            showHideAll( element, themes );
+        });
+    };
+
+    // onclick to toggleSubThemes
+    var togglesubThemes = document.querySelectorAll('.toggleSubThemes');
+    for (let i = 0; i < togglesubThemes.length; i++) {
+        let element = togglesubThemes[i];
+        element.addEventListener( "click", function(){
+            showHideAll( element, subThemes );
+        });
+    };
+
+    // on scroll => toggleButtons displayed as header:
+    window.addEventListener('scroll', function(e){
+        // console.dir(toggleButtonsDiv);
+        let topScroll = document.documentElement.scrollTop;
+
+        if(topScroll > toggleButtonsTopOffset - 32){
+            toggleButtonsDiv.classList.add('header')
+        }else{
+            toggleButtonsDiv.classList.remove('header')
+        }
+    });
+}
+
+function setThemeURL(){
+    // wrap H3 text into link, with href == section.id path
+        // <h3 data-wip>__themeTitle__</h3> =>
+        // <h3><a title="slides" href="/ProgressBG-Python-Slides/pages/themes/__themeTitle__/__themeTitle__.html">__themeTitle__</a></h3>
+
+    for (let i = 0, len = themes.length; i < len ; i++){
+        // do not set link for elements in WIP mode:
+        if( themes[i].hasAttribute("data-wip") ){
+            continue;
+        }
+
+        let h3Node = themes[i].querySelector("h3");
+        let h3_content = h3Node.innerHTML;
+
+        // get section.id
+        let themeTitle = themes[i].id;
+
+        // create link node:
+        let aNode = document.createElement('a');
+        aNode.setAttribute("title", "slides");
+        aNode.href = `/ProgressBG-Python-Slides/pages/themes/${themeTitle}/${themeTitle}.html`;
+        aNode.innerHTML = h3_content;
+
+        // append it into h3 node
+        h3Node.innerHTML = "";
+        h3Node.appendChild(aNode);
+    }
+}
+
+function setThemeHours(){
+    // insert <span class=hours> after each h3 in each section:
+    for(let i=0, len=themes.length; i<len; i++){
+        // get themes hours from "data-hours" attribute:
+        let hours = themes[i].getAttribute("data-hours");
+
+        // create output node:
+        var outNode = document.createElement('span');
+        outNode.className = 'hours';
+        outNode.innerHTML = hours;
+        themes[i].children[0].appendChild(outNode);
+    }
+}
+function calcSectionHours(){
+    var currentSectionHours = 0;
+    for (let i = 0, len = articles.length; i < len ; i++) {
+        let sectionHours = 0;
+
+        // create output node:
+        var outNode = document.createElement('span');
+        outNode.className = 'sectionHours';
+        articles[i].children[0].appendChild(outNode);
+
+        // calculate hours per section:
+        var topicHoursNodes = articles[i].querySelectorAll(".hours");
+
+        for (let i = 0, len = topicHoursNodes.length; i < len; i++) {
+            sectionHours += topicHoursNodes[i].innerHTML*1;
+        }
+
+        currentSectionHours += sectionHours;
+
+        // output
+        outNode.title = "hours:" + currentSectionHours;
+        outNode.title += "\n"+"day:" + currentSectionHours/hours_per_day;
+
+        outNode.innerHTML = "Total Section Hours: " + sectionHours;
     };
 }
 function calcTotalHours(){
-    var out_node = document.getElementsByClassName("total_hours_value")[0];
+    var out_node = document.getElementById("total_hours");
     var hours_nodes = document.getElementsByClassName("hours");
     var total = 0;
     for (var i = 0; i < hours_nodes.length; i++) {
-        var theme_hours = parseInt(hours_nodes[i].innerHTML || 0); // cause of NaN
+        var theme_hours = hours_nodes[i].innerHTML*1 || 0; // cause of NaN
         total += theme_hours;
+        // console.log("total hours=", total);
     };
     out_node.innerHTML = total;
 }
 function calcTotalDays(){
     var hours_nodes = document.getElementsByClassName("hours");
+    var out_node = document.getElementById("total_days");
     var current_hours = 0;
-    for (var i = 0; i < hours_nodes.length; i++) {
-        var theme_hours = parseInt(hours_nodes[i].innerHTML || 0); // cause of NaN
+    var total_days = 0;
+    for (var i = 0,len=hours_nodes.length; i < len ; i++) {
+        var theme_hours = hours_nodes[i].innerHTML*1 || 0; // cause of NaN
         current_hours += theme_hours;
 
         // calculate current days and show it as tooltip
         var current_days;
-        var hours_per_day = 4;
-        // if ( current_hours % hours_per_day > 0){
-        //     current_days = Math.floor( current_hours / hours_per_day) + 1;
-        // }else{
-        //     current_days = Math.floor( current_hours / hours_per_day);
-        // }
 
-        // do not round:
+
         current_days = current_hours / hours_per_day;
-        hours_nodes[i].title = "day:" + current_days;
+        current_days = Math.round(current_days * 10)/10
+
+        // output
+        hours_nodes[i].title = "hours:" + current_hours;
+        hours_nodes[i].title += "\n"+"day:" + current_days;
+
+        total_days = current_days;
     };
+
+    // calculate total days
+    out_node.innerHTML = total_days;
 }
-function showHideAll(  ){
-    var clicked_node = document.getElementsByClassName("iep_syllabus_title");
-    var effected_nodes = document.getElementsByClassName('iep_syllabus_sub_themes');
+
+function showHideAll( clicked_node, effected_nodes ){
+    // console.log("BEFORE: effected_nodes.shown: ", effected_nodes.shown);
+    // console.log("clicked_node: ", clicked_node);
+    // console.log("effected_nodes: ", effected_nodes);
     // init static flag to show or hide all
-    showHideAll.show = (typeof showHideAll.show == 'undefined' ) ? true : showHideAll.show;
-    if (showHideAll.show) {
-        showAllNodes(effected_nodes);
-        showHideAll.show = false;
+    // showHideAll.show = (typeof showHideAll.show == 'undefined' ) ? false : showHideAll.show;
+    if (effected_nodes.shown) {
+        hideAllNodes(effected_nodes);
+        effected_nodes.shown = false;
         clicked_node.title = 'Hide Subtopics';
     }else{
-        hideAllNodes(effected_nodes);
-        showHideAll.show = true;
+        showAllNodes(effected_nodes);
+        effected_nodes.shown = true;
         clicked_node.title = 'Show Subtopics';
     }
+    // console.log("effected_nodes.shown: ", effected_nodes.shown);
 }
 function showAllNodes ( effected_nodes){
     for (var i = 0; i < effected_nodes.length; i++) {
@@ -82,41 +208,44 @@ function showAllNodes ( effected_nodes){
 }
 function hideAllNodes ( effected_nodes){
     for (var i = 0; i < effected_nodes.length; i++) {
+        // skip for empty lists:
+        if(effected_nodes[i].tagName === "OL" && effected_nodes[i].children.length === 0){
+            continue;
+        }
         hideNode(effected_nodes[i]);
     };
 }
-function showHideNode(effected_node){
-    // console.log('showHideNode - effected_node:'+effected_node);
-    if ( effected_node.style.display == 'none'){
-        showNode(effected_node);
-        effected_node.previousElementSibling.title = 'Hide Subtopics';
-    }else {
-        hideNode(effected_node);
-        effected_node.previousElementSibling.title = 'Show Subtopics';
-    }
+function showHideNodes(effected_nodes){
+    // console.log('showHideNode - effected_nodes:'+effected_nodes);
+    effected_nodes.forEach( function(effected_node){
+        if ( effected_node.classList.contains("hidden") ){
+            showNode(effected_node);
+            effected_node.previousElementSibling.title = 'Hide Subtopics';
+        }else {
+            hideNode(effected_node);
+            effected_node.previousElementSibling.title = 'Show Subtopics';
+        }
+    });
 }
 function showNode(effected_node){
     // console.log("showNode IN: effected_node", effected_node);
-    // show node
-    effected_node.style.display = 'block';
-    // set custom show flag as property
-    effected_node.shown = true;
+    effected_node.classList.remove("hidden");
+
     // change title of the H3 element
     effected_node.parentElement.getElementsByTagName("h3")[0].title = 'Hide Subtopics';
     // change arrow
-    var arr_node = effected_node.parentElement.getElementsByClassName("label")[0];
+    var arr_node = effected_node.parentElement.getElementsByTagName("h3")[0];
+    // console.log("arr_node:", arr_node);
     changeArrow( arr_node, 'up');
 };
 function hideNode (effected_node) {
-    // console.log("hideNode IN: effected_node", effected_node);
-    // hide node
-    effected_node.style.display = 'none';
-    // set custom show flag as property
-    effected_node.shown = false;
+    effected_node.classList.add("hidden");
+
     // change title of the H3 element
     effected_node.parentElement.getElementsByTagName("h3")[0].title = 'Show Subtopics';
     // change arrow
-    var arr_node = effected_node.parentElement.getElementsByClassName("label")[0];
+    var arr_node = effected_node.parentElement.getElementsByTagName("h3")[0];
+    // console.log("arr_node:", arr_node);
     changeArrow( arr_node, 'down');
 }
 function changeArrow ( node, direction ) {
@@ -128,11 +257,6 @@ function changeArrow ( node, direction ) {
         node.classList.add("arrow_down");
     }
 }
-function grabAttnetion( node ){
-    // console.log("node = ", node);
-    node.classList.add("grabAttnetion");
-}
-function freeAttnetion( node ){
-    // console.log("node = ", node);
-    node.classList.remove("grabAttnetion");
-}
+
+
+

@@ -76,7 +76,7 @@ ul,ol,li{
     font-style: italic;
     /*text-align: center;*/
     /*color: #994A4A;*/
-    color: #ffde58;
+    color: ##CD0027;
 }
 li>span:before{
     content: " - ";

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>input_user_data </title>
+	<link rel="stylesheet" href="/ProgressBG-Python-Slides/outfit/css/themes/light.css" id="theme">
+	<style>
+		body{
+			width: 80%;
+			margin: 0 auto;
+		}
+		pre{
+			width: 80%;
+			border: 1px dotted #999;
+		}
+	</style>
+</head>
+<body>
+	<h1>Задача 1 (input_user_data.py)</h1>
+    <dl class="fa" style="min-width:80vw">
+        <dt>Да се напише програма (input_user_data.py), която да позволява на администратор да въведе следните данни за потребители:</dt>
+        <pre>
+            |--------|-------|----------|
+            | name   |   age | city     |
+            |--------|-------|----------|
+            | Pier   |    40 | Paris    |
+            | John   |    25 | New York |
+            | Sara   |    45 | London   |
+            | Mary   |    30 | Paris    |
+            | Bob    |    35 | London   |
+            | Mike   |    50 | London   |
+            |--------|-------|----------|
+        </pre>
+    </dl>
+
+
+	<p>Структурата от данни, в която ще съхранявате въведената информация е по ваше усмотрение.</p>
+
+	<p>Преди да се въведат данните за всеки потребител, се извежда съобщение:
+        <dt>"<code>Enter new user data [y/n]?: </code> "</dt>
+		<dd>Ако отговора е 'y' или 'Y', се въвежда информация за нов потребител.</dd>
+		<dd>Ако отговора е различен от 'y' или 'Y' се прекратява въвеждането на данни</dd>
+	<pre><code rel="" class="bash">
+python input_user_data.py
+
+	Enter new user data [y/n]?: y
+	Enter user name:Pier
+	Enter user age: 40
+	Enter user city: Paris
+
+	Enter new user data [y/n]?: y
+	Enter user name:John
+	Enter user age: 25
+	Enter user city: New York
+	...
+
+	Enter new user data [y/n]?: y
+	Enter user name:Mike
+	Enter user age: 50
+	Enter user city: London
+
+	Enter new user data [y/n]?: n
+	</code></pre>
+	<p>Формата на файла, в който ще се запишат въведените данни, е по ваше усмотрение (csv, json, ...), така че друга програма да може да чете въведените данни и да ги обработва.</p>
+</body>
+</html>

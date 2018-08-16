@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>iteratorsGenerators</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- css & themes include -->
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/outfit/css/themes/light.css" id="theme">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-Python-Slides/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-Python-Slides/lib/reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- CUSTOM -->
+    <base target="_blank">
+</head>
+<body>
+    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+        <div class="top_links">
+            <a class="home_link" href="/ProgressBG-Python-Slides/pages/agenda/agenda.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+            <span class="help_link" href="#"><i class="fa fa-question"></i></span>
+            <div class="help_text">
+                <div class="note">Keyboard shortcuts:</div>
+                <div><span>N/Спейс</span><span>Next Slide</span></div>
+                <div><span>P</span><span>Previous Slide</span></div>
+                <div><span>O</span><span>Slides Overview</span></div>
+                <div><span>ctrl+left click</span><span>Zoom Element</span></div>
+                <div class="print-howto"><br>If you want print version => add '<code>?print-pdf</code>' <br> at the end of slides URL (remove '#' fragment) and then print. <br>
+                Like: https://wwwcourses.github.io/...CourseIntro.html?print-pdf </div>
+            </div>
+        </div>
+        <div class="footer theme_switch">
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/dark.css'); return false;">Dark</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/light.css'); return false;">Light</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-Python-Slides/outfit/css/themes/projector.css'); return false;">Projector</a>
+        </div>
+        <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Iterators and Generators in Python</h1></section>
+<section data-transition="zoom">
+    <!-- linkedin badge -->
+    <!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
+    <section class="copyright" data-transition="zoom">
+        <div class="note">
+            <p>Created for</p>
+        </div>
+        <div class="company">
+            <a href="http://progressbg.net/програмиране-с-python-2/">
+            <img style="height:80%" src="/ProgressBG-Python-Slides/outfit/images/logos/ProgressBG_logo_529_127.png">
+            </a>
+        </div>
+        <div class="author">
+            <span class="note">Iva E. Popova, 2016-2024,</span>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        </div>
+    </section>
+    <section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+        <div class="company">
+             <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova on LinkedIn</a></div>
+        </div>
+    </section>
+</section>
+
+<section><h1>Iterators</h1></section>
+<section><h2>Iterators</h2>
+    <section><h3>Why are iterators so special?</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt><b>Efficiency</b>: Unlike loading the entire buffet onto your plate (list) at once, iterators fetch each dish (element) as needed. This is particularly useful for large datasets, where loading everything upfront could be slow and resource-intensive.</dt>
+            <dt><b>Memory Conservation</b>: Just like you don't need to carry all the food at once, iterators don't hold the entire collection in memory. They only remember the current dish (element) and where to find the next one, saving valuable memory for other tasks.</dt>
+            <dt><b>Lazy Evaluation</b>: Think of a buffet where dishes are prepared only when you ask for them. Iterators are similar – they only generate elements when you request them, making them ideal for infinite or very large sequences where you might not need everything.</dt>
+        </dl>
+    </section>
+    <section><h3>Iterators and Iterables</h3>
+        <dl class="fa">
+            <a href="./images/Iterators-in-Python.jpg" style="display: block;"><img src="./images/Iterators-in-Python.jpg" alt="Iterators-in-Python.jpg" style="display:block; width: 50vw; margin: 0 auto;"></a>
+            <dt>An <span class="note">iterator</span> is an object that knows how to return items from a collection, <b>one at a time</b>, while keeping track of its current position within that collection. It must implements next method:</dt>
+            <dd><code>__next__()</code> that returns the next item of the sequence. On reaching the end, it should raise the StopIteration exception.</dd>
+            <dd><code>__iter__()</code> that returns the iterator object itself. This is required to allow both iterables and iterators to be used with the <code>for</code> and <code>in</code> statements.</dd>
+            <dt>An <span class="note">iterable</span> is an object, that implements the method:</dt>
+            <dd><code>__iter__()</code> that returns iterator object</dd>
+            <dt>Iterables are used directly with <code>for</code> loops. Iterators are what Python uses under the hood to loop over these iterables.</dt>
+        </dl>
+    </section>
+    <section><h3><code class="code">iterator</code>  and the <code class="note">__next__</code> method</h3>
+        <dl class="fa">
+            <dt><code class="code">iterator</code> is any object, implementing the <code>__next__</code> method</dt>
+            <dt>When  <code>__next__</code> method is called, the iterator should return its "next value".</dt>
+            <dt>If the iterator has no more values to return, it should raise a StopIteration exception</dt>
+            <dt>There is a built-in function called <code>next</code>, wrapping around <code>__next__</code> that you can use for convenience.</dt>
+            <dd><code>next(it)</code> is equivalent to <code>it.__next__()</code></dd>
+            <dt>Example:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                numbers = [1, 2, 3]
+                iterator = iter(numbers)  # Create an iterator from the list
+
+                print(next(iterator))  # Output: 1
+                print(next(iterator))  # Output: 2
+                print(next(iterator))  # Output: 3
+                print(next(iterator))  # Raises StopIteration because there are no more items
+
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3><code class="note">iterable</code>  and the <code class="note">__iter__</code> method</h3>
+        <dl class="fa">
+            <dt><span class="note">itarable</span> is an object, implementing the <code>__iter__</code> method</dt>
+            <dt>The <code>__iter__</code> method returns an <em>iterator</em>.</dt>
+            <dt>The built-in function <code>iter()</code> can also be used to get an iterator from iterable.</dt>
+            <dt>Every sequence in Python is iterable. But there are other iterable types, which are not sequences, like <code>sets</code> or user-defined iterators.</dt>
+        </dl>
+    </section>
+    <section><h3>Custom Iterator Types</h3>
+        <dl class="fa">
+            <dt>You can create custom iterator by defining class with __iter__() and __next__() methods.:</dt>
+            <pre><code rel="Python" class="python" style="min-height:80vh">
+                class NumberIterator():
+                    """Simple Number Iterator, which can iterate on only two values - 1 and 2."""
+                    def __init__(self, start, end):
+                        self.current = start
+                        self.end = end
+
+                    # define NumberIterator as Iterable
+                    def __iter__(self):
+                        return self
+
+                    def __next__(self):
+                        # generate a number to return
+                        if self.current > self.end:
+                            raise StopIteration
+
+                        value = self.current
+                        self.current += 1
+                        return value
+
+
+
+                # use our custom iterator:
+                for number in NumberIterator(2,4):
+                    print(number, end=",")
+
+                # 2,3,4,
+            </code></pre>
+            <dt><code>__iter__()</code> is often straightforward, usually returning self.</dt>
+            <dt><code>__next__()</code> holds the logic for generating or retrieving elements and signaling the end of iteration.</dt>
+        </dl>
+    </section>
+    <section><h3>Custom Iterator on Fibonacci Sequence -  example</h3>
+        <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci Sequence @wikipedia</a>
+        <pre><code rel="Python" class="python" style="min-height: 80vh;">
+            class Fibonacci():
+                def __init__(self, end):
+                    self.prev = 0
+                    self.next = 1
+                    self.end = end
+
+                def __iter__(self):
+                    return self
+
+                def __next__(self):
+                    value = self.prev
+
+                    if value > self.end:
+                        raise StopIteration
+
+                    self.prev, self.next = self.next, self.prev+self.next
+                    return value
+
+
+            # use our custom iterator:
+            for number in Fibonacci(20):
+                print(number, end=",")
+
+            # 0,1,1,2,3,5,8,13,
+        </code></pre>
+    </section>
+    <!-- <section><h3>Resources</h3>
+        <dl class="fa">
+            <dt><a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Iterator Types @Python3 docs</a></dt>
+            <dt><a href="https://www.python.org/dev/peps/pep-0234/" class="advanced">PEP 234 -- Iterators</a></dt>
+        </dl>
+    </section> -->
+</section>
+
+
+<section><h1><span></span>Generators</h1></section>
+<section><h2 class="advanced">Generators</h2>
+    <section><h3>Overview</h3>
+        <dl class="fa">
+            <dt>Generators are special functions that return iterators instead of regular values.</dt>
+            <dt>They produce values "on demand" using the <code>yield</code> keyword, creating them one at a time.</dt>
+            <dt>Or more formally: a Python generator is a function which returns an iterator by calling <code>yield</code></dt>
+            <dt>Any function that contains a <code>yield</code> statement can be called a generator!</dt>
+            <dt><b>Key Characteristics:</b></dt>
+            <dd><i>Lazy Evaluation</i>: Values are generated only when requested, not all at once.</dd>
+            <dd><i>Iterators</i>: Generators are iterators, meaning they can be used in for loops.</dd>
+            <dd><i>Memory Efficiency</i>: Avoids storing entire sequences in memory, ideal for big data.</dd>
+            <dd><i>Stateful</i>: Remember their state between yield expressions, unlike regular functions.</dd>
+        </dl>
+    </section>
+    <section><h3>"lazy evaluation"</h3>
+        <dl class="fa">
+            <dt>Generators are the primary means by which Python implements so called <a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a></dt>
+            <dt>The lazy (on demand) generation of values translates to lower memory usage and (most of the times) in a performance improvement</dt>
+            <a href="./images/generator_vs_normal_function.png"><img src="./images/generator_vs_normal_function.png" alt="generator_vs_normal_function.png" style="width: 50vw;"></a>
+        </dl>
+    </section>
+    <section><h3>How a generator function works?</h3>
+        <dl class="fa">
+            <dt>When a generator function is called, it returns an iterator, that will controls the execution of the generator function.</dt>
+            <dt>When the <code>__next__</code> method of that generator is called, the execution of the function proceeds to the first yield expression,
+            and the execution is "freezed" - the current state of the function is preserved, and the yield value and the he control is transferred to the caller.
+            </dt>
+            <dt>When calling again the <code>__next__</code> method of that generator, the exection of the function continues from where it was freezed, and continues as described above.</dt>
+            <dt>If calling <code>__next__</code>, the execution code of the function contrains no yield statement - then the StopIteration error is raised.</dt>
+        </dl>
+    </section>
+    <section><h3>Making a Generator</h3>
+        <dt>Creating generator is like creating a normal function, but using <code class="note">yield</code> instead of <code>return</code></dt>
+        <pre><code rel="Python" class="python" style="min-height: 60vh;">
+            def foo_generator():
+                print('generator start')
+
+                # yield is almost like return, but it freezes the execution
+                yield 1
+                yield 2
+
+                print('generator end')
+
+            foo_gen = foo_generator()
+
+            for x in foo_gen:
+                print(x)
+
+
+            # generator start
+            # 1
+            # 2
+            # generator end
+        </code></pre>
+    </section>
+    <section><h3>Resources</h3>
+        <dl class="fa">
+            <dt><a href="https://www.python.org/dev/peps/pep-0255/" class="advanced">PEP 255 -- Simple Generators</a></dt>
+            <dt><a href="https://wiki.python.org/moin/Generators">Generators @python wiki</a></dt>
+        </dl>
+    </section>
+</section>
+
+<section data-min="5"><h1>Generators Examples</h1></section>
+<section><h2>Generators Examples</h2>
+    <section><h3>Custom Generator vs Custom Iterator</h3>
+        <pre><code rel="Python" class="python" style="min-height: 97vh;">
+            def foo_generator():
+                yield 1
+                yield 2
+
+            class FooIterator():
+                def __init__(self) -> None:
+                    self.current  = 1
+                    self.max    = 2
+
+                def __iter__(self):
+                    return self
+
+                def __next__(self):
+                    if self.current<=self.max:
+                        value = self.current
+                        self.current+=1
+                        return value
+                    else:
+                        raise StopIteration
+
+            foo_gen = foo_generator()
+            foo_iter = FooIterator()
+
+            print('Generator test:')
+            for x in foo_gen:
+                print(x, end=",")
+
+            print('\nIterator test:')
+            for x in foo_iter:
+                print(x, end=",")
+
+            # Generator test:
+            # 1,2,
+            # Iterator test:
+            # 1,2,
+        </code></pre>
+        <!-- <p>Play with the full example @repl.it: <a href="https://repl.it/@IvaPopova/Custom-Generator-vs-Custom-Iterator">Custom-Generator-vs-Custom-Iterator</a></p> -->
+    </section>
+    <section><h3>Example - integer numbers generator in range</h3>
+        <pre><code rel="Python" class="python" style="min-height: 10vh;">
+            #define the generator function:
+            def numbers_generator(start,end):
+                """Generates numbers from start (inclusive) to end (inclusive)."""
+                num  = start
+                while num<=end:
+                    yield num
+                    num += 1
+
+            my_numbers = numbers_generator(1,10)
+            # iterate over our generator:
+            for x in my_numbers:
+                print(x, end=",")
+
+            # 1,2,3,4,5,6,7,8,9,10,
+        </code></pre>
+    </section>
+    <section><h3>Example - nested list flatten generator</h3>
+        <pre><code rel="Python" class="python" style="min-height: 40vh;">
+            def flatten(nested):
+                """Flattens a nested list into a single generator of elements."""
+                for sublist in nested:
+                    for element in sublist:
+                        yield element
+
+            nested = [[1, 2], [3, 4], [5]]
+
+            print( list(flatten(nested)) )
+
+            # [1, 2, 3, 4, 5]
+        </code></pre>
+    </section>
+    <section><h3 class="advanced">Naive Cyrillic names generator:</h3>
+        <script src="https://gist.github.com/ProgressBG-Python-Course/eeb24adfc2cf814a669230198244564b.js"></script>
+        <!-- </a> -->
+        <!-- <a href="https://repl.it/@IvaPopova/naiverandomnamesiterator">naive_random_names_iterator @repl.it</a> -->
+    </section>
+</section>
+
+<section data-min="5"><h1 class="advanced">Generator comprehensions</h1></section>
+<section><h2 class="advanced">Generator comprehensions</h2>
+    <section>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Generator comprehensions in Python are a concise way to create generators.</dt>
+            <dt>Basic syntax:</dt>
+            <pre><code rel="Syntax" class="python" style="min-height: 5vh;">
+                (variable for variable in iterable if condition)
+            </code></pre>
+            <dt>Example: generator that yields squares of numbers from 1 to 10</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                squares = (num**2 for num in range(1,11))
+                print(squares)
+                print(list(squares))
+
+                # &lt;generator object &lt;genexpr&gt; at 0x7f87ade4dd80&gt;
+                # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+            </code></pre>
+            <dt>Example: generator that yields squares of even numbers from 1 to 10</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                squares = (num**2 for num in range(1,11) if num%2==0)
+                print(list(squares))
+
+                # [4, 16, 36, 64, 100]
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Use Cases</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt><b>Handling Large Data Sets</b>: Generators are memory-efficient because they yield items one at a time, only generating a value when requested. This makes them particularly useful for processing large data sets where loading the entire data set into memory (e.g., as a list) would be impractical or impossible due to memory constraints.</dt>
+            <dt><b>Data Streaming and Pipelines</b>: Generators can be used to create data pipelines, where you have a series of operations that process data. Each step can be a generator that takes data from the previous step, processes it, and yields the result. This lazy evaluation means that data is processed in a streaming fashion, which can be efficient for tasks like reading and processing files line by line, or processing data coming in from a network.</dt>
+            <dt><b>Improving Performance in Loops</b>: In scenarios where a loop is used to process elements one at a time, using a generator can improve performance by reducing the initial overhead of generating and storing all elements. This is particularly noticeable with operations that may not require all the elements of a sequence or when the operation can terminate early.</dt>
+            <dt><b>Composition and Chaining</b>: Generators can be easily composed or chained together, allowing for the construction of complex data processing chains that are evaluated lazily. This is useful in functional programming patterns within Python, where you might filter, map, and reduce data in a series of steps.</dt>
+        </dl>
+    </section>
+</section>
+
+<section data-min="10"><h1>Generator comprehensions examples:</h1></section>
+<section><h2 class="advanced">Generator comprehensions examples:</h2>
+    <section><h3>Process large log file</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Consider a scenario where you need to process a log file that is several gigabytes in size. Loading the entire file into memory as a list of lines would be inefficient and might even exceed your system's memory capacity. Instead, you can use a generator to process one line at a time.</dt>
+            <dt>You can use next generator expression that efficiently iterates over each line in a file named ./syslog, yielding only those lines that contain the substring 'error'</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                error_lines = (line for line in open('./syslog') if 'error' in line)
+                for line in error_lines:
+                    print(line)
+
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Data Streaming and Pipelines</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Data streaming and pipelines refer to the process of sequentially passing data through a series of steps (or stages), where each step processes the data in some way and passes it on to the next step. This approach is particularly useful for processing large datasets or streams of data in a memory-efficient manner. Python's generator functions and expressions are ideal for constructing such pipelines due to their lazy evaluation, which allows them to process one item at a time.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 50vh;">
+                filename = 'example.txt'
+
+                # Pipeline Construction
+                # Step 1: Read Lines
+                lines = (line for line in open(filename))
+
+                # Step 2: Normalize Text
+                normalized_lines = (line.lower().strip() for line in lines)
+
+                # Step 3: Filter Out Comments
+                non_comment_lines = (line for line in normalized_lines if not line.startswith('#'))
+
+                # Execute the pipeline
+                for line in non_comment_lines:
+                    print(line)
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Composition and Chaining</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Imagine we have a list of sales records where each record is a dictionary containing the sales amount and the region. Our goal is to:</dt>
+            <dd>Filter records to include only sales from a specific region (e.g., "Europe").</dd>
+            <dd>Convert each record into just the sales amount (mapping).</dd>
+            <dd>Calculate the total sales amount for the filtered records.</dd>
+        </dl>
+        <pre><code rel="Python" class="python" style="min-height: 60vh;">
+            sales_data = [
+                {'amount': 1000, 'region': 'Europe'},
+                {'amount': 1500, 'region': 'North America'},
+                {'amount': 800, 'region': 'Europe'},
+                {'amount': 1200, 'region': 'Asia'},
+                {'amount': 3000, 'region': 'Europe'},
+                {'amount': 700, 'region': 'North America'},
+            ]
+            # Variant 1: with generators
+            europe_sales_amounts = (
+                # map
+                sale['amount'] for sale in (
+                    # filter:
+                    sale for sale in sales_data if sale['region']=='Europe'
+                )
+            )
+            total_sales_amount = sum(europe_sales_amounts)
+
+            print(total_sales_amount)
+        </code></pre>
+    </section>
+</section>
+
+
+<section id="hw"><h1>Homework</h1></section>
+    <section><h2>Homework</h2>
+        <section>
+            <dl class="fa">
+                <dt>The tasks are given in next <a href="https://gist.github.com/ProgressBG-Python-Course/0e4013d3b5c72c0ae30fb2bfd2b35782">gist file</a></dt>
+                <dt>You can copy it and work directly on it. Just put your code under "### Your code here".</dt>
+            </dl>
+        </section>
+    </section>
+</section>
+
+
+
+
+
+<section class="disclaimer" data-background="/ProgressBG-Python-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
+     <p>These slides are based on</p>
+     <p>customised version of </p>
+     <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+     <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+        </div>
+    </div>
+    <!-- Custom processing -->
+    <script src="/ProgressBG-Python-Slides/outfit/js/slides.js"></script>
+    <!-- external scripts -->
+    <script src="/ProgressBG-Python-Slides/lib/reveal.js/lib/js/head.min.js"></script>
+    <script src="/ProgressBG-Python-Slides/lib/reveal.js/js/reveal.js"></script>
+     <!-- init reveal -->
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        var highlightjsTabSize = '  ';
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            history: true,
+            center: true,
+            width: 1920,
+            height: 1280,
+            // Bounds for smallest/largest possible scale to apply to content
+            // minScale: .5,
+            maxScale: 1,
+            // slide transition
+            transition: 'concave', // none/fade/slide/convex/concave/zoom
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+            // shift+maous click to zoom in/out element
+            zoomKey: 'ctrl',
+            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            // transition: Reveal.getQueryHash().transition || 'default'
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure(); hljs.initHighlightingOnLoad(); } },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '/ProgressBG-Python-Slides/lib/reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>

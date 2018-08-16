@@ -1,7 +1,44 @@
 {
+    "python.terminal.activateEnvironment": false,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
-    "python.linting.pep8Enabled": false,
-    "python.linting.flake8Enabled": false,
-    "cSpell.language": "en"
+    "python.pythonPath": "/usr/bin/python3",
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.extraPaths": [
+		"./",
+		"${workspaceFolder}",
+		"${workspaceFolder}/.venv"
+	],
+
+    "workbench.colorCustomizations": {
+        "editorWhitespace.foreground": "#999"
+    },
+
+    "spellright.language": [
+        "Bulgarian"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "python",
+        "ini",
+        "html"
+    ],
+    "editor.indentSize": "tabSize",
+    "diffEditor.ignoreTrimWhitespace": true,
+    "scm.diffDecorationsIgnoreTrimWhitespace": "true",
+    "diffEditor.hideUnchangedRegions.enabled": false,
+    "workbench.layoutControl.enabled": true,
+    "window.title": "${activeEditorMedium}",
+    // "spellright.ignoreRegExpsByClass": {
+    //     "markdown": [ "/&amp;/g", "/&nbsp;/g" ],
+    //     "cpp": [ "/#include\\s+\\\".+\\\"/g" ],
+    //     "html": [
+    //         "/<script>[^]*?</script>/gm",
+    //         ""
+    //     ],
+    //     "latex": [ "/\\\\begin{minted}[^]*?\\\\end{minted}/gm" ]
+    // }
+
 }

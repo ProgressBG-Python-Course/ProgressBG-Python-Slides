@@ -7,8 +7,6 @@
 .reveal pre{
 	font-size: .6em;
 	line-height: 1;
-	min-width: 80vh;
-	margin: 0 auto;
 	white-space: pre-wrap;       /* css-3 */
 	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
 	white-space: -pre-wrap;      /* Opera 4-6 */
@@ -18,12 +16,12 @@
 .reveal pre>code{
 	font-family: 'Inconsolata', monospace;
 	/*font-weight: bold;*/
-	font-size: 1.2em;	
-	line-height: 1.1em;
-	margin: 1em 0 1em 0;
+	/*font-size: 0.8em;*/
 	padding-left: .3em;
 	padding-bottom: .3em;
-	padding-right: 0;	
+	padding-right: 0;
+	line-height: 1.1em;
+	tab-size: 4;
 }
 code[rel]::before{
 	content: attr(rel);
@@ -56,10 +54,6 @@ code[rel="JS"]::before{
 }
 code[rel="Terminal"]::before{
 	background: rgba(0,0,0, .6);
-	color: #FFF;
-}
-code[rel="Output"]::before{
-	background: rgba(0,0,0, .4);
 	color: #FFF;
 }
 code:first-line{

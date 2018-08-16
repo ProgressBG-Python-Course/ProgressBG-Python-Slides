@@ -7,10 +7,6 @@
     color: #CCC;
 }
 
-.reveal section .advanced:before{
-    color: #ef9a9a;
-}
-
 
 /* results blocks */
 .reveal>.slides div.results_h{
