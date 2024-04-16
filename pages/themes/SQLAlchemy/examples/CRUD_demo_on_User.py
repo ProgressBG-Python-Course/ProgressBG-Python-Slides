@@ -1,75 +1,83 @@
-from sqlalchemy import create_engine, Column, Integer, String, Date
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+# Base class for our class definitions
 Base = declarative_base()
 
 class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    age = Column(Integer)
+    __tablename__ = 'users'  # Define the table name
 
-class UserManager:
-    def __init__(self, db_uri):
-        self.engine = create_engine(db_uri)
+    # Define the columns of the table
+    id = Column(Integer, primary_key=True)  # Primary key column
+    name = Column(String, nullable=False)   # Name cannot be null
+    age = Column(Integer, nullable=False)   # Age cannot be null
+
+    def __repr__(self):
+        # Human-readable representation of the object, helpful for debugging
+        return f"<User(name={self.name}, age={self.age})>"
+
+class Database:
+    def __init__(self, db_url='sqlite:///python_course.db'):
+        """Initializes database connection and sessionmaker."""
+        # Create engine ties our app with SQLAlchemy ORM to a specific database. Echo set to True to log all SQL queries
+        self.engine = create_engine(db_url, echo=True)
+        # Creates all tables defined in the Base subclass
         Base.metadata.create_all(self.engine)
+        # Creates session to handle queries
         self.Session = sessionmaker(bind=self.engine)
+        self.session = self.Session()
 
-    def create_user(self, name, age):
-        session = self.Session()
+    def add_user(self, name, age):
+        """Add a new user to the database."""
         new_user = User(name=name, age=age)
-        session.add(new_user)
-        session.commit()
-        session.close()
+        # Add the new user to the session
+        self.session.add(new_user)
+        # Commit all pending transactions to the database
+        self.session.commit()
 
-    def read_user(self, user_id):
-        session = self.Session()
-        user = session.query(User).filter(User.id == user_id).first()
-        session.close()
-        return user
+    def get_users(self):
+        """Retrieve all users from the database."""
+        return self.session.query(User).all()
 
-    def update_user(self, user_id, name=None, age=None):
-        session = self.Session()
-        user = session.query(User).filter(User.id == user_id).first()
-        if user:
-            if name:
-                user.name = name
-            if age:
-                user.age = age
-            session.commit()
-        session.close()
+    def update_user(self, user_id, name, age):
+        """Update a user's information in the database."""
+        # Retrieve specific user by ID
+        user = self.session.query(User).filter(User.id == user_id).one()
+         # Update name and age
+        user.name = name
+        user.age = age
+        # Commit all pending transactions to the database
+        self.session.commit()
 
     def delete_user(self, user_id):
-        session = self.Session()
-        user = session.query(User).filter(User.id == user_id).first()
-        if user:
-            session.delete(user)
-            session.commit()
-        session.close()
+        """Delete a user from the database."""
+        # Find the user to be deleted
+        user = self.session.query(User).filter(User.id == user_id).one()
+        # Delete the user from the session
+        self.session.delete(user)
+        # Commit all pending transactions to the database
+        self.session.commit()
 
-if __name__ == '__main__':
-    # Create an instance of UserManager with a database URI
-    db_uri = 'sqlite:///example.db'
-    user_manager = UserManager(db_uri)
+    def __del__(self):
+        """Close the session when the object is deleted to free resources."""
+        self.session.close()
 
-    # Create a new user
-    user_manager.create_user(name='Ivan', age=30)
+# Example usage
+if __name__ == "__main__":
+    db = Database()
 
-    # Read the user by ID
-    user = user_manager.read_user(user_id=1)
-    print(user.id, user.name, user.age)  # Output: 1 Ivan 30
+    # Add users to the database
+    db.add_user('Ivan', 30)
+    db.add_user('Maria', 25)
 
-    # Update the user's age
-    user_manager.update_user(user_id=1, age=31)
+    # Print all users in the database
+    print(db.get_users())
 
-    # Read the updated user
-    user = user_manager.read_user(user_id=1)
-    print(user.id, user.name, user.age)  # Output: 1 Ivan 31
+    # Update Ivan's details
+    db.update_user(1, 'Ivan Petrov', 31)
 
-    # Delete the user
-    user_manager.delete_user(user_id=1)
+    # Delete Maria from the database
+    db.delete_user(2)
 
-    # Attempt to read the user (should return None)
-    user = user_manager.read_user(user_id=1)
-    print(user)  # Output: None
+    print(db.get_users())

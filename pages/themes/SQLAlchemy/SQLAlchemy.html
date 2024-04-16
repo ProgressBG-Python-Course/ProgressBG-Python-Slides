@@ -76,6 +76,204 @@
 </section>
 
 
+<section class="main-section-title" id="DatabaseConcepts"><h1>Short Introduction to Database Concepts</h1></section>
+<section class="sub-sections">
+    <h2>Database Concepts</h2>
+    <section id="WhatIsADatabase"><h3>What is a Database?</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>A database is a structured set of data held in a computer, usually accessible in various ways.</dt>
+            <a href="./images/DBMS_Overview.png" style="display: block; text-align: center;">
+                <img src="./images/DBMS_Overview.png" alt="DBMS_Overview.png" style="min-height: 40vh;">
+            </a>
+            <dt>Databases allow for efficient data management.</dt>
+            <dt>They provide a systematic way to organize, manage, and retrieve data, ensuring data integrity and security.</dt>
+        </dl>
+    </section>
+    <section id="TypesOfDatabases"><h3>Types of Databases</h3>
+        <dl class="fa" style="min-width:80vw">
+            <a href="./images/documentDB_vs_RDMS.png" style="display: block; text-align: center;">
+                <img src="./images/documentDB_vs_RDMS.png" alt="documentDB_vs_RDMS.png" style="min-height: 40vh;">
+            </a>
+            <dt>Relational Databases (SQL)</dt>
+            <dd>Organize data into one or more tables with columns and rows. Tables relate to each other through foreign keys (in image above - the ZIP_id column).</dd>
+            <dd>SQL (Structured Query Language) is a standardized programming language used to manage relational databases and perform various operations on the data in them.</dd>
+            <dt>NoSQL Databases</dt>
+            <dd>Flexible data models that do not require a fixed schema, often used for large sets of distributed data.</dd>
+        </dl>
+    </section>
+    <section id="CommonDatabaseOperations"><h3>Common Database Operations</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>CRUD Operations</dt>
+            <dd>Create, Read, Update, Delete - the basic operations stored in a database.</dd>
+            <pre><code rel="SQL" class="sql" style="min-height: 1vh;">
+                # Example SQL for CRUD operations
+                INSERT INTO users (name, age) VALUES ('Ivan', 30);  -- Create
+                SELECT * FROM users;                                -- Read
+                UPDATE users SET age = 31 WHERE name = 'Ivan';      -- Update
+                DELETE FROM users WHERE name = 'Ivan';              -- Delete
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
+<section class="main-section-title" id="SQLiteForDummies"><h1>Get familiar with SQLite</h1></section>
+<section class="sub-sections"><h2>Get familiar with SQLite</h2>
+    <section id="IntroductionToSQLite"><h3>Introduction to SQLite</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt><a href="https://www.sqlite.org/">SQLite</a> is a lightweight, file-based database that does not require a separate server process and allows access via a simple integration with almost any programming language.</dt>
+            <dt>SQLite is built into all mobile phones and most computers and comes bundled inside countless other applications that people use every day</dt>
+            <dt>Why Choose SQLite?</dt>
+            <dd><b>Simple to set up and use</b> - no complicated server setup; just needing a file to be accessed or created.</dd>
+            <dd><b>Highly portable</b> - The entire database consists of a single file on disk, making it extremely easy to copy and move.</dd>
+            <dd><b>Surprisingly capable</b> - Supports most SQL standards, making it capable enough for many small to medium applications.</dd>
+            <dd>SQLite is used by literally millions of application - check <a href="https://www.sqlite.org/famous.html">Well-Known Users of SQLite</a></dd>
+        </dl>
+    </section>
+    <!-- <section id="BasicOperationsInSQLite"><h3>Basic Operations in SQLite</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Creating a Database</dt>
+            <dd>Simply access a file with SQLite; if it does not exist, SQLite will create it.</dd>
+            <dt>Creating Tables</dt>
+            <dd>Use SQL commands to define tables and their structure within the database.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                # Example of creating a table in SQLite
+                CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);
+            </code></pre>
+            <dt>Adding, Retrieving, and Managing Data</dt>
+            <dd>Insert, select, update, and delete data using standard SQL queries.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                # Examples of SQL data manipulation commands
+                INSERT INTO users (name, age) VALUES ('Ivan', 30);
+                SELECT * FROM users;
+                UPDATE users SET age = 31 WHERE name = 'Ivan';
+                DELETE FROM users WHERE name = 'Ivan';
+            </code></pre>
+        </dl>
+    </section> -->
+    <section id="UseCasesForSQLite"><h3>Use Cases for SQLite</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Embedded Applications</dt>
+            <dd>Perfect for applications where simplicity and minimalism are preferred, such as in mobile apps or small web applications.</dd>
+            <dt>Prototyping and Testing</dt>
+            <dd>Excellent for developers who need a database to test or prototype their applications quickly.</dd>
+            <dt>Single-User Local Storage</dt>
+            <dd>Ideal for desktop applications requiring a local storage solution without the need for networked database access.</dd>
+        </dl>
+    </section>
+    <section><h3>Interacting with SQLite</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>By SQLite GUI Viewer -  a graphical user interface tool that allows users to interact with SQLite databases without the need for command-line interactions. On Windows you can use:</dt>
+            <dd><a href="https://sqlitebrowser.org/">DB Browser for SQLite (DB4S)</a> - a high-quality, visual, open-source tool to create, design, and edit database files compatible with SQLite.</dd>
+            <dd><a href="https://sqlitestudio.pl/">SQLiteStudio</a> - an SQLite database manager with a multifunctional GUI with an integrated set of SQLite tools and services.</dd>
+            <dt>By IDE/Code Editors plugins</dt>
+            <dd><a href="https://www.jetbrains.com/help/pycharm/sqlite.html">Pycharm's Database Tools and SQL plugin</a> - note, that the plugin is available <span class="note">only in PyCharm Professional</span>.</dd>
+            <dd><a href="https://marketplace.visualstudio.com/items?itemName=yy0931.vscode-sqlite3-editor">VSCode's SQLite3 Editor extension</a> - edit SQLite3 files like you would in spreadsheet applications.</dd>
+        </dl>
+    </section>
+</section>
+<section class="sub-sections"><h2>Using SQLite with Python</h2>
+    <section><h3>Using SQLite with Python</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Using SQLite with Python is straightforward thanks to the built-in sqlite3 module. </dt>
+            <dt>This means you don't need to install any additional packages to start working with SQLite in Python.</dt>
+        </dl>
+    </section>
+    <section id="SetupSQLiteDatabase"><h3>Setup SQLite Database</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Import `sqlite3` and connect to a database file.</dt>
+            <dd>If the file does not exist, SQLite will automatically create it.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import sqlite3
+
+                connection = sqlite3.connect('./python_course.db')
+            </code></pre>
+        </dl>
+    </section>
+    <section id="CreateTable"><h3>Create Table</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Create a new table using SQL commands.</dt>
+            <dd>Tables are defined with specific columns and data types.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 55vh;">
+                import sqlite3
+
+                connection = sqlite3.connect("python_course.db")
+
+                cursor = connection.cursor()
+                cursor.execute('''
+                CREATE TABLE IF NOT EXISTS employees (
+                    id INTEGER PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    position TEXT NOT NULL,
+                    office TEXT,
+                    age INTEGER,
+                    start_date TEXT
+                )
+                ''')
+                connection.commit()
+            </code></pre>
+        </dl>
+    </section>
+    <section id="InsertData"><h3>Insert Data</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Insert new records into the table.</dt>
+            <dd>Use INSERT SQL statements to add data.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                cursor.execute('''
+                INSERT INTO employees (name, position, office, age, start_date)
+                VALUES ('Ivan Ivanov', 'Software Engineer', 'Sofia', 30, '2022-01-01')
+                ''')
+
+                connection.commit()
+            </code></pre>
+        </dl>
+    </section>
+    <section id="QueryData"><h3>Query Data</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Retrieve data from the table.</dt>
+            <dd>Use SELECT statements to fetch data.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                cursor.execute('SELECT * FROM employees')
+                rows = cursor.fetchall()
+                for row in rows:
+                    print(row)
+            </code></pre>
+        </dl>
+    </section>
+    <section id="UpdateAndDeleteData"><h3>Update and Delete Data</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Modify or remove existing records.</dt>
+            <dd>Use UPDATE and DELETE statements to change or remove data.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                # Update data
+                cursor.execute('''
+                UPDATE employees SET age = 31 WHERE name = 'Ivan Ivanov'
+                ''')
+                connection.commit()
+
+                # Delete data
+                cursor.execute('''
+                DELETE FROM employees WHERE name = 'Ivan Ivanov'
+                ''')
+                connection.commit()
+            </code></pre>
+        </dl>
+    </section>
+    <section id="CloseConnection"><h3>Close Connection</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Always close the database connection when done.</dt>
+            <dd>This frees up system resources that were being used by the database connection.</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                connection.close()
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>SQLite CRUD Example</h3>
+        <script src="https://gist.github.com/ProgressBG-Python-Course/32998d0ef7c63ee125ceed7e4fd681b2.js"></script>
+    </section>
+</section>
+
+
+
 <section><h1>What is an ORM?</h1></section>
 <section><h2>What is an ORM?</h2>
     <section><h3>Overview</h3>
@@ -93,26 +291,26 @@
     </section>
     <section><h3>Analogy between Tables and Classes</h3>
         <pre><code rel="SQL" class="sql" data-noescape>
-            CREATE TABLE user (
-                id serial primary key,
-                name character varying,
-                address character varying
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL,
+                age INTEGER NOT NULL
             )
         </code></pre>
         <pre><code rel="Python" class="python" style="min-height: 1vh;">
             class User:
-                def __init__(self, name, address):
+                def __init__(self, name, age):
                     self.name = name
-                    self.address = address
+                    self.age = age
         </code></pre>
     </section>
-    <section><h3>ORM for MongoDB?</h3>
+    <!-- <section><h3>ORM for MongoDB?</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>MongoDB is a NoSQL document-oriented database. While SQLAlchemy provides a rich set of features for working with relational databases, it does not natively support MongoDB.</dt>
             <dt>In Python's ecosystem there are other libraries that provide similar functionality to SQLAlchemy but are specifically designed for MongoDB.</dt>
             <dt>One popular choice is MongoEngine, which is an Object-Document Mapper (ODM) for MongoDB that provides similar features to SQLAlchemy but tailored for MongoDB's document structure.</dt>
         </dl>
-    </section>
+    </section> -->
 </section>
 
 <section class="main-section-title" id="IntroductionToSQLAlchemy"><h1>Introduction to SQLAlchemy</h1></section>
@@ -121,14 +319,16 @@
         <dl class="fa" style="min-width:80vw">
             <dt>SQLAlchemy is a powerful SQL toolkit and Object-Relational Mapping (ORM) library for Python.</dt>
             <dt>SQLAlchemy provides a Pythonic way to interact with databases, allowing developers to work with SQL databases using Python objects and syntax, making database operations more intuitive and efficient.</dt>
-
-            <dt>Key Features</dt>
+            <a href="./images/SQLAlchemy_layers.png" style="display: block; text-align: center;">
+                <img src="./images/SQLAlchemy_layers.png" alt="SQLAlchemy_layers.png" style="min-height: 60vh;">
+            </a>
+            <!-- <dt>Key Features</dt>
             <dd><b>ORM support</b>: Allows developers to interact with databases using Python objects, abstracting away the complexities of SQL.</dd>
             <dd><b>Expression Language</b>: Provides a Pythonic way to construct SQL queries, making it easier to write and maintain code.</dd>
             <dd><b>Connection Pooling</b>: Manages database connections efficiently, improving performance.</dd>
             <dd><b>Transaction support</b>: Ensures data integrity by managing database transactions.</dd>
             <dd><b>Schema Migration</b>: Provides tools for managing and migrating database schemas, making it easier to evolve your application over time.</dd>
-            <dd><b>Compatibility</b>: Supports multiple database backends</dd>
+            <dd><b>Compatibility</b>: Supports multiple database backends</dd> -->
         </dl>
     </section>
     <section><h3>Supported Database Backends</h3>
@@ -167,7 +367,7 @@
                 from sqlalchemy import create_engine
 
                 # Create an engine to connect to a SQLite database
-                engine = create_engine('sqlite:///mydatabase.db')
+                engine = create_engine('sqlite:///python_course.db')
 
                 # create engine for MySQL dialect with MySQL Connector DBAPI:
                 engine = create_engine("mysql+mysqlconnector://test:test1234@localhost/test")
@@ -186,69 +386,10 @@
             <dt>List and more information about dialects can be found on: <a href="https://docs.sqlalchemy.org/en/20/dialects/index.html">Dialects</a></dt>
         </dl>
     </section>
-    <section><h3>Create Session</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Once connected, SQLAlchemy uses a Session object to manage interactions with the database.</dt>
-            <dt>Sessions keep track of objects loaded from the database and handle transactions.</dt>
-        </dl>
-        <pre><code rel="Python" class="python" style="min-height: 1vh;">
-            from sqlalchemy.orm import sessionmaker
-
-            # Create a session
-            Session = sessionmaker(bind=engine)
-            session = Session()
-        </code></pre>
-    </section>
-    <section><h3>Why using Session?</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt><b>Transactional Integrity:</b></dt>
-            <dd>The `Session` provides a transactional boundary. It ensures that all changes made to objects in a session are persisted in the database atomically (either all changes are committed or none), maintaining the integrity of your data.</dd>
-
-            <dt><b>Unit of Work:</b></dt>
-            <dd>The `Session` tracks changes made to objects and automatically synchronizes these changes with the database upon committing a transaction. It effectively acts as a unit of work, allowing you to perform multiple operations on objects and commit them as a single transaction.</dd>
-
-            <dt><b>Identity Map:</b></dt>
-            <dd>Within a session, each object is unique. This means that if you load the same object multiple times within a session, you'll always get back the same Python object instance. This behavior helps in maintaining consistency and avoiding unnecessary duplicate objects.</dd>
-
-            <dt><b>Caching and Performance:</b></dt>
-            <dd>The `Session` implements a first-level cache to optimize performance. Once an object is loaded into a session, subsequent requests for the same object are retrieved from the cache, reducing the number of database queries and improving overall performance.</dd>
-
-            <dt><b>Context Management:</b></dt>
-            <dd>The `Session` can be used within a context manager (using the `with` statement) to ensure proper handling of resources. It automatically opens a connection to the database when entering the context and closes it when exiting, preventing resource leaks and managing connections efficiently.</dd>
-            <dt>More on Sessions: <a href="https://docs.sqlalchemy.org/en/20/orm/session_basics.html">Session Basics @docs.sqlalchemy.org</a></dt>
-        </dl>
-    </section>
 </section>
 
 <section class="main-section-title"><h1>Create Tables</h1></section>
 <section class="sub-sections"><h2>Create Tables</h2>
-    <section><h3>Creating a table with MetaData and Table </h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>MetaData in SQLAlchemy represents a collection of database schema elements, such as tables, columns, and constraints. It acts as a container for storing and managing the structure of a database.</dt>
-            <dt>To define database schema elements in SQLAlchemy, you typically create instances of the Table, Column, and other schema constructs and associate them with a MetaData object.</dt>
-            <pre><code rel="Python" class="python" style="min-height: 55vh;">
-                from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
-
-                # Create an engine
-                engine = create_engine('sqlite:///mydatabase.db')
-
-                # Create a metadata object
-                metadata = MetaData()
-
-                # Define the table
-                user_table = Table('user', metadata,
-                    Column('id', Integer, primary_key=True),
-                    Column('name', String),
-                    Column('age', Integer)
-                )
-
-                # Create the table in the database associated with the provided engine
-                metadata.create_all(engine)
-            </code></pre>
-            <dt>This approach can be useful in situations where you prefer more control over the table definition.</dt>
-            <dt>However, using the declarative base (discussed in next slides) is often more convenient and is the recommended approach for most use cases.</dt>
-        </dl>
-    </section>
     <section id="DefiningDatabaseModels"><h3>Creating a Table with Declarative Base</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>SQLAlchemy uses a system known as Declarative, which allows us to create classes that include directives to describe the actual database table they will be mapped to.</dt>
@@ -261,7 +402,7 @@
                 from sqlalchemy import Column, Integer, String
 
                 # Create an engine
-                engine = create_engine('sqlite:///mydatabase.db')
+                engine = create_engine('sqlite:///python_course.db')
 
                 # Declare a base using declarative_base
                 Base = declarative_base()
@@ -277,6 +418,32 @@
                 Base.metadata.create_all(engine)
             </code></pre>
             <dt>Note that the tables won't be created automatically just by defining the model. You'll need to create an engine, and call <code>Base.metadata.create_all(engine)</code></dt>
+        </dl>
+    </section>
+    <section><h3 class="advanced">Creating a table with MetaData and Table </h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>MetaData in SQLAlchemy represents a collection of database schema elements, such as tables, columns, and constraints. It acts as a container for storing and managing the structure of a database.</dt>
+            <dt>To define database schema elements in SQLAlchemy, you typically create instances of the Table, Column, and other schema constructs and associate them with a MetaData object.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 55vh;">
+                from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+
+                # Create an engine
+                engine = create_engine('sqlite:///python_course.db')
+
+                # Create a metadata object
+                metadata = MetaData()
+
+                # Define the table
+                user_table = Table('user', metadata,
+                    Column('id', Integer, primary_key=True),
+                    Column('name', String),
+                    Column('age', Integer)
+                )
+
+                # Create the table in the database associated with the provided engine
+                metadata.create_all(engine)
+            </code></pre>
+            <dt>This approach can be useful in situations where you prefer more control over the table definition.</dt>
         </dl>
     </section>
 </section>
@@ -306,7 +473,7 @@
             from sqlalchemy.orm import declarative_base
 
             # Create an engine
-            engine = create_engine('sqlite:///example.db')
+            engine = create_engine('sqlite:///python_course.db')
 
             # Declare a base using declarative_base
             Base = declarative_base()
@@ -328,7 +495,6 @@
 
         </code></pre>
     </section>
-
 </section>
 
 <section class="main-section-title"><h1>CRUD Operations</h1></section>
@@ -343,6 +509,38 @@
             <dt><b>Update</b> operation involves modifying existing data in a system. It typically corresponds to updating records in a database.</dt>
 
             <dt><b>Delete</b> operation involves removing existing data from a system. It typically corresponds to deleting records from a database.</dt>
+        </dl>
+    </section>
+    <section><h3>Create Session</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Once connected, SQLAlchemy uses a Session object to manage interactions with the database.</dt>
+            <dd>Use session objects to add new records, fetch data, and update or delete existing records.</dd>
+        </dl>
+        <pre><code rel="Python" class="python" style="min-height: 1vh;">
+            from sqlalchemy.orm import sessionmaker
+
+            # Create a session
+            Session = sessionmaker(bind=engine)
+            session = Session()
+        </code></pre>
+    </section>
+    <section><h3>Why using Session?</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt><b>Transactional Integrity:</b></dt>
+            <dd>The `Session` provides a transactional boundary. It ensures that all changes made to objects in a session are persisted in the database atomically (either all changes are committed or none), maintaining the integrity of your data.</dd>
+
+            <dt><b>Unit of Work:</b></dt>
+            <dd>The `Session` tracks changes made to objects and automatically synchronizes these changes with the database upon committing a transaction. It effectively acts as a unit of work, allowing you to perform multiple operations on objects and commit them as a single transaction.</dd>
+
+            <dt><b>Identity Map:</b></dt>
+            <dd>Within a session, each object is unique. This means that if you load the same object multiple times within a session, you'll always get back the same Python object instance. This behavior helps in maintaining consistency and avoiding unnecessary duplicate objects.</dd>
+
+            <dt><b>Caching and Performance:</b></dt>
+            <dd>The `Session` implements a first-level cache to optimize performance. Once an object is loaded into a session, subsequent requests for the same object are retrieved from the cache, reducing the number of database queries and improving overall performance.</dd>
+
+            <dt><b>Context Management:</b></dt>
+            <dd>The `Session` can be used within a context manager (using the `with` statement) to ensure proper handling of resources. It automatically opens a connection to the database when entering the context and closes it when exiting, preventing resource leaks and managing connections efficiently.</dd>
+            <dt>More on Sessions: <a href="https://docs.sqlalchemy.org/en/20/orm/session_basics.html">Session Basics @docs.sqlalchemy.org</a></dt>
         </dl>
     </section>
     <section id="InsertingData"><h3>Inserting Data</h3>
@@ -365,7 +563,7 @@
 
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 # Execute a raw SQL insert statement
-                engine.execute("INSERT INTO user (name, age) VALUES ('Alice', 25)")
+                engine.execute("INSERT INTO user (name, age) VALUES ('Maria', 25)")
             </code></pre>
         </dl>
     </section>
@@ -379,7 +577,7 @@
             from sqlalchemy import Column, Integer, String
 
             # Create an engine
-            engine = create_engine('sqlite:///mydatabase.db')
+            engine = create_engine('sqlite:///python_course.db')
 
             # Declare a base using declarative_base
             Base = declarative_base()
@@ -446,7 +644,46 @@
             <dd>This provides flexibility for constructing advanced filtering queries.</dd>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 # Example of using filter() with complex conditions
-                session.query(User).filter(User.age > 30, User.name.like('%Ivan%')).all()
+                session.query(User).filter(User.age > 25, User.name.like('%Ivan%')).all()
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Filter using multiple filter conditions</h3>
+        <pre><code rel="Python" class="python" style="min-height: 1vh;">
+            # Users named 'Ivan' and over 25 years old
+            query = session.query(User).filter(User.name == 'Ivan').filter(User.age > 25)
+            Maria_over_25 = query.all()
+
+            for user in Maria_over_25:
+                print(user.name, user.age)
+        </code></pre>
+    </section>
+    <section><h3>Filter using Logical Operators</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>You can use and_(), or_(), and not_() to combine multiple conditions logically:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                from sqlalchemy import and_, or_, not_
+
+                # Users named 'Maria' or 'Ivan' who are over 25 years old
+                query = session.query(User).filter(or_(User.name == 'Maria', User.name == 'Ivan'), User.age > 25)
+                users = query.all()
+
+                for user in users:
+                    print(user.name, user.age)
+
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Filter using LIKE Statements</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The filter() method can also handle LIKE statements for pattern matching:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                # Users whose name starts with 'I'
+                query = session.query(User).filter(User.nIe.like('I%'))
+                a_users = query.all()
+
+                for user in a_users:
+                    print(user.name)
             </code></pre>
         </dl>
     </section>
@@ -482,8 +719,8 @@
 </section>
 
 
-<section class="main-section-title"><h1>Tables Relationships in SQLAlchemy</h1></section>
-<section class="sub-sections"><h2>Tables Relationships in SQLAlchemy</h2>
+<section class="main-section-title"><h1 class="advanced">Tables Relationships in SQLAlchemy</h1></section>
+<section class="sub-sections"><h2 class="advanced">Tables Relationships in SQLAlchemy</h2>
     <section><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Relationships in SQLAlchemy define associations between different tables in a database. They represent how entities in one table are related to entities in another table.</dt>
@@ -648,7 +885,7 @@
                 from sqlalchemy import create_engine, MetaData
 
                 # Create an engine to connect to the database
-                engine = create_engine('sqlite:///example.db')
+                engine = create_engine('sqlite:///python_course.db')
 
                 # Reflect the database schema
                 metadata = MetaData()
