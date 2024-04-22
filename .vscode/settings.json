@@ -30,6 +30,7 @@
     "diffEditor.hideUnchangedRegions.enabled": false,
     "workbench.layoutControl.enabled": true,
     "window.title": "${activeEditorMedium}",
+
     // "spellright.ignoreRegExpsByClass": {
     //     "markdown": [ "/&amp;/g", "/&nbsp;/g" ],
     //     "cpp": [ "/#include\\s+\\\".+\\\"/g" ],
@@ -40,4 +41,8 @@
     //     "latex": [ "/\\\\begin{minted}[^]*?\\\\end{minted}/gm" ]
     // }
 
+    "pyqt-integration.pylupdate.cmd": "pylupdate6",
+	"pyqt-integration.pyrcc.cmd": "pyrcc6",
+	"pyqt-integration.pyuic.cmd": "pyuic6",
+	"pyqt-integration.qtdesigner.path": "`/home/nemsys/python_venvs/.python_course_3.11/bin/pyqt6-tools designer`",
 }
