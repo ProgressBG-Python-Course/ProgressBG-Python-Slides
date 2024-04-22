@@ -44,5 +44,8 @@
     "pyqt-integration.pylupdate.cmd": "pylupdate6",
 	"pyqt-integration.pyrcc.cmd": "pyrcc6",
 	"pyqt-integration.pyuic.cmd": "pyuic6",
-	"pyqt-integration.qtdesigner.path": "`/home/nemsys/python_venvs/.python_course_3.11/bin/pyqt6-tools designer`",
+    "pyqt-integration.qtdesigner.path": "`/home/nemsys/python_venvs/.python_course_3.11/bin/pyqt6-tools designer`",
+    "files.exclude": {
+        "**/__pycache__": true
+    },
 }
