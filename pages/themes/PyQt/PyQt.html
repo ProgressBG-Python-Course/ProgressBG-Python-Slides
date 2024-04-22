@@ -655,6 +655,151 @@
 
 
 
+<section data-min="5" class="main-section-title" id="IntroductionToSignalsAndSlots"><h1>Introduction to Signals And Slots</h1></section>
+<section class="sub-sections"><h2>Signals And Slots Overview</h2>
+	<section><h3>What are Signals And Slots?</h3>
+		<a href="./images/signals_and_slots.png"><img src="./images/signals_and_slots.png" alt="signals_and_slots.png" style="min-height: 80vh;"></a>
+		<dl class="fa">
+			<!-- <dt>Qt library provides two parallel mechanisms to define and process events.</dt>
+			<ol>
+				<li>Using <code>QEvent</code> class - which is appropriate for implementing custom widgets</li>
+				<li><code>Signals</code> when we just using widgets already defined in QWidget hierarchy.</li>
+			</ol> -->
+			<dt>Signals and slots are used for communication between objects.</dt>
+			<dt>For example, if a user clicks a Close button, we probably want the window's close() function to be called.</dt>
+			<dt>A signal is s notification that the event has happened</dt>
+			<dt>A slot is a function that is called, when that event occurs.</dt>
+			<dt>In order to establish communication between objects, we <span class="note">connect</span> a signal to a slot to achieve the desired action</dt>
+		</dl>
+	</section>
+	<section><h3>What are Signals And Slots?</h3>
+		<dl class="fa">
+			<dt>A <span class="note">Signal is a special object property</span> that can be emitted in response to a event.</dt>
+			<dt>Usually, we emit signals when the object's internal state has changed.</dt>
+			<dt>A <span class="note">Slot is an object method</span> that can receive a signal and act in response to it.</dt>
+			<dt>In fact, a slot can be not only a Qt object method, <span class="note">it can be any Python callable</span>.</dt>
+			<dt>When a signal is emitted, the slots connected to it are usually executed immediately</dt>
+		</dl>
+	</section>
+	<section><h3>Signals and Slots Example</h3>
+		<dl class="fa">
+			<dt>A QPushButton has a <a href="https://doc.qt.io/qt-6/qabstractbutton.html#clicked">clicked signal</a> that is emitted whenever the button is clicked by a user. </dt>
+			<dt>The QWidget class has a <a href="https://doc.qt.io/qt-6/qwidget.html#close">close() slot</a> that causes it to close if it's a top-level window. </dt>
+			<dt>We could connect the two like this:</dt>
+		</dl>
+		<pre><code rel="Python" class="python">
+			self.btn_cancel = qtw.QPushButton('Cancel')
+			self.btn_cancel.clicked.connect(self.close)
+		</code></pre>
+		<dt>All classes descended from QObject (including all QWidget classes) can send and receive signals.</dt>
+	</section>
+	<section><h3>Common predefined Signals and Slots</h3>
+		<dl class="fa">
+			<dt>All buttons have next signals and slots: <a href="https://doc.qt.io/qt-5/qabstractbutton.html#public-slots">QAbstractButton Slots and Signals</a></dt>
+			<dt>QLineEdit object has: <a href="https://doc.qt.io/qt-5/qlineedit.html#public-slots">QLineEdit Slots And Signals</a></dt>
+			<dt>All QWidget objects have next <a href="https://doc.qt.io/qt-5/qwidget.html#public-slots">QWidget Slots</a> and <a href="https://doc.qt.io/qt-5/qwidget.html#signals">QWidget Signals</a></dt>
+		</dl>
+	</section>
+</section>
+
+<section data-min="50" class="main-section-title" id="PassingDataBetweenSignalsAndSlots"><h1>Passing data between signals and slots</h1></section>
+<section class="sub-sections"><h2>Passing data between signals and slots</h2>
+	<section>
+		<dl class="fa">
+			<dt>Signals can also pass data to the slots they are connected.</dt>
+			<dt>For example, QLineEdit object has a <code>textChanged</code> signal that sends the text entered into the widget along with the signal</dt>
+			<dt>The QLineEdit object also has a <code>setText()</code> slot that accepts a string argument. We could connect them like this:</dt>
+			<pre><code rel="Python" class="python">
+				self.line_edit1 = qtw.QLineEdit()
+				self.line_edit2 = qtw.QLineEdit()
+
+				self.line_edit1.textChanged.connect(self.line_edit2.setText)
+
+				self.mainLayout = qtw.QVBoxLayout()
+				self.mainLayout.addWidget(self.line_edit1)
+				self.mainLayout.addWidget(self.line_edit2)
+
+				self.setLayout(self.mainLayout)
+			</code></pre>
+		</dl>
+	</section>
+	<section><h3>Task: Print in console the text in a lineEdit</h3>
+		<dl class="fa">
+			<dt>Create a Widget with  1 QLineEdit object  (<code>line_edit1</code>) in it</dt>
+			<dt>We want on every change to the content of <code>line_edit1</code> that content to be printed in the console.</dt>
+		</dl>
+	</section>
+	<section><h3>Solution</h3>
+		<p>Click on "view raw" link at gist's bottom right corner to view the code, ready for copy-paste :)</p>
+		<script src="https://gist.github.com/WWWCourses/d5d3a00efa22eccd9b8b88ed75343a6b.js"></script>
+	</section>
+</section>
+
+
+<section data-min="5" class="main-section-title" id="CustomSignalsAndSlots"><h1>Custom signals and slots</h1></section>
+<section class="sub-sections"><h2>Custom slots</h2>
+	<section><h3>Custom Slots</h3>
+		<dl class="fa">
+			<dt>Any Python callable can play the role of a slot.</dt>
+            <dt>Using the pyqtSlot() decorator allows us to specify the type of the arguments that will be passed to the slot.</dt>
+            <dt>pyqtSlot() is a decorator that takes a Python callable and returns a slot object. </dt>
+			<pre><code rel="Python" class="python">
+                @qtc.pyqtSlot(str)
+                def some_slot(*args):
+                    for arg in args:
+                        print(arg)
+            </code></pre>
+	</section>
+
+</section>
+<section class="sub-sections"><h2>Custom Signals</h2>
+	<section id="DefiningCustomSignals"><h3>Defining Custom Signals</h3>
+		<dl class="fa">
+			<dt>Custom signals are defined using the <code>pyqtSignal()</code> function.</dt>
+			<dt>pyqtSignal() returns a signal object, which is is a wrapper around the Python callable that can be connected to a slot. </dt>
+			<dt><b>Custom signals must be defined as class attributes.</b></dt>
+			<dt>Custom signals have the emit()method, which is used to emit the signal.</dt>
+			<dt>Reference:</dt>
+			<dd><a href="https://www.riverbankcomputing.com/static/Docs/PyQt6/signals_slots.html#defining-new-signals-with-pyqtsignal">Defining New Signals with pyqtSignal</a></dd>
+			<dd><a href="https://www.riverbankcomputing.com/static/Docs/PyQt6/signals_slots.html#emit">emit</a></dd>
+		</dl>
+		<pre><code rel="Python" class="python">
+			# create custom signal which will carry a string data type data:
+			sig_submit = qtc.pyqtSignal(str)
+
+			@qtc.pyqtSlot(bool)
+			def onSubmit(self):
+				self.sig_submit.emit(self.edit.text())
+				self.close()
+		</code></pre>
+	</section>
+</section>
+
+<section data-min="50" class="main-section-title" id="SharingDataBetweenWidgets"><h1>Sharing data between widgets using custom signals and slots</h1></section>
+<section class="sub-sections"><h2>Sharing data between widgets using custom signals and slots</h2>
+	<section>
+		<dl class="fa">
+            <dt>At its core, the signals and slots mechanism can be seen as a way for any two objects in an application to communicate while remaining <a href="https://en.wikipedia.org/wiki/Loose_coupling#:~:text=In%20computing%20and%20systems%20design,the%20opposite%20of%20tight%20coupling.">loosely coupled</a></dt>
+			<dt>Suppose you have a program that pops up a form window.</dt>
+			<dt>When the user finish filling the form and submits it, we need to get the entered data back to the main application class for processing.</dt>
+			<dt>There are a few ways we could approach this. One is the main application to watch for click events on the pop-up window's Submit button, then grab the data from its fields before destroying the dialog </dt>
+			<dt>But that approach requires the main form to know all about the pop-up dialog's widgets and any refactoring of the pop-up would risk breaking code in the main application.</dt>
+		</dl>
+	</section>
+	<section><h3>Demo: tightly-coupled approach</h3>
+		<p>Note that MainWindow must know form's implementation</p>
+		<script src="https://gist.github.com/WWWCourses/85a71a944860e9b37f2b40a9f6ed8a7c.js"></script>
+	</section>
+	<section><h3>Demo: loosely-coupled approach</h3>
+		<p>Note that MainWindow don't care about form's implementation, it just pass and receive data</p>
+		<script src="https://gist.github.com/WWWCourses/4f5763c425ac129a9e232cfd11adb448.js"></script>
+	</section>
+</section>
+
+
+
+
+
 
 <!--
 ########################################################
