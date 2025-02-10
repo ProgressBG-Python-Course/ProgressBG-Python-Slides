@@ -98,10 +98,26 @@
 
 <section class="main-sesction-title" id="GetFamiliarWithPython"><h1>Get familiar with Python Language</h1></section>
 <section class="sub-sections"><h2>Get familiar with Python Language</h2>
-    <section><h3></h3>
+    <section><h3>Python - "Batteries Included"</h3>
         <a href="images/Python_vs_Java-programming_lang_as_an_essay.jpg"><img src="images/Python_vs_Java-programming_lang_as_an_essay.jpg" style="height: 100vh;"></a>
         <p class="fontsize_06">picture source: <a href="http://i.imgur.com/ZyeCO.jpg">@imgur.com</a><br>
         from <a href="https://www.reddit.com/r/programming/comments/fqtqk/if_programming_languages_were_essays/">If programming languages were essays...</a></p>
+    </section>
+    <section><h3>The Zen of Python</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>These are the first lines of The Zen of Python, which you can see by running:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import this
+            </code></pre>
+            <dd>Beautiful is better than ugly.</dd>
+            <dd>Explicit is better than implicit.</dd>
+            <dd>Simple is better than complex.</dd>
+            <dd>Complex is better than complicated.</dd>
+            <dd>Flat is better than nested.</dd>
+            <dd>Sparse is better than dense.</dd>
+            <dd>Readability counts.</dd>
+            <dd>...</dd>
+        </dl>
     </section>
     <section><h3>History</h3>
         <dl class="fa">
@@ -117,7 +133,7 @@
             <dt>Python is a general-purpose programming language, used for:</dt>
             <dd>Web and Internet Development</dd>
             <dd>System administration (incl. cloud)</dd>
-            <dd>Data Science, Big Data, Machine Learning</dd>
+            <dd>Data Science, Big Data, Machine Learning, AI</dd>
             <dd>Scientific computing</dd>
             <dd>Education</dd>
             <dd>Mobile apps development</dd>
@@ -127,13 +143,15 @@
     <section><h3>Python Interpreter</h3>
         <dl class="fa">
             <dt>Python is an interpreted language</dt>
-            <dt>An interpreter is a program that directly executes the instructions in a high-level language, without converting it into machine code</dt>
-            <dt>A compiler is a program that translates the source code into byte/machine code, and then execute it.</dt>
+            <dt><span class="note">Interpreter</span> - a program that executes code <strong>line by line</strong>, translating it into an intermediate form (e.g., bytecode) and running it <strong>immediately</strong> without generating a separate machine code file.</dt>
+            <dd>Example languages: Python, JavaScript, PHP, Ruby, Perl, ...</dd>
+            <dt><span class="note">Compiler</span> - a program that translates the <strong>entire source code</strong> at once into machine code (or another low-level format) before execution, producing an <strong>executable file</strong>.</dt>
+            <dd>Example languages: C, C++, Rust (compiled to machine code); Java, C# (compiled to bytecode, executed by a virtual machine).</dd>
             <dt>Contemporary interpreters, like Python, use internal compiler to optimize their work.</dt>
         </dl>
         <a href="./images/InterpreterVSCompiler.png"><img src="./images/InterpreterVSCompiler.png" alt="InterpreterVSCompiler.png"></a>
     </section>
-    <section><h3>Python implementations/distributions</h3>
+    <section><h3 class="advanced">Python implementations/distributions</h3>
         <p>Python is an open source project: <a href="https://github.com/python">Python's github</a></p>
         <dl class="fa">
             <dt><a href="https://www.python.org/">CPython</a> - the official Python distribution.</dt>
@@ -158,18 +176,20 @@
             <dd>Once the download is complete, locate the downloaded file (usually a .exe file).</dd>
             <dd>Double-click on the installer to run it.</dd>
             <dt>Customize Installation (Optional)</dt>
-            <dd>It's a good idea to <span class="note">check the box that says <b>Add Python to PATH</b></span> during installation. This makes it easier to run Python from the command line.</dd>
+            <dd><span class="note">Check the box that says "<b>Add Python to PATH</b>"</span> during installation. This makes it easier to run Python from the command line.</dd>
             <dt>Install Python:</dt>
             <dd>Click the "Install Now" button to start the installation process.</dd>
             <dd>Python should be installed in <b>C:\Users\YourUsername\AppData\Local\Programs\Python\Python3x</b></dd>
             <dt>Reference: <a href="https://docs.python.org/3/using/windows.html#installation-steps">Using Python on Windows - installation-steps @docs.python.org</a></dt>
         </dl>
     </section>
-    <section><h3>Install Git (and Git BASH) for Windows (Optional)</h3>
+    <section><h3>Install Git (and Git Bash - Optional) for Windows</h3>
         <dl class="fa">
-            <dt><a href="https://gitforwindows.org/">Git for Windows</a> provides a BASH emulation terminal used to run Git from the command line. </dt>
+            <dt><a href="https://git-scm.com/downloads/win">Download Git for Windows from the official Git website.</a></dt>
+            <dt><a href="https://gitforwindows.org/">Git for Windows</a> includes Git and a BASH emulation terminal, providing a Unix-like experience (useful for scripting and automation later on Linux/Mac OS).</dt>
         </dl>
     </section>
+
     <section><h3>Install Python on Mac</h3>
         <dl class="fa">
             <dt><a href="https://docs.python.org/3/using/mac.html">Using Python on a MacOS @docs.python.org</a></dt>
@@ -182,7 +202,7 @@
     </section>
     <section><h3>Verify installation:</h3>
         <dl class="fa">
-            <dt>To check for python installed version open a Terminal/Command Prompt and type:
+            <dt>To check for python installed version open a Terminal/Command Prompt/GitBash and type:
                 <pre><code rel="Terminal" class="shell">
                     # windows:
                     python --version
@@ -199,7 +219,7 @@
             <dt>If on Windows the above command open the Microsoft Store, make sure that python installation path is the first one in PATH environment variable list, or check <a href="https://learn.microsoft.com/en-us/windows/python/faqs#why-does-running-python-exe-open-the-microsoft-store-">Why does running python.exe open the Microsoft Store?</a></dt>
         </dl>
     </section>
-    <section><h3>Using Multiple Python Versions on Windows - <code>py.exe launcher</code></h3>
+    <section><h3 class="advanced">Using Multiple Python Versions on Windows - <code>py.exe launcher</code></h3>
         <dl class="fa">
             <dt>The Python launcher for Windows (<code>py.exe</code> ) is a utility which aids in locating and executing of different Python versions.</dt>
             <dt>The <code>py</code> launcher will automatically select the most recent version of Python you've installed.</dt>
@@ -208,7 +228,7 @@
             <dd><a href="https://docs.python.org/3/using/windows.html#python-launcher-for-windows">Python Launcher for Windows @python.org</a></dd>
         </dl>
     </section>
-    <section><h3>Using Multiple Python Versions on Linux/MacOS - <code>pyenv</code></h3>
+    <section><h3 class="advanced">Using Multiple Python Versions on Linux/MacOS - <code>pyenv</code></h3>
         <dl class="fa">
             <dt>Pyenv is a simple tool to manage multiple versions of Python</dt>
             <dt>Reference: <a href="https://github.com/pyenv/pyenv">pyenv @GitHub</a></dt>
@@ -240,17 +260,19 @@
 <section class="sub-sections"><h2>Write Python in VS Code</h2>
     <section><h3>VSCode intro</h3>
         <dl class="fa">
-            <dt><a href="https://code.visualstudio.com/docs/getstarted/userinterface">User Interface</a></dt>
-            <dt><a href="https://code.visualstudio.com/docs/getstarted/themes">Color Themes</a></dt>
-            <dt><a href="https://code.visualstudio.com/docs/introvideos/extend">Using extensions in Visual Studio Code</a></dt>
+            <dt>Download and install Visual Studio Code from <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></dt>
+            <dt>Get familiar with:</dt>
+            <dd><a href="https://code.visualstudio.com/docs/getstarted/userinterface">User Interface</a></dd>
+            <dd><a href="https://code.visualstudio.com/docs/getstarted/themes">Color Themes</a></dd>
+            <dd><a href="https://code.visualstudio.com/docs/introvideos/extend">Using extensions in Visual Studio Code</a></dd>
         </dl>
     </section>
-    <!-- <section><h3>Useful Extensions</h3>
+    <section><h3>Useful Extensions</h3>
         <dl class="fa">
             <dt><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python Extension from Microsoft</a></dt>
             <dt><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">Pylance Extension from Microsoft</a></dt>
         </dl>
-    </section> -->
+    </section>
     <section><h3>VSCode Workspace</h3>
         <dl class="fa">
             <dt>A Visual Studio Code "workspace" is the collection of one or more folders that are opened in a VS Code window (instance).</dt>
@@ -270,7 +292,7 @@
                 ├── HW
                 └── Labs
             </code></pre>
-            <dt>In File Explorer, right click on 'PythonCourse' folder and select "Open with"=>"Visual Studio Code"</dt>
+            <dt>In Windows File Explorer, right click on 'PythonCourse' folder and select "Open with"=>"Visual Studio Code"</dt>
             <dt>Now you have a single-folder workspace!</dt>
             <a href="./images/vsCode/PythonCourseWorkspace.png"><img src="./images/vsCode/PythonCourseWorkspace.png" alt="PythonCourseWorkspace"></a>
         </dl>
@@ -287,23 +309,25 @@
     </section>
     <section><h3>Create and execute a Python file</h3>
         <dl class="fa">
-            <dt>Right click on 'PythonCourse/Labs' folder in VS Code Sidebar.</dt>
-            <dt>Select: "New File" and in the input box enter the name: <code>say_hello.py</code> and press enter.</dt>
+            <dt><b>Create</b> a Python File:</dt>
+            <dd>Right click on 'PythonCourse/Labs' folder in VS Code Sidebar.</dd>
+            <dd>Select: "New File" and in the input box enter the name: <code>say_hello.py</code> and press enter.</dd>
             <a href="./images/vsCode/CreateNewFile.png"><img src="./images/vsCode/CreateNewFile.png" alt="CreateNewFile"></a>
-            <dt>Write down this code (<span class="note">put your name in the quotes</span>):</dt>
+            <dt><b>Write</b> down this code (<span class="note">put your name in the quotes</span>):</dt>
             <pre><code rel="Python" class="python">
                 my_name = "Iva"
                 print("Hello " + my_name)
             </code></pre>
-            <dt>Right click anywhere on the editor window and select "<strong>Run Python File in Terminal</strong>".<br><span class="note">Note, this command will be present, only if you've been installed the extension: <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">python by microsoft</a></span></dt>
+            <dt><b>Run</b> Python Code</dt>
+            <dd>Right click anywhere on the editor window and select "<strong>Run Python File in Terminal</strong>" (or simply press F5).<br><span class="note">Note, this command will be present, only if you've been installed the extension: <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">python by microsoft</a></span></dd>
         </dl>
     </section>
-    <section><h3>Create and execute a Python file - demo</h3>
+    <!-- <section><h3>Create and execute a Python file - demo</h3>
         <dl class="fa">
             <dt>A terminal panel should be opened in your editor showing the python script execution and its output:</dt>
             <a href="images/vsCode/CreateAndExecutePythohnFile.gif"><img src="images/vsCode/CreateAndExecutePythohnFile.gif"></a>
         </dl>
-    </section>
+    </section> -->
     <section><h3>Setup 'Run with Python' Task</h3>
         <dl class="fa">
             <dt>It's more flexible and convenient to run Python program by setting <a href="https://code.visualstudio.com/docs/editor/tasks">VSCode task</a>. After that we can run Python Program by pressing <kbd>CTRL+SHIFT+B</kbd>  </dt>
