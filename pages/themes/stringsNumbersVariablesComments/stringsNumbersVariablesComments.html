@@ -513,46 +513,6 @@
     <section><h3>Name binding</h3>
         <a href="images/variables_bounding.png"><img src="images/variables_bounding.png"></a>
     </section>
-
-    <section><h3>Name Binding</h3>
-        <dl class="fa">
-            <dt>Python reuses the immutable objects instead of creating copies</dt>
-            <dd>That's true only for small immutable objects (implementation dependant, so don't rely on that)</dd>
-
-            <pre><code rel="Python" class="python3" style="min-height: 60vh;">
-                # only one object will be created
-                a = 1
-                b = 1
-                print(id(a))
-                # 9413184
-                print(id(b))
-                #9413184
-
-                # two different objects may be created (implementation dependant)
-                c = 1_000_000
-                d = 1_000_000
-                print(id(c))
-                # 140418111214320
-                print(id(d))
-                # 140418111215440
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>Name binding - aliasing</h3>
-        <dl class="fa">
-            <dt>When the right-hand side of the assignment is an existing variable, Python did not create a new object, but gives that object another name, an alias.</dt>
-            <pre><code rel="Python" class="python3">
-                a = 1_000_000
-                b = a
-                print(id(a))
-                # 140418111916176
-
-                print(id(b))
-                # 140418111916176
-
-            </code></pre>
-        </dl>
-    </section>
     <section><h3 class="advanced">Garbage collection</h3>
         <dl class="fa">
             <dt>Garbage Collection is a process of reclaiming the unused runtime memory automatically.</dt>
