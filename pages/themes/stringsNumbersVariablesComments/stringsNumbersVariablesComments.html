@@ -566,7 +566,7 @@
     <h1>Exercises</h1>
 </section>
 <section><h2><b>Academical to Astronomical hours converter</b></h2>
-    <section><h3>The task</h3>
+    <section id="acad_to_astro_hours"><h3>The task</h3>
         <dl class="fa">
             <dt><b><i>Task</i></b>:</dt>
             <dd>Write a Python program that calculates the total duration (in astronomical hours) of a Python course consisting of 64 academical hours, including the respective breaks.</dd>
@@ -599,7 +599,7 @@
             Solution without using variables to store values
             """
 
-            print((64*40 + 64/3*15)/60)
+            print((64*40 + 64/4*20)/60)
         </code></pre>
     </section>
     <section><h3>solution: too many variables</h3>
@@ -615,8 +615,8 @@
             minutes_in_astro_hour = 60
             minutes_in_acad_hour = 40
             course_total_acad_hours = 64
-            acad_hours_in_a_day = 3
-            minutes_in_break = 15
+            acad_hours_in_a_day = 4
+            minutes_in_break = 20
 
             # program logic:
             course_days = course_total_acad_hours/acad_hours_in_a_day
@@ -630,8 +630,8 @@
     </section> -->
 </section>
 
-<section id="hw_bmi"><h2><b>Body Mass Index calculator</b></h2>
-    <section><h3>The problem</h3>
+<section><h2><b>Body Mass Index calculator</b></h2>
+    <section id="hw_bmi"><h3>The problem</h3>
         <dl class="fa" style="font-size: 0.8em;">
             <dt>Calculate your body mass index (BMI) with Python, given the formula:<br>
             <code class="note">BMI = W / (H*H)</code><br>
