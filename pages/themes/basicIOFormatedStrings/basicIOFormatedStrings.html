@@ -81,7 +81,8 @@
 <section><h2>Escape Sequences</h2>
     <section>
         <dl class="fa">
-            <dt>The backslash (\) character is used to escape characters that otherwise have a special meaning, such as newline, backslash itself, or the quote character.</dt>
+            <dt>Escape sequences are special character combinations used in strings to represent characters that cannot be typed directly.</dt>
+            <dt>The backslash (\) character in a string is used to escape characters that otherwise have a special meaning, such as newline, backslash itself, or the quote character.</dt>
             <dt>With escape sequence we can insert characters that are illegal in a string, like quotes or new line symbol.</dt>
             <dt>The most used escape sequences are given bellow:</dt>
         </dl>
@@ -134,11 +135,11 @@
     </section>
 </section>
 
-<section data-min="5"><h1>Basic IO</h1></section>
-<section><h2>Basic IO </h2>
+<section data-min="5"><h1>Basic Input/Output (I/O)</h1></section>
+<section><h2>Basic Input/Output (I/O)</h2>
     <section><h3>print() function</h3>
         <dl class="fa" style="width: 80vw;">
-            <dt style="font-size: .8em"><a href="https://docs.python.org/3/library/functions.html#print"><code>print()</code></a> function is used for outputting data to the console.</dt>
+            <dt><a href="https://docs.python.org/3/library/functions.html#print"><code>print()</code></a> function is used for outputting data to the console.</dt>
             <pre><code rel="Syntax" class="python">
                 print(*objects, sep=' ', end='\n',file=sys.stdout, flush=False)
             </code></pre>
@@ -171,53 +172,38 @@
     </section>
     <section><h3>Python input() function</h3>
         <dl class="fa">
-            <dt><a href="https://docs.python.org/3/library/functions.html#input"><code>input()</code></a> function is used to get user input as a string.</dt>
+            <dt><a href="https://docs.python.org/3/library/functions.html#input"><code>input()</code></a> function is used to get user input <b>as string</b>.</dt>
             <pre><code rel="Syntax" class="python3">
                 variable = input("prompt message, to be displayed to the user: ")
             </code></pre>
             <dt>Examples:</dt>
             <pre><code rel="Python" class="python">
-                # No space at the end of &lt;prompt_msg&gt;
-                &gt;&gt;&gt; user_name = input(&quot;Hi, what is your name:&quot;)
-                Hi, what is your name:Iva
-
-                &gt;&gt;&gt; user_pass = input(&quot;What is your password: &quot;)
-                What is your password: 123
-
-                &gt;&gt;&gt; print(f&#39;Ok, your password is |{user_pass}|&#39;)
-                Ok, your password is |123|
+                name = input("Enter your name: ")
+                print("Hello,", name)
             </code></pre>
         </dl>
     </section>
-    <section><h3>Numeric Input - Example</h3>
+    <section><h3>Input always returns a string - Example</h3>
         <dl class="fa">
             <dt>Note, that no matter what value is entered, it will be <span class="note">stored as a string</span>!</dt>
             <pre><code rel="Python" class="python3">
-                >>> user_input = input("Enter some number: ")
-                Enter some number: 42
-
-                >>> print(user_input)
-                42
-
-                >>> print(user_input*5)
-                4242424242
-
-                >>> print(type(user_input))
-                &lt;class 'str'&gt;
+                value = input(&quot;Enter a number: &quot;)
+                print(&quot;The type of the entered value is:&quot;, type(value))  # Always &lt;class &apos;str&apos;&gt;
             </code></pre>
+            <dd>Even if you enter a number like 42, the value will be stored as a string ("42").</dd>
             <dt>But you can easily convert it to numerical, using the built in functions <a href="https://docs.python.org/3/library/functions.html#input"><code>int()</code></a> or <a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a></dt>
             <pre><code rel="Python" class="python" style="min-height: 40vh;">
-                &gt;&gt;&gt; x = int(input(&#39;Enter x=&#39;))
-                Enter x=5
+                value = input(&quot;Enter a number: &quot;)
 
-                &gt;&gt;&gt; y = float(input(&#39;Enter y=&#39;))
-                Enter y=5
+                # Convert to integer
+                integer_value = int(value)
+                print(&quot;Integer value:&quot;, integer_value)
+                print(&quot;Type of integer_value:&quot;, type(integer_value))
 
-                &gt;&gt;&gt; print(x,y, sep=&quot; , &quot;)
-                5 , 5.0
-
-                &gt;&gt;&gt; print(type(x),type(y), sep=&quot; , &quot;)
-                &lt;class &#39;int&#39;&gt; , &lt;class &#39;float&#39;&gt;
+                # Convert to float
+                float_value = float(value)
+                print(&quot;Float value:&quot;, float_value)
+                print(&quot;Type of float_value:&quot;, type(float_value))
             </code></pre>
         </dl>
     </section>
@@ -225,7 +211,7 @@
 
 <section data-min="50"><h1>Formatted Strings (f-strings)</h1></section>
 <section><h2>Formatted Strings (f-strings)</h2>
-    <section><h3>Overview</h3>
+    <section><h3>Why?</h3>
         <dl class="fa">
             <dt>Before Python 3.6 we have to use the concatenation operator when we want to display some string and some variables interpolated into it.</dt>
             <dt>Consider next example:</dt>
@@ -251,8 +237,12 @@
     <section><h3>What are <code>f-strings</code>?</h3>
         <dl class="fa">
             <dt>Python 3.6 added "f-strings" which provide concise and convenient way to embed Python expressions inside string literals.</dt>
-            <dt>The letter "f" is used as a prefix before the opening quotation mark of the string literal</dt>
-            <pre><code rel="Python" class="python3" style="min-height: 58vh;">
+            <pre><code rel="Syntax" class="python" style="min-height: 1vh;">
+                f"some text {expression} more text"
+            </code></pre>
+            <dt>The letter "f" is used as a prefix before the opening quotation mark of the string literal. Inside string literal we can use <code>{}</code> (curly braces) to embed any Python expression.</dt>
+            <dt>Example:</dt>
+            <pre><code rel="Python" class="python3" style="min-height: 62vh;">
                 # single line f-string:
                 x = 1
                 y = 2
@@ -280,7 +270,7 @@
         <dl class="fa">
             <dt>The <code>f-strings</code> in Python allow for various format specifiers to control how the values are displayed.</dt>
             <dt>Examples:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 40vh;">
+            <pre><code rel="Python" class="python" style="min-height: 62vh;">
                 # ------------------- Precision for Floating Point Numbers ------------------- #
                 pi = 3.14159265
 
@@ -288,7 +278,7 @@
                 print(f"{pi:.2f}")
                 # 3.14
 
-                # ---------------------- comma as a thousands separator ---------------------- #
+                # ---------------------- Comma as a thousands separator ---------------------- #
                 budget = 1234567890
                 print(f'budget={budget:,}')
                 # budget=1,234,567,890
@@ -304,24 +294,24 @@
     </section>
     <section><h3>Formatting <code>f-strings</code> - more examples</h3>
         <pre><code rel="Python" class="python" style="min-height: 90vh;">
-            # ----------------------------- Aligning Strings ----------------------------- #
+            &lt;!-- --------------------------- Width and Align --------------------------- --&gt;
             x = 123
 
-            # Right-align a string and pad it with spaces on the left:
-            print(f"--->{x:>10}<---")
-            # --->       123<---
+            # Right-align x within a 10-character wide field:
+            print(f&quot;---&gt;{x:&gt;10}&lt;---&quot;)
+            # ---&gt;       123&lt;---
 
-            # Center-align a string by adding spaces on both sides:
-            print(f"--->{x:^10}<---")
-            # --->   123    <---
+            # Center-align x within a 10-character wide field:
+            print(f&quot;---&gt;{x:^10}&lt;---&quot;)
+            # ---&gt;   123    &lt;---
 
-            # Center-align a string, but pad it with different symbol ('*'):
-            print(f'--->{x:*^10}<---')
-            # --->***123****<---
+            # Center-align x within a 10-character wide field, padding with &apos;*&apos;:
+            print(f&apos;---&gt;{x:*^10}&lt;---&apos;)
+            # ---&gt;***123****&lt;---
 
             # Pad an integer with zeros.
             day = 5
-            print(f"Day of the month: {day:02d}")
+            print(f&quot;Day of the month: {day:02d}&quot;)
             # Day of the month: 05
 
 
@@ -330,7 +320,7 @@
             precision = 3
 
             # Use variables to determine the format.
-            print(f"Value: {value:.{precision}f}")
+            print(f&quot;Value: {value:.{precision}f}&quot;)
             # Value: 12.346
         </code></pre>
     </section>
