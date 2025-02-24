@@ -811,11 +811,12 @@
         <dl class="fa">
             <dt>The package <a href="http://www.numpy.org/">numpy</a> contains powerful N-dimensional array objects and other numerical operations (we'll go into it in later topics).
             </dt>
-            <dt>In order to use it, you need to install it first:</dt>
+            <dt>In order to use it, you need to install it first (we'll cover deeply modules instalation topic later), for now just open a terminal ad paste:</dt>
             <pre><code rel="Terminal" class="bash">
                 pip install numpy
             </code></pre>
-            <pre><code rel="Python" class="python" style="min-height: 40vh;">
+            <dt>Crete next python file (python_numpy_demo.py):</dt>
+            <pre><code rel="python_numpy_demo.py" class="python" style="min-height: 40vh;">
                 import numpy
 
                 # lets create a python list
@@ -833,13 +834,20 @@
                 #[2 5 8]
 
                 print(type(arr[:,1]))
-                &lt;class &#39;numpy.ndarray&#39;&gt;
+            </code></pre>
+            <dt>And execute it</dt>
+            <pre><code rel="Output" class="bash">
+                [2 5 8]
+                &lt;class &apos;numpy.ndarray&apos;&gt;
             </code></pre>
         </dl>
     </section>
     <section><h3>List of tuples</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>A common use case for List of Tuples is storing 2D or 3D coordinates, e.g., [(x1, y1), (x2, y2)].</dt>
+        </dl>
         <pre><code rel="Python" class="python" style="min-height: 40vh;">
-            ### create list_of_tuples:
+            ### create list_of_tuples representing a point 3D coordinates:
             points = [
                 (1,2),
                 (3,4),
@@ -864,22 +872,30 @@
         </code></pre>
     </section>
     <section><h3>Tuple of lists</h3>
-        <pre><code rel="Python" class="python" style="min-height: 50vh;">
-            users = (
-                ["Ivan", "Ivanov", 34],
-                ["Maria", "Ivanova", 36],
-                ["Asen", "Asenov", 20],
-            )
+        <dl class="fa" style="min-width:80vw">
+            <dt>A common use case for Tuple of Lists is when you need <b>a simple and effective structure</b> for storing grouped collections with fixed structure, like  organizing product names with their corresponding quantities, e.g., (['Shirt', 'Pants'], [20, 35]).</dt>
+            <pre><code rel="Python" class="python" style="min-height: 65vh;">
+                # Tuple of lists: product names and their quantities
+                products = (
+                    ['Shirt', 'Pants'],
+                    [20, 35]
+                )
 
-            ### try to change the list inside tuple:
-            users[0][2] = 100
-            print(users[0])
-            # ['Ivan', 'Ivanov', 100]
+                # Printing product 1 details
+                print(f"Product: {products[0][0]}, Quantity: {products[1][0]}")
+                # Product: Shirt, Quantity: 20
 
-            ### try to change the tuple itself:
-            users[0] = ["Petyr", "Petrov", 45]
-            # TypeError: 'tuple' object does not support item assignment
-        </code></pre>
+                ### change the quantity for product 1:
+                users[0][2] = 100
+                print(users[0])
+                # ['Ivan', 'Ivanov', 100]
+
+                ### try to change the tuple itself:
+                users[0] = ["Petyr", "Petrov", 45]
+                # TypeError: 'tuple' object does not support item assignment
+            </code></pre>
+            <dt><b>Key Points:</b>You can modify elements inside the lists within the tuple (e.g., the quantity), but you cannot change the structure of the tuple itself (e.g., reassigning products[0])</dt>
+        </dl>
     </section>
 </section>
 
@@ -887,67 +903,123 @@
 <section><h2>Copy Lists </h2>
     <section><h3>Copy by reference</h3>
         <dl class="fa">
-            <pre><code rel="Terminal" class="bash">
-                l = [1,2,3]
-                not_a_copy = l
+            <dt>In Python, lists are <b>mutable objects</b>, and when you assign a list to another variable, you are copying the reference (not the actual data). This means both variables point to the same underlying list in memory.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                # Original list
+                original_list = [1, 2, 3]
+
+                # Assigning reference of the original list to new_list
+                new_list = original_list
+
+                # Modifying new_list also affects original_list
+                new_list[0] = 100
+
+                print(original_list)  # Output: [100, 2, 3]
+                print(new_list)       # Output: [100, 2, 3]
             </code></pre>
-            <dt>When we assign a variable ('<code>not_a_copy</code> ') to list, Python did not copy the list, but just creates a reference that points to the same list object. Both '<code>l</code>' and '<code>not_a_copy</code>'  <b>refer to the exact same list in memory.</b></dt>
+            <dt><code>new_list = original_list</code> does not create a new list. Instead, new_list references the same list object as original_list. Both '<code>new_list</code>' and '<code>original_list</code>'  <b> refer to the exact same list in memory.</b></dt>
+            <dt>To check if two variables refer to the exact same list (or object) in memory, you can use the <a href="https://docs.python.org/3/library/operator.html#operator.is_">is operator</a> and/or the <a href="https://docs.python.org/3/library/functions.html#id">id() function</a></dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                original_list = [1,2,3]
+                new_list = original_list  # new_list refers to the same object as original_list
+
+                # Get the memory address (id) of both variables
+                print(f"Memory address of original_list: {id(original_list)}")
+                print(f"Memory address of new_list: {id(new_list)}")
+
+                # Check if both variables refer to the same object in memory
+                print( original_list is new_list)
+            </code></pre>
         </dl>
     </section>
     <section><h3>Shallow Copy</h3>
         <dl class="fa">
-            <dt>A shallow copy creates a new object, but does not create copies of the objects that the original object references.</dt>
-            <dt>The new object stores references to the same elements as the original object.</dt>
+            <dt>A shallow copy in Python refers to copying an object, but not recursively copying the objects contained within it. In a shallow copy, the new object is a new container (like a new list), but <b>the elements inside the container are still references to the same objects as those in the original container</b></dt>
         </dl>
-        <pre><code rel="Python" class="python" style="min-height: 40vh;">
-            l = [[1,2,3], [4,5]]
-            shallow_copy = l.copy()
+        <pre><code rel="Python" class="python" style="min-height: 60vh;">
+            # Original list with nested list (mutable object inside)
+            original_list = [1, 2, [3, 4]]
 
-            l[0] = 9
-            print(l)                # [9, [4, 5]]
-            print(shallow_copy)     # [[1, 2, 3], [4, 5]]
+            # Create a shallow copy using slicing
+            shallow_copy = original_list[:]
 
-            l[1][0] = 9
-            print(l)                # [9, [9, 5]]
-            print(shallow_copy)     # [[1, 2, 3], [9, 5]]
+            # Modify the inner list in the shallow copy
+            shallow_copy[2][0] = 99
+
+            # Output the lists
+            print(f"Original list: {original_list}")  # [1, 2, [99, 4]]
+            print(f"Shallow copy: {shallow_copy}")    # [1, 2, [99, 4]]
+
+            # Check if both lists are the same object
+            print(original_list is shallow_copy)  # False, because the outer lists are different
+            print(original_list[2] is shallow_copy[2])  # True, because the inner list is shared
         </code></pre>
+    </section>
+    <section><h3>How to create a Shallow Copy</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Slicing for lists:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                new_list = original_list[:]
+            </code></pre>
+            <dt>copy() method for lists:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                new_list = original_list.copy()
+            </code></pre>
+            <dt>copy() function from the copy module (for general objects like lists, dictionaries, etc.):</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import copy
+                new_object = copy.copy(original_object)
+            </code></pre>
+        </dl>
     </section>
     <section><h3>Deep Copy</h3>
         <dl class="fa">
-            <dt>A deep copy creates a new object and recursively creates copies of the objects that the original object references.</dt>
+            <dt>A deep copy in Python means creating a new object and recursively copying all objects found within the original object, including the nested ones</dt>
             <dt><b>The new object and its elements are completely independent of the original object.</b></dt>
-            <dt>Deep copy are created by <code>copy.deepcopy(l)</code> method from the <code>copy</code> module</dt>
-        </dl>
-        <pre><code rel="Python" class="python" style="min-height: 40vh;">
-            import copy
+            <dt>Deep copy are created by <code>copy.deepcopy(l)</code> method from the <a href="https://docs.python.org/3/library/copy.html"><code>copy</code></a> module</dt>
+            <pre><code rel="Python" class="python" style="min-height: 40vh;">
+                import copy
 
-            l = [[1,2,3], [4,5]]
-            deep_copy = copy.deepcopy(l)
+                # Original list with nested list (mutable object inside)
+                original_list = [1, 2, [3, 4]]
 
-            l[0] = 9
-            print(l)             # [9, [4, 5]]
-            print(deep_copy)     # [[1, 2, 3], [4, 5]]
+                # Create a deep copy
+                deep_copy = copy.deepcopy(original_list)
 
-            l[1][0] = 9
-            print(l)             # [9, [9, 5]]
-            print(deep_copy)     # [[1, 2, 3], [4, 5]]
-        </code></pre>
-        <dl class="fa">
-            <dt>Deep copy is generally slower and more memory-intensive than shallow copy because it involves creating copies of all nested objects.</dt>
+                # Modify the inner list in the deep copy
+                deep_copy[2][0] = 99
+
+                # Output the lists
+                print(f"Original list: {original_list}")  # [1, 2, [3, 4]]
+                print(f"Deep copy: {deep_copy}")          # [1, 2, [99, 4]]
+
+                # Check if both lists are the same object
+                print(original_list is deep_copy)  # False, because they are different objects
+                print(original_list[2] is deep_copy[2])  # False, because the inner lists are different objects
+            </code></pre>
+            <dt class="note">Deep copy is generally slower and more memory-intensive than shallow copy because it involves creating copies of all nested objects.</dt>
         </dl>
     </section>
 </section>
 
 
 
-<section id="hw">
-    <section><h1>Homework</h1></section>
-    <section id="sequence_data_types_tasks"><h3>Homework</h3>
+<section class="main-section-title" id="hw"><h1>Homework</h1></section>
+<section class="sub-sections"><h2>Homework</h2>
+    <section id="sequence_data_types_tasks"><h3>Sequence data types: tasks</h3>
         <dl class="fa">
             <dt>The tasks are given in next <a href="https://gist.githubusercontent.com/ProgressBG-Python-Course/543b71fa43efdc456912fbe05da84e98/raw">gist file</a></dt>
             <dt>You can copy it and work directly on it. Just put your code under "### Your code here".</dt>
         </dl>
         <script src="https://gist.github.com/ProgressBG-Python-Course/543b71fa43efdc456912fbe05da84e98.js"></script>
+    </section>
+</section>
+
+<section class="main-section-title"><h1>Solutions</h1></section>
+<section class="sub-sections"><h2>Solutions</h2>
+    <section id="sequence_data_types_solutions"><h3>Solutions</h3>
+        <script src="https://gist.github.com/ProgressBG-Python-Course/83c4f24415ff3272eedc49ac4822c2ac.js"></script>
+        <!-- https://gist.github.com/ProgressBG-Python-Course/83c4f24415ff3272eedc49ac4822c2ac -->
     </section>
 </section>
 
