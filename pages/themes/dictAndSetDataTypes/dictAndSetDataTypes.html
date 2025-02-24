@@ -752,18 +752,25 @@
         <dl class="fa">
             <dt>To find a min/max value from values, you can use Python's built-in functions <a href="https://docs.python.org/3/library/functions.html#min">min()</a> and <a href="https://docs.python.org/3/library/functions.html#max">max()</a></dt>
             <dd>You can use them on any sequence, like this:</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                numbers = [2.50, 2.43, 3.50]
+
+                # Get max value in list:
+                print( max(numbers) )
+            </code></pre>
+            <dd>Or on dictionary, like this:</dd>
             <pre><code rel="Python" class="python" style="min-height: 40vh;">
-                numbers = [2,3,1,5]
+                prices = {
+                    "apples": 2.50,
+                    "oranges": 2.43,
+                    "bananas": 3.50
+                }
 
-                min_number = min(numbers)
-                max_number = max(numbers)
+                # Get max value in a dict
+                print( max(prices.values()) )
 
-                print(min_number)
-                print(max_number)
-
-                #OUTPUT
-                # 1
-                # 5
+                # Get the key of max value in a dict
+                print( max(prices, key=prices.get) )
             </code></pre>
         </dl>
     </section>
