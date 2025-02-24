@@ -98,17 +98,17 @@
 <section id="whileLoop"><h1><code>while</code> loop</h1></section>
 <section><h2><code>while</code> loop</h2>
     <section><h3>Syntax</h3>
-        <pre><code rel="Syntax" class="python" data-noescape>
-            while <i>condition</i> <b>:</b>
-                <i>block</i>
-        </code></pre>
-        <dl class="fa">
-            <dt>The block will be executed <b>while</b> the <b>condition is True</b>!</dt>
-            <dt class="note">Inside the block we have to change the variable used in condition to prevent an endless loop. Or we can use <code>break</code> statement (discussed further)</dt>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The <code>while loop</code> in Python repeatedly executes a block of code as long as a specified condition is True. It’s useful when the number of iterations is not known in advance and depends on some condition being met</dt>
+            <pre><code rel="Syntax" class="python" data-noescape>
+                while <i>condition</i> <b>:</b>
+                    <i>block</i>
+            </code></pre>
+            <dd>The block will be executed <b>while</b> the <b>condition is True</b>!</dd>
+            <dd class="note">Inside the block we have to change the variable used in condition to prevent an endless loop. Or we can use <code>break</code> statement (discussed further)</dd>
+            <dt>Flow Diagram</dt>
+            <a href="images/WhileFlow.png"><img src="images/WhileFlow.png"></a>
         </dl>
-    </section>
-    <section id="whileLoopFlow"><h3>Flow</h3>
-        <a href="images/WhileFlow.png"><img src="images/WhileFlow.png"></a>
     </section>
     <section><h3>Simple example</h3>
         <pre><code rel="Python" class="python">
@@ -137,39 +137,21 @@
         </code></pre>
     </section>
     <section><h3>Example: proper use case of while</h3>
-        <p class="note"><code>While</code> loop is suitable, when we do not know in advance the number of iterations needed</p>
-        <pre><code rel="Python" class="python">
-            # ask user to enter a name (string), until it contains at least 3 symbols
-            # the len function on string returns the number of symbols in a string
-            user_name = input("Enter a name, please: ")
-            user_name_length = len(user_name)
-
-            while user_name_length < 3:
-                user_name = input("Enter a name (at least 3 symbols): ")
+        <dl class="fa" style="min-width:80vw">
+            <dt><code>While</code> loop is suitable, when we <b>do not know in advance the number of iterations needed</b></dt>
+            <pre><code rel="Python" class="python">
+                # ask user to enter a name (string), until it contains at least 3 symbols
+                # the len function on string returns the number of symbols in a string
+                user_name = input("Enter a name, please: ")
                 user_name_length = len(user_name)
 
-            print("Thank you, {}!".format(user_name))
-        </code></pre>
-    </section>
-    <section><h3>Example: sum all numbers in [1..100]</h3>
-        <dl class="fa">
-            <dt>Note, that this is just an example to illustrate the syntax and algorithm.</dt>
-            <pre><code rel="Python" class="python">
-                i = 1
-                total_sum = 0
-                while i <= 100:
-                    total_sum += i
-                    i += 1
-                print("total_sum = ", total_sum)
-                # total_sum =  5050
-            </code></pre>
-            <dt>Same task is better to be implemented with <code>for</code> loop, or even better: with built-in function sum()</dt>
-            <pre><code rel="Python" class="python" style="min-height: 20vh;">
-                total_sum = sum(range(1,101))
-                print("total_sum = ", total_sum)
+                while user_name_length < 3:
+                    user_name = input("Enter a name (at least 3 symbols): ")
+                    user_name_length = len(user_name)
 
-                # total_sum =  5050
+                print("Thank you, {}!".format(user_name))
             </code></pre>
+            <dd>Note: Repetition in the <code>while</code> block code is not ideal. We could refactor this by using an endless loop with <code>while True</code> and a <code>break</code> statement, which we will explore further.</dd>
         </dl>
     </section>
     <!-- <section><h3>Task: sum even numbers in [1..100]</h3>
@@ -185,23 +167,21 @@
 <section id="forLoop"><h1><code>for</code> loop</h1></section>
 <section><h2><code>for</code> loop</h2>
     <section><h3>Syntax</h3>
-        <pre><code rel="Syntax" class="python" data-noescape>
-            for <i>item</i> in <i>sequence</i> <b>:</b>
-                #do something with item
-        </code></pre>
         <dl class="fa">
+            <dt>The for loop in Python is used to iterate over a sequence (like a list, tuple, dictionary, or string) and execute a block of code for each item in that sequence</dt>
+            <pre><code rel="Syntax" class="python">
+                for variable in sequence:
+                    # code to execute for each item
+            </code></pre>
             <dt>Example:</dt>
             <pre><code rel="Python" class="python">
-                for s in "ada":
-                    print(s.capitalize())
+                for letter in "ada":
+                    print(letter.capitalize())
 
                 # A
                 # D
                 # A
             </code></pre>
-            <dt>Python <code>for</code> statement is different than the "C-based" <code>for</code> loops in other popular languages (C#, Java, PHP, JavaScript)</dt>
-            <dt class="note">In Python, <code>for</code> statement iterates over the items of any sequence.</dt>
-            <dd>This is common to <code>foreach</code> loop concept in above-mentioned languages </dd>
         </dl>
     </section>
     <section><h3>Flow</h3>
@@ -264,10 +244,10 @@
         </dl>
 
     </section>
-    <section id="LoopOnIndexesOfSequenceCStyle"><h3>Loop on indexes of sequence: C-style</h3>
+    <section id="LoopOnIndexesOfSequenceCStyle"><h3>Loop on indexes of sequence (C-style loops)</h3>
         <dl class="fa">
-            <dt>As we saw, Python doesn't have C-style for loop, but we can emulate it.</dt>
-            <dd class="note">Note, that this is not the Pythonic way of looping on sequence by index.</dd>
+            <dt>Sometimes we need to iterate through the indices of elements in a sequence rather than iterating through the elements themselves. In Python we can do this in two ways: </dt>
+            <dd>Using <code>range(len(sequence))</code> to loop over the indexes of the sequence.</dd>
             <pre><code rel="Python" class="python" style="min-height: 20vh;">
                 colors = ["red", "green", "blue"]
                 for index in range(len(colors)):
@@ -277,8 +257,7 @@
                 # 1: green
                 # 2: blue
             </code></pre>
-            <dt>To iterate over a sequence with index and value, we can use the built-in <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate(iterable, start=0)</a> function:</dt>
-            <dd class="note">this is the Pythonic way.</dd>
+            <dd>Using <a href="https://docs.python.org/3/library/functions.html#enumerate">enumerate(iterable, start=0)</a> function that allows us to loop over a sequence and get both the index and the value of each element at the same time:</dd>
             <pre><code rel="Python" class="python" style="min-height: 30vh;">
                 colors = ["red", "green", "blue"]
                 for index, color in enumerate(colors):
@@ -487,7 +466,7 @@
     </section>
     <section><h3>match statement</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>Python 3.10 introduces <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">match statement</a> which is similar to "switch-case" in other languages</dt>
+            <dt>Python 3.10 introduces <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">match statement</a> which takes an expression and compares its value to successive patterns given as one or more case blocks. This is superficially similar to a switch statement in C, Java or JavaScrip</dt>
             <pre><code rel="Python" class="python" style="min-height: 90vh;">
                 # print program menu:
                 print("Select an action:")

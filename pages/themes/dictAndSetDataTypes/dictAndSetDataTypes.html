@@ -88,34 +88,41 @@
 <section><h2>Dictionaries</h2>
     <section><h3>What is a Dictionary?</h3>
         <dl class="fa">
-            <dt>An <span class="note">unordered</span> collection of objects (values)</dt>
-            <dt>Each value is associated with a <span class="note">unique key</span>.</dt>
-            <dt>A dictionary can be regarded as a collection of <span class="note">key:value</span> pairs</dt>
-            <dt>Dictionaries in Python are similar to <em>associative arrays</em>, <em>hashes (hash tables)</em> in other programming languages (PHP, Perl, Ruby)</dt>
+            <dt>An <span class="note">unordered</span> collection of <span class="note">key:value</span> pairs.</dt>
+            <dt>A dictionary is like a list, but instead of using numbers (indexes) to access values, it uses <span class="note">unique keys</span> associated with values.</dt>
+            <dt>Unlike lists, dictionaries are <span class="note">unordered</span>, meaning the items don’t have a fixed position.</dt>
+            <dt>Dictionaries are useful for storing data where quick lookup by a specific key is needed, like a phonebook or a student record.</dt>
         </dl>
     </section>
     <section><h3>Dictionary Structure</h3>
         <a href="images/dictionary_structure.png"><img src="images/dictionary_structure.png"></a>
     </section>
-    <section><h3>Syntax</h3>
-        <pre><code rel="Syntax" class="shell" data-noescape>
-            dictionary = {
-            'key1': <em>value 1</em>,
-            'key2': <em>value 2</em>,
-            'keyN': <em>value N</em>
-            }
-        </code></pre>
+    <section><h3>Dictionary Syntax and Main Characteristics</h3>
         <dl class="fa">
-            <dt>There is <span class="note">no order</span> in dictionary! We can not say if 'key1' pair will be before 'key2' pair</dt>
-            <dd>In fact, after Python 3.5 the dict objects preserves insertion order, but relying on that property is risky.</dd>
-            <dd>If you need an ordered dict structure - use <a href="https://docs.python.org/3/library/collections.html#module-collections">OrderedDict objects from collections module</a></dd>
-            <dt>Keys must be <span class="note">immutable</span> data type. Usually they are strings.</dt>
-            <dt>Keys must be <span class="note">unique</span>. If multiple "key:values" pairs with the same key exists, only the last one pair will be present in the dictionary</dt>
+            <dt><b>Creating a dictionary:</b></dt>
+            <pre><code rel="Syntax" class="shell" data-noescape>
+                dictionary = {
+                    'key1': <em>value 1</em>,
+                    'key2': <em>value 2</em>,
+                    'keyN': <em>value N</em>
+                }
+            </code></pre>
+
+            <dt><b>Dictionaries are <span class="note">unordered</span></b></dt>
+            <dd>Although dictionaries preserve insertion order in Python 3.6+ (officially guaranteed from 3.7), relying on this behavior is not recommended.</dd>
+            <dd>If you need an ordered dictionary, use <a href="https://docs.python.org/3/library/collections.html#module-collections">OrderedDict</a> from the <code>collections</code> module.</dd>
+
+            <dt><b>Keys must be <span class="note">immutable</span> data types</b></dt>
+            <dd>Commonly, keys are strings, but they can also be numbers or tuples (as long as they contain only immutable elements).</dd>
+
+            <dt><b>Keys must be <span class="note">unique</span></b></dt>
+            <dd>If duplicate keys are defined, only the last occurrence is kept, overwriting any previous value.</dd>
         </dl>
     </section>
+
     <section><h3>Dictionaries - examples</h3>
         <pre><code rel="Python" class="python" style="min-height: 70vh;">
-            ### Example 1
+            # Example 1: Basic dictionary usage
             en_bg_dict = {
              'apple': 'ябълка',
              'orange':'портокал',
@@ -125,7 +132,7 @@
             print(en_bg_dict['apple'])
             # ябълка
 
-            ### Example 2 - repeated keys
+            ### Example 2: Duplicate keys overwrite previous values
             en_bg_dict = {
                 'apple': 'ябълка',
                 'orange':'портокал',
@@ -162,23 +169,35 @@
         </dl>
     </section>
     <section><h3>Change item in a dictionary</h3>
-        <pre><code rel="Syntax" class="shell" data-noescape>
-                dictionary_name[<em>key</em>] = <em>new_value</em>
-        </code></pre>
-        <pre><code rel="Python" class="python" style="min-height: 20vh;">
-            ### change apples prices:
-            prices['apples'] = 2.20
-            print(prices)
-            # {'apples': 2.2, 'oranges': 2.43, 'bananas': 3.5}
-        </code></pre>
+        <dl class="fa" style="min-width:80vw">
+            <dt>To update the value associated with an existing key in a dictionary, assign a new value using the key.</dt>
+            <pre><code rel="Syntax" class="shell" data-noescape>
+                    dictionary_name[<em>key</em>] = <em>new_value</em>
+            </code></pre>
+            <dt>Example: Update the price of apples</dt>
+            <pre><code rel="Python" class="python" style="min-height: 20vh;">
+                prices = {
+                    'apples': 2.50,
+                    'oranges': 2.43,
+                    'bananas': 3.50
+                }
+
+                prices['apples'] = 2.20  # Change value for key 'apples'
+                print(prices)
+
+                # Output:
+                # {'apples': 2.2, 'oranges': 2.43, 'bananas': 3.5}
+            </code></pre>
+        </dl>
     </section>
     <section><h3>Add item in a dictionary</h3>
         <dl class="fa">
-            <dt>Note that, unlike lists, we can use a non-existing key in <code>dictionary_name[<em>key</em>]</code> to add new item</dt>
+            <dt>Unlike lists, dictionaries allow us to add new items by specifying a <code>key</code> that does not already exist.</dt>
+            <dt>This can be done by assigning a value to the new key using:</dt>
             <pre><code rel="Syntax" class="python" data-noescape>
                 dictionary_name[<em>new_key</em>] = <em>new_value</em>
             </code></pre>
-            <dt>Examples:</dt>
+            <dt>Example:</dt>
             <pre><code rel="Python" class="python" style="min-height: 40vh;">
                 prices = {
                     "apples": 2.50,
@@ -186,20 +205,21 @@
                     "bananas": 3.50
                 }
 
-                ### add new key:value pair:
+                ### Add new key-value pair:
                 prices['plums'] = 4.30
                 print(prices)
                 # {'apples': 2.5, 'oranges': 2.43, 'bananas': 3.5, 'plums': 4.3}
             </code></pre>
         </dl>
     </section>
-    <section><h3>Delete item from dictionary: <code class="note">del</code> - operator</h3>
+
+    <section><h3>Delete item from dictionary: <code class="note">del</code> operator</h3>
         <dl class="fa">
-            <dt><code>del</code> operator deletes the key:value pair whit the given key. </dt>
+            <dt>The <code>del</code> operator removes the key-value pair associated with the given key from the dictionary.</dt>
             <pre><code rel="Syntax" class="python" data-noescape>
                 del <em>dictionary</em>[<em>key</em>]
             </code></pre>
-            <dt>If <code>key</code> did not exists a KeyError will be raised.</dt>
+            <dt>If the specified <code>key</code> does not exist, a <code>KeyError</code> will be raised.</dt>
             <dt>Example:</dt>
             <pre><code rel="Python" class="python" style="min-height: 50vh;">
                 prices = {
@@ -208,24 +228,26 @@
                     "bananas": 3.50
                 }
 
-                # delete '"oranges": 2.43' pair:
+                # Delete '"oranges": 2.43' pair:
                 del prices['oranges']
                 print(prices)
                 # {'apples': 2.5, 'bananas': 3.5}
 
-                # try to delete non-existing key:
-                del prices['plums']
+                # Try to delete a non-existing key (uncomment to see the error):
+                # del prices['plums']
                 # KeyError: 'plums'
             </code></pre>
         </dl>
     </section>
+
     <section><h3>Delete item from dictionary: <code class="note">pop()</code></h3>
         <dl class="fa">
+            <dt>Unlike the <code>del</code> operator, <code>pop()</code> removes the key-value pair and returns the value associated with the given key.</dt>
             <pre><code rel="Syntax" class="python" data-noescape>
-                value = pop(<em>key</em>[, <em>default</em>])
+                value = dictionary.pop(<em>key</em>[, <em>default</em>])
             </code></pre>
-            <dt>If <em>key</em> is in the dictionary, remove it and return its value, else return <em>default</em>.</dt>
-            <dt>If no <em>key</em> or <em>default</em> values are given a KeyError is raised.</dt>
+            <dt>If <em>key</em> is found in the dictionary, it is removed, and its value is returned. If the <em>key</em> is not found, the <em>default</em> value is returned (if provided).</dt>
+            <dt>If no <em>key</em> or <em>default</em> is provided, a <code>KeyError</code> will be raised.</dt>
             <pre><code rel="Python" class="python" style="min-height: 70vh;">
                 prices = {
                     "apples": 2.50,
@@ -233,72 +255,97 @@
                     "bananas": 3.50
                 }
 
-                ### remove 'apples' key:value pair from the dictionary, and return its value
+                # Remove 'apples' key-value pair and return its value
                 apples_price = prices.pop('apples')
                 print(apples_price)
-                # 2.5
+                # Output: 2.5
                 print(prices)
-                # {'oranges': 2.43, 'bananas': 3.5}
+                # Output: {'oranges': 2.43, 'bananas': 3.5}
 
-
-                ### try to remove 'plums' key:value pair from the dictionary, no KeyError will be raised, as default value is given:
+                # Try to remove 'plums' key-value pair from the dictionary. No KeyError raised, as default is provided
                 plums_price = prices.pop('plums', None)
                 print(plums_price)
-                # None
+                # Output: None
                 print(prices)
-                # {'oranges': 2.43, 'bananas': 3.5}
+                # Output: {'oranges': 2.43, 'bananas': 3.5}
             </code></pre>
         </dl>
     </section>
-    <section><h3>Get all dictionary keys: <code class="note">keys()</code></h3>
+
+    <section><h3>Get all dictionary keys: <code class="note">dict.keys()</code></h3>
         <dl class="fa" style="font-size: .9em">
-            <dt>the <a href="https://docs.python.org/3/library/stdtypes.html#dict.keys"><code>dict.keys()</code></a> method returns a <em><a href="https://docs.python.org/3/library/stdtypes.html#dict-views">dict view object</a></em> of dictionary keys, which means that when the dictionary changes, the view reflects these changes.</dt>
-            <dt>Example:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 47vh;">
+            <dt>the <a href="https://docs.python.org/3/library/stdtypes.html#dict.keys"><code>dict.keys()</code></a> method returns a <em><a href="https://docs.python.org/3/library/stdtypes.html#dict-views">dict view</a> object</em> of dictionary keys</dt>
+            <dt>The keys in the <code>dict_keys</code> object can be used in loops or converted into a list if needed.</dt>
+            <dt>Example: Get dictionary keys as list</dt>
+            <pre><code rel="Python" class="python" style="min-height: 40vh;">
                 prices = {
                     "apples": 2.50,
                     "oranges": 2.43,
                     "bananas": 3.50
                 }
 
-                prices_view = prices.keys()
-                print(prices_view)
-                # dict_keys(['apples', 'oranges', 'bananas'])
+                # Get all the keys in the dictionary as dict_keys view
+                keys = prices.keys()
 
-                # let's change prices:
-                prices.pop('apples', None)
-                print(prices_view)
-                # dict_keys(['oranges', 'bananas'])
+                # Convert dict_keys view to a list to display all the keys
+                print(list(keys))
+                # Output: ['apples', 'oranges', 'bananas']
             </code></pre>
         </dl>
     </section>
-    <section><h3><code class="note">keys()</code> - another dynamic view example</h3>
-        <pre><code rel="Python" class="python" style="min-height: 50vh;">
-            prices = {
-                "apples": 2.50,
-                "oranges": 2.43,
-                "bananas": 3.50
-            }
+    <section><h3>The <code>dict_keys</code> view object is dynamic!</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The view object is dynamic, meaning <span class="note">any changes to the dictionary (like adding or removing keys) will automatically reflect in the <code>dict_keys</code> view</span>.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 85vh;">
+                prices = {
+                    "apples": 2.50,
+                    "oranges": 2.43,
+                    "bananas": 3.50
+                }
 
-            # get prices keys view:
-            prices_keys = prices.keys()
-            print("before:", prices_keys)
+                # Get all the keys in the dictionary
+                keys = prices.keys()
+                print(keys)
+                # Output: dict_keys(['apples', 'oranges', 'bananas'])
 
-            # add new key-value pair:
-            prices["new_key"]="new value"
+                # Modify the dictionary by adding a new key-value pair
+                prices["plums"] = 4.30
 
-            # check if prices_keys contains the new key
-            print("after:", prices_keys)
-        </code></pre>
-        <pre><code rel="Output" class="bash" data-noescape>
-            before: dict_keys(['bananas', 'oranges', 'apples'])
-            after: dict_keys(['new_key', 'bananas', 'oranges', 'apples'])
-        </code></pre>
-    </section>
-    <section><h3>Get all dictionary values: <code class="note">values()</code></h3>
-        <dl class="fa" style="font-size: .9em">
-            <dt>the <a href="https://docs.python.org/3/library/stdtypes.html#dict.values"><code>dict.values()</code></a> method of a dictionary returns a <em><a href="https://docs.python.org/3/library/stdtypes.html#dict-views">dict view object</a></em>  dictionary values</dt>
+                # The dict_keys view reflects the change automatically
+                print(keys)
+                # Output: dict_keys(['apples', 'oranges', 'bananas', 'plums'])
+
+                # Remove an item
+                del prices["apples"]
+
+                # The dict_keys view reflects the deletion as well
+                print(keys)
+                # Output: dict_keys(['oranges', 'bananas', 'plums'])
+            </code></pre>
         </dl>
+    </section>
+    <section><h3>Get all dictionary values: <code class="note">dict.values()</code></h3>
+        <dl class="fa" style="font-size: .9em">
+            <dt>the <a href="https://docs.python.org/3/library/stdtypes.html#dict.values"><code>dict.values()</code></a> method of a dictionary returns a <em><a href="https://docs.python.org/3/library/stdtypes.html#dict-views">dict_values</a> view object</em>  of dictionary values</dt>
+            <dt>The keys in the <code>dict_values</code> object can be used in loops or converted into a list if needed.</dt>
+            <dt>Example: Get dictionary values as list</dt>
+            <pre><code rel="Python" class="python" style="min-height: 40vh;">
+                prices = {
+                    "apples": 2.50,
+                    "oranges": 2.43,
+                    "bananas": 3.50
+                }
+
+                # Get all the values in the dictionary as dict_values view
+                values = prices.values()
+
+                # Convert dict_values view to a list to display all the values
+                print(list(values))
+                # [2.5, 2.43, 3.5]
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>The <code>dict_values</code> view object is dynamic!</h3>
         <pre><code rel="Python" class="python" style="min-height: 40vh;">
             prices = {
                 "apples": 2.50,
@@ -306,35 +353,22 @@
                 "bananas": 3.50
             }
 
-            price_list = prices.values()
-            print(price_list)
-            # dict_values([2.5, 2.43, 3.5])
+            values = prices.values()
+
+            # Print initial values
+            print("Initial values:", list(values))
+            # Initial values: [2.5, 2.43, 3.5]
+
+            # Modify the dictionary by adding a new item
+            prices["plums"] = 4.30
+
+            # Print values after modification
+            print("Updated values:", list(values))
+            # Updated values: [2.5, 2.43, 3.5, 4.3]
         </code></pre>
+
     </section>
-    <section><h3><code class="note">values()</code> - dynamic view example</h3>
-        <pre><code rel="Python" class="python" style="min-height: 40vh;">
-            prices = {
-                "apples": 2.50,
-                "oranges": 2.43,
-                "bananas": 3.50
-            }
-
-            # get prices values view:
-            prices_values = prices.values()
-            print("before:", prices_values)
-
-            # change a value:
-            prices["oranges"]=100
-
-            # check if prices_values reflects the change:
-            print("after:", prices_values)
-        </code></pre>
-        <pre><code rel="Output" class="bash" data-noescape>
-            before: dict_values([3.5, 2.5, 2.43])
-            after: dict_values([3.5, 2.5, 100])
-        </code></pre>
-    </section>
-    <section><h3>Get all dictionary items (key-value pairs): <code class="note">items()</code></h3>
+    <section><h3>Get all dictionary items (key-value pairs): <code class="note">dict.items()</code></h3>
         <dl class="fa" style="font-size: .9em">
             <dt>the <a href="https://docs.python.org/3/library/stdtypes.html#dict.items"><code>dict.items()</code></a> method of a dictionary returns a <em><a href="https://docs.python.org/3/library/stdtypes.html#dict-views">dict view object</a></em> of dictionary items, i.e. a view of <span class="note">key-value pairs</span></dt>
         </dl>
@@ -374,7 +408,7 @@
             after: dict_items([('apples', 2.5), ('bananas', 3.5)])
         </code></pre>
     </section>
-    <section><h3>dict views in Python3 and Python2</h3>
+    <!-- <section><h3>dict views in Python3 and Python2</h3>
         <dl class="fa">
             <dt>The <code>keys()</code>, <code>values()</code> and <code>items()</code> methods return dict view objects only in <span class="note">Python3</span>. In Python2 they return lists.</dt>
             <dt>If you need to convert a dict view object to a list in Python3, you may use the <code>list()</code> method`</dt>
@@ -395,7 +429,7 @@
             print(list(prices.items()))
             # [('apples', 2.5), ('oranges', 2.43), ('bananas', 3.5)]
         </code></pre>
-    </section>
+    </section> -->
     <section><h3>Iterate over dictionary keys:</h3>
         <p>Note that when using <code>for-in</code> loop, dict_name is the same as dict_name.keys()</p>
         <pre><code rel="Syntax" class="shell" data-noescape>
