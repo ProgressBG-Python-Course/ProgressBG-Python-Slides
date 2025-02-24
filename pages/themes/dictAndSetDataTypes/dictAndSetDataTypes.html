@@ -835,9 +835,20 @@
             <dd>Find and print the extra skills the candidate has ('Flask', 'JavaScript').</dd>
             <dt>Expected output:</dt>
             <pre><code rel="Terminal" class="bash">
-                Matched Skills: {'Python', 'Git'}
-                Missing Skills: {'SQL', 'Django'}
-                Extra Skills: {'Flask', 'JavaScript'}
+                Matched Skills: Python, Git
+                Missing Skills: SQL, Django
+                Extra Skills: Flask, JavaScript
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Hints</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Use sets as this data structure is most appropriate for this task</dt>
+            <dt>To stringify a sequence or set, you can use the  <a href="https://docs.python.org/3/library/stdtypes.html#str.join">str.join()</a> method</dt>
+            <dt>The str.join() method joins elements of an iterable (like a list or set) into a single string, with a specified separator between them:</dt>
+            <pre><code rel="Terminal" class="bash">
+                skills = {'Python', 'Git'}
+                print(f'Skills: {", ".join(skills)}')
             </code></pre>
         </dl>
     </section>
