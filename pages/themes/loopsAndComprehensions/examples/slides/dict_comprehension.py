@@ -32,3 +32,4 @@ high_performing_quarters = {q: sum(months.values())/len(months)
                             for q, months in sales_data.items()
                             if sum(months.values())/len(months) > 18000}
 pprint(high_performing_quarters, indent=4)
+# {'Q3': 19000.0, 'Q4': 22333.333333333332}
