@@ -188,7 +188,7 @@
         <a href="images/ForFlow.png"><img src="images/ForFlow.png"></a>
     </section>
     <section><h3>Examples</h3>
-        <pre><code rel="Python" class="python" style="min-height: 50vh;">
+        <pre><code rel="Python" class="python" style="min-height: 55vh;">
             ### loop on list items:
             for item in [1,2,3]:
                 print(item, end=",")     # 1,2,3,
@@ -214,6 +214,7 @@
                     print(n, end=",")               # 1,2,3,4,5,
             </code></pre>
             <dt>Sum numbers in range (1,10):</dt>
+            <dd>Just an example, its better to use the built-in <a href="https://docs.python.org/3/library/functions.html#sum">sum</a> function.</dd>
             <pre><code rel="Python" class="python" style="min-height: 20vh;">
                 total_sum = 0
                 for n in range(1,11):
@@ -389,7 +390,7 @@
     <section><h3><code>do-while</code> emulation with <code>break</code></h3>
         <dl class="fa">
             <dt><span class="note">Python did not have <code>do-while</code> loop, as in other languages</span> (reason: "There should be one - and preferably only one - obvious way to do it.", <a href="https://www.python.org/dev/peps/pep-0020/">The Zen of Python</a>)</dt>
-            <dt>But <code>do-while</code> structure is useful when we need the body of the <code>while</code> loop to be executed at least ones.</dt>
+            <dt>But <code>do-while</code> structure is useful when we need the body of the <code>while</code> loop to be executed at least one.</dt>
             <dd>General structure of a "do-while" loop, which did not exists in Python:</dd>
             <pre><code rel="Python" class="python">
                 do {
@@ -428,7 +429,7 @@
     <section><h3 class="advanced">"switch-case" statement emulation for Python&lt;3.10</h3>
         <dl class="fa">
             <dt>In oldest python versions you can emulate ""switch-case"" with multiple <code>if-elif-break</code> blocks</dt>
-            <dd>Another way is to use Python dictionaries which values are functions (will be discussed further)</dd>
+            <!-- <dd>Another way is to use Python dictionaries which values are functions (will be discussed further)</dd> -->
             <pre><code rel="Python" class="python" style="min-height: 99vh;">
                 # print program menu:
                 print("Select an action:")
@@ -438,7 +439,7 @@
                 print()
 
                 while True:
-                    user_choice = int(input("Enter a number [0-4]: "))
+                    user_choice = int(input("Enter a number [1-3]: "))
 
                     if user_choice == 1:
                         print("Action 1 fired!")
@@ -457,17 +458,18 @@
                 # 2. Action 3
                 # 3. Action 3
 
-                # Enter a number [0-4]: 7
+                # Enter a number [1-3]: 7
                 # Wrong input!
-                # Enter a number [0-4]: 2
+                # Enter a number [1-3]: 2
                 # Action 2 fired!
             </code></pre>
         </dl>
     </section>
     <section><h3>match statement</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>Python 3.10 introduces <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">match statement</a> which takes an expression and compares its value to successive patterns given as one or more case blocks. This is superficially similar to a switch statement in C, Java or JavaScrip</dt>
-            <pre><code rel="Python" class="python" style="min-height: 90vh;">
+            <dt>Python 3.10 introduces <a href="https://docs.python.org/3/tutorial/controlflow.html#match-statements">match statement</a> is superficially similar to a switch statement in C, Java or JavaScrip.</dt>
+            <dt><code>match</code> takes an expression and compares its value to successive patterns given as one or more <code>case</code> blocks.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 105vh;">
                 # print program menu:
                 print("Select an action:")
                 print("1. Action 1")
@@ -476,7 +478,7 @@
                 print()
 
                 while True:
-                    user_choice = int(input("Enter a number [0-4]: "))
+                    user_choice = int(input("Enter a number [1-3]: "))
 
                     match user_choice:
                         case 1:
@@ -486,6 +488,7 @@
                         case 3:
                             print("Action 3 fired!")
                         case _
+                            # default case that matches anything not handled by previous cases.
                             print('Wrong input!')
 
                 # Select an action:
@@ -493,9 +496,9 @@
                 # 2. Action 3
                 # 3. Action 3
 
-                # Enter a number [0-4]: 7
+                # Enter a number [1-3]: 7
                 # Wrong input!
-                # Enter a number [0-4]: 2
+                # Enter a number [1-3]: 2
                 # Action 2 fired!
             </code></pre>
         </dl>
@@ -559,74 +562,106 @@
 
 <section data-min="5" id="comprehensions"><h1>Comprehensions</h1></section>
 <section><h2>List Comprehensions</h2>
-    <section><h3>Why</h3>
-        <dl class="fa">
-            <dt>A common programming task involves generating a new list based on the values of an existing list (or another iterable), i.e. mapping the elements of one list into another.</dt>
-            <dt>Let's say you want to create a list of squares of the numbers numbers in a list</dt>
-            <dd>We can use for loop (<span class="note">not Pythonic</span>): </dd>
-            <pre><code rel="Python" class="python">
-                numbers = [1,3,2,5]
-                squares = []
-                for num in numbers:
-                    squares.append(num ** 2)
-
-                print(squares)
-
-                # [1, 9, 4, 25]
-            </code></pre>
-            <dd>but list comprehension offers more shorter way:</dd>
-            <pre><code rel="Python" class="python">
-                numbers = [1,3,2,5]
-                squares = [num**2 for num in numbers]
-
-                print(squares)
-
-                # [1, 9, 4, 25]
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>Syntax</h3>
+    <section><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>List comprehensions in Python provide a concise way to create lists.</dt>
-            <pre><code rel="Syntax" class="python" style="min-height: 10vh;">
-                new_list = [expression for item in iterable if condition]
+            <dt>List comprehensions in Python are a concise way to create lists based on existing sequences. They provide a more elegant and readable alternative to traditional for loops when you need to create a new list by transforming or filtering elements.</dt>
+            <pre><code rel="Syntax" class="python" style="min-height: 10vh;" data-noescape>
+                new_list = <b>[</b><span style="color: blue;">expression</span> <b>for</b> <span style="color: orange;">item</span> in <span style="color: red;">iterable</span> <i>if condition</i><b>]</b>
             </code></pre>
             <dt>where:</dt>
-            <dd><i>expression</i> is the item to be returned and added to the new_list. I.e. it acts like a mapping expression.
-            </dd>
-            <dd><i>item</i> is the variable representing the members of the iterable.</dd>
-            <dd><i>iterable</i> is the object you are iterating over.</dd>
-            <dd><b>if condition</b> clause is optional, and if present it plays the role of filter.</dd>
+            <dd><span style="color: blue;">expression</span> is the item to be returned and added to the new_list. I.e. the transformation to apply to each item.</dd>
+            <dd><span style="color: red;">iterable</span> is the sequence you're iterating over  (e.g., list, range, string, etc.)</dd>
+            <dd><span style="color: orange;">item</span> is the variable representing each element in the iterable.</dd>
+            <dd><i>if condition</i> is <b>optional</b> filter to include only elements that match a condition</dd>
             <dt>Examples:</dt>
             <pre><code rel="Python" class="python">
-                l = [1,2,3,4,5]
-
-                # Multiplying Each Element by 3
-                tripled = [x * 3 for x in l]        # [3, 6, 9, 12, 15]
-
-                # Filtering Even Numbers:
-                evens = [el for el in l if el%2==0]	# [2, 4]
-
-                # map letters to its uppercase
+                # Map letters to its uppercase
                 letters = ['a', 'b', 'c']
                 upper_letters = [l.upper() for l in letters]
-                print(upper_letters)
+                print(upper_letters) #['A', 'B', 'C']
+
+                # Filtering Even Numbers:
+                numbers = [1,2,3,4,5]
+                evens = [el for el in numbers if el%2==0]
+                print(evens) # [2, 4]
             </code></pre>
         </dl>
     </section>
-    <section><h3>Examples</h3>
-        <dl class="fa">
-            <dt>Consider next task: generate a new list from a given list l, where each even number is replaced with string 'even' and each odd number - with 'odd'.</dt>
-            <dd>Hint: we would not need the if clause, because we do not want to filter the list, but instead - map a value for each list item. So, we must write an <i>expression</i> which return 1 if item is even, and 0 - if item is odd.</dd>
-            <pre><code rel="Python" class="python">
-                numbers = [1,3,2,5]
-                mapped = ['even' if num%2==0 else 'odd' for num in numbers]
-                print(mapped)
+    <section><h3>For loop vs List Comprehensions</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Example 1: Creating a list of squares from another iterable</dt>
+            <dd>with for loop</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                squares = []
+                for x in range(5):
+                    squares.append(x**2)
 
-                ['odd', 'odd', 'even', 'odd']
+                print(squares)
+                #[0, 1, 4, 9, 16]
+            </code></pre>
+            <dd>with list comprehension</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                squares = [x**2 for x in range(5)]
+
+                print(squares)
+                #[0, 1, 4, 9, 16]
             </code></pre>
         </dl>
+    </section>
+    <section><h3>For loop vs List Comprehensions</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Example 2: Filtering elements</dt>
+            <dd>with for loop</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                even_numbers = []
+                for x in range(10):
+                    if x % 2 == 0:
+                        even_numbers.append(x)
 
+                        print(even_numbers)
+                # [0, 2, 4, 6, 8]
+            </code></pre>
+            <dd>with list comprehension</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                even_numbers = [x for x in range(10) if x%2==0]
+
+                print(even_numbers)
+                # [0, 2, 4, 6, 8]
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>More Examples</h3>
+        <pre><code rel="Python" class="python" style="min-height: 100vh;">
+            # Map letters to its uppercase
+            letters = ['a', 'b', 'c']
+            upper_letters = [l.upper() for l in letters]
+            print(upper_letters)
+            #['A', 'B', 'C']
+
+            # Map Celsius temperatures to Fahrenheit
+            celsius = [0, 20, 37, 100]
+            fahrenheit = [((temp * 9/5) + 32) for temp in celsius]
+            print(fahrenheit)
+            #[32.0, 68.0, 98.6, 212.0]
+
+            # Filtering Even Numbers:
+            numbers = [1,2,3,4,5]
+            evens = [num for num in numbers if num % 2 == 0]
+            print(evens)
+            #[2, 4]
+
+            # Filtering email addresses
+            emails = ["user1@gmail.com", "user2@yahoo.com", "user3@gmail.com"]
+            gmail_users = [email for email in emails if "@gmail.com" in email]
+            print(gmail_users)
+            #['user1@gmail.com', 'user3@gmail.com']
+
+            # Flattening a nested list
+            matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+            flat_list = [num for row in matrix for num in row]
+            print(flat_list)
+            #[1, 2, 3, 4, 5, 6, 7, 8, 9]
+        </code></pre>
     </section>
 </section>
 <section><h2>Dictionary Comprehensions</h2>
@@ -691,6 +726,35 @@
             </code></pre>
         </dl>
 
+    </section>
+    <section><h3>Example: Frequency Counter for Text Analysis</h3>
+        <pre><code rel="Python" class="python" style="min-height: 1vh;">
+            #Example: Counting word frequency in a text
+            text = "apple banana apple apple banana plum"
+            words = text.split()
+
+            word_frequency = {word: words.count(word) for word in set(words)}
+
+            print(word_frequency)
+            # {'apple': 3, 'banana': 2, 'plum': 1}
+        </code></pre>
+    </section>
+    <section><h3>Example: Data Filtering for Reports</h3>
+        <pre><code rel="Python" class="python" style="min-height: 1vh;">
+            # Filtering sales data for a quarterly report
+            sales_data = {
+                'Q1': {'Jan': 10000, 'Feb': 12000, 'Mar': 15000},
+                'Q2': {'Apr': 14000, 'May': 16000, 'Jun': 18000},
+                'Q3': {'Jul': 17000, 'Aug': 19000, 'Sep': 21000},
+                'Q4': {'Oct': 20000, 'Nov': 22000, 'Dec': 25000}
+            }
+            # Get quarters with average sales above 18000
+            high_performing_quarters = {q: sum(months.values())/len(months)
+                                        for q, months in sales_data.items()
+                                        if sum(months.values())/len(months) > 18000}
+            pprint(high_performing_quarters, indent=4)
+            # {'Q3': 19000.0, 'Q4': 22333.333333333332}
+        </code></pre>
     </section>
 </section>
 

@@ -1,4 +1,3 @@
-str = "alibaba"
-for s in str:
-    if s == "i": break
-    print(s)
+even_numbers = [x for x in range(10) if x%2==0]
+print(even_numbers)
+# [0, 2, 4, 6, 8]
