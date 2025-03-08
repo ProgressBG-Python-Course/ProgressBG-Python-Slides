@@ -14,5 +14,5 @@ for student, score in student_scores.items():
 
 #print result
 for student, score in best_students_scores.items():
-  print("{:<8s} - {:<.2f}".format(student,score))
+  print(f"{student:<8s} - {score:<.2f}")
 

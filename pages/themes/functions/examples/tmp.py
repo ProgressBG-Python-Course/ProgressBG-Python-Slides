@@ -1,7 +1,4 @@
-x=1
-def foo(x):
-    x=2
-    print(x)
+def greet(msg, name):
+    print(f"{msg} {name}!")
 
-foo(9)
-print(x)
+greet("Hi",name="Maria")
