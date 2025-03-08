@@ -13,17 +13,7 @@
 #     изход: възраст-25, град-София, име-Иван
 
 # YOUR CODE HERE
-# data = {}
-# while True:
-#     key = input('Enter key: ')
-#     if key=='':
-#         break
 
-#     value=input('Enter value: ')
-#     data[key]=value
-
-# for key in sorted(data):
-#     print(f'{key}-{data[key]}')
 
 # --------------------------------- Задача 2. -------------------------------- #
 # Да се създаде програма, която чете думи като вход от клавиатурата, докато
@@ -34,14 +24,6 @@
 #   изход: ябълка: 3, банан: 2, портокал: 1
 
 # YOUR CODE HERE
-# words = ["ябълка", "банан", "ябълка", "портокал", "банан", "ябълка"]
-# words_count = {}
-
-# for word in set(words):
-#     words_count[word]=words.count(word)
-
-# print(words_count)
-
 
 
 # --------------------------------- Задача 3. -------------------------------- #
