@@ -347,9 +347,9 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Class Attributes - use case</h3>
+    <section><h3>Class Attributes - use case 1</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>Class attributes are ideal for defining constants or default values that are common to all instances of a class.</dt>
+            <dt>Class attributes are ideal for values that are common to all instances of a class.</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
                 class Person:
                     count = 0
@@ -363,6 +363,42 @@
                 ivan = Person("Ivan Petrov")
 
                 print(Person.count)  # 3
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Class Attributes - use case 2</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Class attributes are ideal for defining constants.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                class Circle:
+                    PI = 3.14159  # Class attribute
+
+                    def __init__(self, radius):
+                        self.radius = radius
+
+                    def area(self):
+                        return Circle.PI * self.radius ** 2
+
+                c = Circle(5)
+                print(c.area())  # Output: 78.53975
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Class Attributes - use case 3</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Class attributes are ideal for default values.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                class User:
+                    default_role = "guest"
+
+                    def __init__(self, name, role=None):
+                        self.name = name
+                        self.role = role if role else User.default_role
+
+                u1 = User("Alice")
+                u2 = User("Bob", "admin")
+                print(u1.role)  # Output: guest
+                print(u2.role)  # Output: admin
             </code></pre>
         </dl>
     </section>
@@ -500,6 +536,8 @@
         </dl>
     </section>
 </section>
+
+
 
 <section id="MagicDunderMethods_OperatorOverloading"><h1>Magic (dunder) methods. Operator Overloading</h1></section>
 <section><h2>Magic (dunder) methods</h2>
