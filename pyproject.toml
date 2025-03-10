@@ -1,0 +1,10 @@
+[tool.ruff]
+# General settings
+line-length = 88
+target-version = "py310"  # Adjust to your Python version
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-format = true

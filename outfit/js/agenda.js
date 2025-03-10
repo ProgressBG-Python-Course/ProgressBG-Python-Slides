@@ -36,7 +36,7 @@ function attachEvents(){
         let titleNode = titleNodes[i];
 
         // do not add click on empty lists and remove the arrow class on that title:
-        if(titleNode.nextElementSibling.tagName === "OL" && titleNode.nextElementSibling.children.length === 0){
+        if(titleNode.nextElementSibling?.tagName === "OL" && titleNode.nextElementSibling.children.length === 0){
             titleNode.className = "";
             continue;
         }

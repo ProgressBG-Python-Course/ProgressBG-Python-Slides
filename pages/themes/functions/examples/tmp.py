@@ -1,4 +1,5 @@
-def greet(msg, name):
-    print(f"{msg} {name}!")
+print("hello")
 
-greet("Hi",name="Maria")
+x = 3
+
+
