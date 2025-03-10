@@ -601,6 +601,83 @@
     </section>
 </section>
 
+
+<section class="main-section-title"><h1>First-class functions in Python</h1></section>
+<section class="sub-sections"><h2>First-class functions in Python</h2>
+    <section><h3>Overview</h3>
+        <dl class="fa">
+            <dt class="note">Functions in Python are first-class functions, meaning that:</dt>
+            <dd>A function can be assigned to a variable or stored in another data structure (like a list of functions).</dd>
+            <dd>A function can be passed as an argument to another function.</dd>
+            <dd>A function can be returned as a value from another function.</dd>
+            <dt class="note">Functions in Python are values, just like integers, strings, lists, and other objects.</dt>
+        </dl>
+    </section>
+    <section><h3>A function can be assigned to variable</h3>
+        <pre><code rel="Python" class="python">
+            def greet(name):
+                print("Hello, {}".format(name))
+
+            #a function can be assigned to variable:
+            foo = greet
+            greet("Maria")
+            foo("Maria")
+
+            #OUTPUT
+            # Hello, Maria
+            # Hello, Maria
+        </code></pre>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The variable <code>foo</code> holds a reference to the same function object in memory, so calling foo("Maria") is equivalent to calling greet("Maria")</dt>
+        </dl>
+    </section>
+    <section><h3>A function can be passed as argument to another function</h3>
+        <pre><code rel="Python" class="python" style="min-height: 70vh;">
+            def apply_function(func, value):
+                """Applies a function to a value."""
+                return func(value)
+
+            def square(x):
+                """Returns the square of x."""
+                return x * x
+
+            def cube(x):
+                """Returns the cube of x."""
+                return x ** 3
+
+            # Passing the function 'square' to 'apply_function'
+            result_square = apply_function(square, 5)
+            print(result_square)  # Output: 25
+
+            # Passing the function 'cube' to 'apply_function'
+            result_cube = apply_function(cube, 5)
+            print(result_cube)  # Output: 125
+
+        </code></pre>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The function apply_function takes two arguments: func (a function) and value.</dt>
+            <dt>The functions square and cube are passed as arguments to apply_function, and apply_function executes these functions with the provided value (5)</dt>
+        </dl>
+    </section>
+    <section><h3>A function can be returned as value from another function</h3>
+        <pre><code rel="Python" class="python">
+            def multiply_by(n):
+                """Returns a function that multiplies its input by n."""
+                def multiply(x):
+                    return x * n
+                return multiply
+
+            # Returning a function that multiplies by 2
+            double = multiply_by(2)
+
+            # Calling the returned function
+            result = double(5)
+            print(result)  # Output: 10
+
+        </code></pre>
+    </section>
+</section>
+
 <section id="LambdaExpressions"><h1>Lambda expressions</h1></section>
 <section><h2>Lambda expressions</h2>
     <section><h3>Overview</h3>
