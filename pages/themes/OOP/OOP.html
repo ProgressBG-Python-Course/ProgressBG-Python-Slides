@@ -556,32 +556,34 @@
     <section><h3>__str__ method</h3>
         <dl class="fa">
             <dt>The <code>__str__</code> method is meant to return a human-readable string representation of an object.</dt>
-            <dt>The <code>__str__()</code> method which will be invoked, when you call the str(), format() or print() functions of a class instance</dt>
+            <dt>The <code>__str__()</code> method will be invoked when you call the str(), format() or print() functions of a class instance</dt>
             <dt class="note">The return value must be a string!</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+            <pre><code rel="Python" class="python" style="min-height: 55vh;">
                 class Person:
                     def __init__(self, name, age):
                         self.name = name
                         self.age = age
 
                     def __str__(self):
-                        return "name = {}\nage = {}\n".format(self.name, self.age)
+                        return f"name = {self.name}\nage = {self.age}\n"
+
 
                 maria = Person("Maria Popova", 25)
 
                 print(maria)
                 # name = Maria Popova
                 # age = 25
+
             </code></pre>
         </dl>
     </section>
 </section>
 <section><h2 class="advanced">Operator overloading</h2>
     <section><h3>Overview</h3>
-        <dl class="fa" style="min-width:80vw">
+        <dl class="fa">
             <dt>Operator overloading in Python refers to the ability of a class to redefine standard operator behavior for its instances.</dt>
             <dt> This means you can use Python's built-in operators (like +, -, *, etc.) with objects of your custom classes in a way that is intuitive and specific to your class's context</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+            <pre><code rel="Python" class="python" style="min-height: 65vh;">
                 class Point:
                     def __init__(self, x, y):
                         self.x = x
@@ -599,6 +601,7 @@
 
                 print(p3)
 
+                # x = 4, y = 6
             </code></pre>
         </dl>
     </section>
@@ -607,7 +610,11 @@
 <section id="OopBasicsExamples"><h1>OOP Basics: Examples</h1></section>
 <section><h2>OOP Basics: Examples</h2>
     <section><h3>Employee Class</h3>
-        <pre><code rel="Python" class="python" style="min-height: 99vh;">
+        <dl class="fa" style="min-width:80vw">
+            <dt>The following example defines an Employee class to represent an employee with attributes (name, emp_id, salary, department).</dt>
+            <dt>It implements methods for salary calculation, including overtime adjustments, and provides a formatted string representation of the employee.</dt>
+        </dl>
+        <pre><code rel="Python" class="python" style="min-height: 106vh;">
             class Employee:
                 """Represents an employee with a name, ID, salary, and department."""
 
@@ -642,6 +649,9 @@
         </code></pre>
     </section>
     <section><h3>Find employee with the highest salary</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>This example defines an Employee class and creates a list of five employees with different salaries. It then finds and prints the employee with the highest salary.</dt>
+        </dl>
         <pre><code rel="Python" class="python" style="min-height: 99vh;">
             class Employee:
                 """Represents an employee with a name, ID, salary, and department."""
@@ -653,6 +663,7 @@
                     self.salary = salary
                     self.department = department
 
+
             # Create 5 employee objects with different salaries
             employees = [
                 Employee("Ivan Petrov", 1234567890, 50000, "Engineering"),
@@ -663,19 +674,13 @@
             ]
 
             # Find the employee with the highest salary
-            highest_earner = None
-            highest_salary = 0
-
-            for employee in employees:
-                if employee.salary > highest_salary:
-                    highest_earner = employee
-                    highest_salary = employee.salary
+            highest_earner = max(employees, key=lambda emp: emp.salary)
 
             # Print the details of the employee with the highest salary
             print(f"Employee with the highest salary:")
             print(f"Name: {highest_earner.name}")
             print(f"ID: {highest_earner.emp_id}")
-            print(f"Salary: ${highest_salary}")
+            print(f"Salary: ${highest_earner.salary}")
             print(f"Department: {highest_earner.department}")
 
             # Employee with the highest salary:
@@ -686,6 +691,10 @@
         </code></pre>
     </section>
     <section><h3>Car Class</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>This code defines a Car class with attributes such as manufacturer, model, year, color, and mileage.</dt>
+            <dt>It includes methods to simulate accelerating and braking the car, along with a string representation of the car's details</dt>
+        </dl>
         <pre><code rel="Python" class="python" style="min-height: 99vh;">
             class Car:
                 """Represents a car with specific attributes and functionalities."""
@@ -750,19 +759,25 @@
 
             </code></pre>
             <dt>Example</dt>
-            <pre><code rel="Python" class="python" style="min-height: 5 0vh;">
+            <pre><code rel="Python" class="python" style="min-height: 70vh;">
                 class Person():
+                    # Constructor to initialize name and age attributes
                     def __init__(self, name, age):
                         self.name = name
                         self.age = age
 
+                    # Method to print a greeting message
                     def greet(self):
                         print(f"Hi, I'm {self.name} and I'm {self.age} years old. ")
 
+                # Employee class inherits from Person class, no additional functionality is added
                 class Employee(Person):
                     pass
 
+                # Create an Employee object named maria with name "Maria" and age 20
                 maria = Employee("Maria", 20)
+
+                # Call the greet method (inherited from Person) on the maria object
                 maria.greet()
             </code></pre>
         </dl>
@@ -778,8 +793,8 @@
         <dl class="fa">
             <dt>Derived classes may override methods of their base classes.</dt>
         </dl>
-        <pre><code rel="Python" class="python" style="min-height:70vh;">
-            class Person():
+        <pre><code rel="Python" class="python" style="min-height:105vh;">
+            class Person:
                 def __init__(self, name, age):
                     self.name = name
                     self.age = age
@@ -787,24 +802,37 @@
                 def greet(self):
                     print(f"Hi, I'm {self.name} and I'm {self.age} years old. ")
 
+
             class Employee(Person):
+                # Overriding the greet method to customize greeting for employees
                 def greet(self):
                     print(f"Hi, I'm the employee {self.name}, {self.age} years old. ")
 
-            maria = Person("Maria", 20)
-            petar = Employee('Petar', 34)
 
+            # Create a Person object named maria with name "Maria" and age 20
+            maria = Person("Maria", 20)
+
+            # Create an Employee object named petar with name "Petar" and age 34
+            petar = Employee("Petar", 34)
+
+            # Call the greet method on maria (Person object)
             maria.greet()
+
+            # Call the greet method on petar (Employee object, using overridden method)
             petar.greet()
 
+            # Output:
             # Hi, I'm Maria and I'm 20 years old.
             # Hi, I'm the employee Petar, 34 years old.
+
         </code></pre>
     </section>
-    <section><h3><code>super()</code> access to base methods</h3>
+    <section><h3><code>super()</code> function</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>From a derived (child) class we can call methods, defined in the base (parent) class, using <code>super()</code></dt>
-            <pre><code rel="Syntax" class="python" style="min-height: 60vh;">
+            <dt>super() allows the child class to call methods from its parent class without explicitly naming the parent class.</dt>
+            <dt>Instead of directly using the parent class name (e.g., ParentClass.method()), super() allows dynamic resolution, which is useful for multiple inheritance scenarios.</dt>
+            <dt>You can use super() to call the parent class's __init__ method to initialize inherited attributes.</dt>
+            <pre><code rel="Syntax" class="python" style="min-height: 70vh;">
                 class Person():
                     def __init__(self, name, age):
                         self.name = name
@@ -867,11 +895,11 @@
                 </tr>
             </table>
             <dt>Example:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 53vh;">
+            <pre><code rel="Python" class="python" style="min-height: 60vh;">
                 class Person:
                     def __init__(self, name, age):
                         self.name = name
-                        self.__age = age  # private !!!
+                        self.__age = age  # private attribute, cannot be accessed directly outside the class
 
                     def __str__(self):
                         return f"name = {self.name}; __age = {self.__age}"
@@ -879,14 +907,14 @@
 
                 maria = Person("Maria Popova", 25)
 
-                # let's try to change Maria's age:
-                maria.__age = 100
+                # Attempt to change Maria's age by directly accessing the private attribute
+                maria.__age = 100  # This won't change the private attribute __age,
 
-                # we could not
-                print(maria) # name = Maria Popova; __age = 25
+                # The actual __age value remains the same (private attributes are not directly accessible)
+                print(maria)  # Output: name = Maria Popova; __age = 25
+
             </code></pre>
         </dl>
-
     </section>
     <section><h3 class="advanced">Private Attributes in Python?</h3>
         <dl class="fa" style="min-width:80vw">
@@ -912,122 +940,119 @@
     </section>
 </section>
 
-
+<!--
 <section data-min="10" id="inspectingClassesAndObjects"><h1>Inspecting Classes and Objects</h1></section>
 <section><h2>Inspecting Classes and Objects</h2>
-	<section><h3><code>__dict__ - revealing object's dictionary</code></h3>
-		<pre><code rel="Syntax" class="python">
-			class Person:
-				def __init__(self, name, age):
-					self.name = name
-					self.__age = age
+    <section><h3><code>__dict__ - revealing object's dictionary</code></h3>
+        <pre><code rel="Syntax" class="python">
+            class Person:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.__age = age
 
-			maria = Person("Maria Popova", 25)
+            maria = Person("Maria Popova", 25)
 
-			# inspect object attributes dictionary:
-			print( maria.__dict__ )
+            # inspect object attributes dictionary:
+            print( maria.__dict__ )
 
-			# inspect class attributes dictionary:
-			print( Person.__dict__ )
-		</code></pre>
-	</section>
-	<section><h3><code>dir()</code> - revealing all object's attributes</h3>
-		<dl class="fa">
-			<dt>The built-in function <code>dir()</code> used with an object name as argument will reveal most of the attributes defined for that object. <span style="font-size: .9em">Check <a href="https://docs.python.org/3/library/functions.html#dir">dir() on python3 docs</a> for more information.</span></dt>
-		</dl>
-		<pre><code rel="Python" class="python">
-			class Person:
-				def __init__(self, name, age):
-					self.name = name
-					self.__age = age
+            # inspect class attributes dictionary:
+            print( Person.__dict__ )
+        </code></pre>
+    </section>
+    <section><h3><code>dir()</code> - revealing all object's attributes</h3>
+        <dl class="fa">
+            <dt>The built-in function <code>dir()</code> used with an object name as argument will reveal most of the attributes defined for that object. <span style="font-size: .9em">Check <a href="https://docs.python.org/3/library/functions.html#dir">dir() on python3 docs</a> for more information.</span></dt>
+        </dl>
+        <pre><code rel="Python" class="python">
+            class Person:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.__age = age
 
-			maria = Person("Maria Popova", 25)
+            maria = Person("Maria Popova", 25)
 
-			print("maria has next attributes:")
-			print( dir(maria) )
+            print("maria has next attributes:")
+            print( dir(maria) )
 
-			# of course, dir() is calling the __dir__() method on the object, but it's better to use the function call, though you can do that:
-			print( maria.__dir__() )
-		</code></pre>
-	</section>
-	<section><h3><code>id()</code> - object identity</h3>
-		<dl class="fa">
-			<dt>The built-in <code>id()</code> functions returns the "identity" of an object.</dt>
-			<dd>an integer which is guaranteed to be unique and constant for this object during its lifetime</dd>
-			<dd>In CPython it is the address of memory where the object lives</dd>
-		</dl>
-	</section>
-	<section><h3><code>id()</code> - example</h3>
-		<pre><code rel="Python" class="python">
-			x = 42
-			y = x
+            # of course, dir() is calling the __dir__() method on the object, but it's better to use the function call, though you can do that:
+            print( maria.__dir__() )
+        </code></pre>
+    </section>
+    <section><h3><code>id()</code> - object identity</h3>
+        <dl class="fa">
+            <dt>The built-in <code>id()</code> functions returns the "identity" of an object.</dt>
+            <dd>an integer which is guaranteed to be unique and constant for this object during its lifetime</dd>
+            <dd>In CPython it is the address of memory where the object lives</dd>
+        </dl>
+    </section>
+    <section><h3><code>id()</code> - example</h3>
+        <pre><code rel="Python" class="python">
+            x = 42
+            y = x
 
-			print( id(x) )
-			print( id(y) )
-		</code></pre>
-		<pre><code rel="OUTPUT" class="bash" data-noescape>
-			10920736
-			10920736
-		</code></pre>
-	</section>
-</section>
+            print( id(x) )
+            print( id(y) )
+        </code></pre>
+        <pre><code rel="OUTPUT" class="bash" data-noescape>
+            10920736
+            10920736
+        </code></pre>
+    </section>
+</section> -->
 
 <section id="everythingIsAnObject"><h1>Everything is an object</h1></section>
 <section><h2>Everything is an object</h2>
-	<section>
-		<dl class="fa">
-			<dt>In Python every value is represented as an object</dt>
-			<dd>Numbers and Strings are objects</dd>
-			<dd>Sequences and Dictionary are objects</dd>
-			<dd>Functions are objects</dd>
-			<dd>Classes and Methods are objects</dd>
-			<dd>...</dd>
-		</dl>
-	</section>
-	<section><h3>"First-class Everything"</h3>
-		<blockquote>
-			One of my goals for Python was to make it so that all objects were "first class." By this, I meant that I wanted all objects that could be named in the language (e.g., integers, strings, functions, classes, modules, methods, etc.) to have equal status. That is, <span class="note">they can be assigned to variables, placed in lists, stored in dictionaries, passed as arguments, and so forth</span>.
-		</blockquote>
-		<a href="http://python-history.blogspot.com/2009/02/">A blog post by Guido van Rossum</a>
-	</section>
+    <section>
+        <dl class="fa">
+            <dt>In Python every value is represented as an object</dt>
+            <dd>Numbers and Strings are objects</dd>
+            <dd>Sequences and Dictionary are objects</dd>
+            <dd>Functions are objects</dd>
+            <dd>Classes and Methods are objects</dd>
+            <dd>...</dd>
+        </dl>
+    </section>
+    <section><h3>"First-class Everything"</h3>
+        <blockquote>
+            One of my goals for Python was to make it so that all objects were "first class." By this, I meant that I wanted all objects that could be named in the language (e.g., integers, strings, functions, classes, modules, methods, etc.) to have equal status. That is, <span class="note">they can be assigned to variables, placed in lists, stored in dictionaries, passed as arguments, and so forth</span>.
+        </blockquote>
+        <a href="http://python-history.blogspot.com/2009/02/">A blog post by Guido van Rossum</a>
+    </section>
 </section>
 
 
 <section data-min="15" id="variablesNamesAndValuesDeepLook"><h1>Variables names and values - deep look</h1></section>
 <section><h2>Variables names and values - deep look</h2>
-  <section><h3>How assignment works?</h3>
-  	<dl class="fa">
-  		<dt><code>name = value</code></dt>
-  		<dt class="note">Names are references to values</dt>
-  		<dd>Assignment <span class="note">binds</span> a symbolic name (on the left side) with a value object (on the right side)</dd>
-  		<dt class="note">Many names can refer to one value.</dt>
-  		<dt class="note">Assignment never copies data</dt>
-  	</dl>
-  </section>
-  <section><h3>More on names and values in Python</h3>
-  	<dl class="fa">
-  		<dt><a href="https://nedbatchelder.com/text/names.html">Facts and myths about Python names and values</a>, 2013 by Ned Batchelder</dt>
-  	</dl>
-  </section>
-</section>
+    <section><h3>How does assignment work?</h3>
+        <dl class="fa">
+            <dt><code>name = value</code></dt>
+            <dt>Assignment <span class="note">binds</span> a symbolic name (on the left side) to a value object (on the right side).</dt>
+            <dt>Names are references to the memory address where the value is stored, rather than the value itself.</dt>
+            <dt>Multiple names can refer to the same value.</dt>
+            <dt>Assignment does not copy the data; it simply creates a reference to the value.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                x = 10  # x points to the value 10
+                y = x   # y now also points to the value 10
 
-<section data-min="5" id="Resources"><h1>Resources</h1></section>
-<section><h2>YouTube Videos</h2>
-	<section><h3>Python Classes and Objects - John Philip Jones</h3>
-		<p>Simple, a childish like, explained...</p>
-		<iframe src="https://www.youtube.com/embed/AaIdperUu-A?list=PL6lxxT7IdTxEloArZ2ZSRWCy5jQpD5VtT" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-	</section>
-	<section><h3>Nina Zakharenko - Memory Management in Python - The Basics - PyCon 2016</h3>
-	  <iframe width="1280" height="720" src="https://www.youtube.com/embed/F6u5rhUQ6dU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </section>
-</section>
-<section><h2>blogs, tutorials</h2>
-	<section>
-		<dl class="fa">
-			<dt>If you want to go deep in OOP with Python:</dt>
-			<d><a href="https://www.python-course.eu/python3_object_oriented_programming.php">Object-Oriented Programming</a> www.python-course.eu</d>
-		</dl>
-	</section>
+                print(x)  # Output: 10
+                print(y)  # Output: 10
+
+                # Changing y does not affect x since integers are immutable.
+                # So a new object is created and y points to it
+                y = 20
+                print(x)  # Output: 10
+                print(y)  # Output: 20
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>More on names and values in Python</h3>
+        <dl class="fa">
+            <dt><a href="https://nedbatchelder.com/text/names.html">Facts and myths about Python names and values</a>, 2013 by Ned Batchelder</dt>
+        </dl>
+    </section>
+    <section><h3>Nina Zakharenko - Memory Management in Python - The Basics - PyCon 2016</h3>
+        <iframe width="1280" height="720" src="https://www.youtube.com/embed/F6u5rhUQ6dU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </section>
 </section>
 
 <section id="hw">
