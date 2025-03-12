@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/ProgressBG-Python-Slides/images/favicons/favicon-32.png">
     <!-- css & themes include -->
     <link rel="stylesheet" href="/ProgressBG-Python-Slides/lib/reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="/ProgressBG-Python-Slides/outfit/css/themes/dark.css" id="theme">
+    <link rel="stylesheet" href="/ProgressBG-Python-Slides/outfit/css/themes/light.css" id="theme">
     <!-- Printing and PDF exports -->
     <script>
         var link = document.createElement( 'link' );
@@ -59,7 +59,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Exceptions: raising and handling</h1></section>
+<section><h1>Exceptions handling in Python</h1></section>
 <section data-transition="zoom">
     <!-- linkedin badge -->
     <!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
@@ -84,260 +84,211 @@
     </section>
 </section>
 
-<section><h1>What are Exceptions</h1></section>
-<section><h2>What are Exceptions</h2>
-    <section>
-        <dl class="fa">
-            <dt>Exceptions - not a syntax, but a <span class="note">run-time errors</span> (<span class="note">raised during the execution of a program</span>)</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                # syntax error:
-                >>>print('hi'
-                # SyntaxError: '(' was never closed
-
-                # runtime error (Exception):
-                >>> user_number = int(input("Enter a number: "))
-                Enter a number: ada
-                # ValueError: invalid literal for int() with base 10: 'ada'
-
-                # runtime error (Exception):
-                >>> colors = ["red", "green","blue"]
-                >>> print( colors[3] )
-                # IndexError: list index out of range
-            </code></pre>
-            <dt>Exceptions are triggered automatically on detecting errors in the program or manually through code.</dt>
-            <dt>Python categorizes exceptions into two main types: built-in exceptions and user-defined exception</dt>
-            <dt>There are many types of built-in exceptions defined in Python	:</dt>
-            <dd>ValueError, NameError, TypeError, IndexError, ZeroDivisionError,... </dd>
-            <dt>Built-in Exceptions are hierarchically organized in Python:</dt>
-            <dd><a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy" class="advanced">Exception hierarchy</a></dd>
-        </dl>
-    </section>
-</section>
 
 <section id="ExceptionsHandling"><h1>Exceptions Handling</h1></section>
 <section><h2>Exceptions Handling</h2>
-    <section><h3>Overview</h3>
+    <section id="Overview"><h3>Overview</h3>
         <dl class="fa">
-            <dt>When an exception is <span class="note">raised (thrown)</span> you may want to take some actions (logging the issue, attempting to recover, or providing user-friendly feedback), instead of abruptly terminating.</dt>
-            <dt>You can specify actions to be taken for specific types of exceptions. For instance, you could write one block of code to handle file-related errors and another to address mathematical errors, each with its own recovery strategy or error message.</dt>
-            <dt>The process of managing exceptions in Python involves several key elements, mainly the <code>try</code>, <code>except</code>, <code>else</code>, and <code>finally</code> blocks.</dt>
-
-        </dl>
-    </section>
-    <section><h3>Syntax</h3>
-        <pre><code rel="Syntax" class="python" data-noescape>
-            try:
-                # block of code, which may raise an exception
-            except <em>ExceptionType</em> as e:
-                # do something if an <em>ExceptionType</em> was raised
-            else:
-                # do something only when no Exception was raised
-            finally:
-                # do something no matter if an Exception was raised or not.
-                # (useful for closing DB connections, etc.)
-        </code></pre>
-        <dl class="fa" style="font-size: 1em">
-            <dt><span class="note">except</span> is executed only when an exception from <em>ExceptionType</em> was raised in <code>try</code> code. <em>ExceptionType</em> is any of the built-in <a href="https://docs.python.org/3/library/exceptions.html">Exception Classes</a> or a User-defined Exception Class. You may have more than one <b>except</b> clauses for different Exception Types</dt>
-            <dt><span class="note">else</span> (<i>optional</i>) is executed <span class="note">only</span> when the code in <code>try</code> clause did not raise any exception. It's useful for code that should run only if the try block was successful.</dt>
-            <dt><span class="note">finally</span> (<i>optional</i>) is always executed! It's typically used for cleaning up resources, such as closing files or network connections.</dt>
-        </dl>
-    </section>
-    <section><h3>Examples</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Basic: handling ValueError</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+            <dt>An exception is an error that occurs during the execution of a program.</dt>
+            <dt>Exception handling allows a program to:</dt>
+            <dd>Avoid crashes by handling unexpected errors.</dd>
+            <dd>Provide user-friendly feedback instead of cryptic error messages.</dd>
+            <dd>Ensure proper cleanup (e.g., closing files, releasing resources).</dd>
+            <dt>Basic Example</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 try:
-                    # code, which can raise an exception
-                    user_number = int(input("Enter a number: "))
-                except ValueError as e:
-                    # do something if ValueError was raised
-                    print("You did not enter a number!")
-                else:
-                    # do something only if there was no Exception
-                    print("Your number is ", user_number)
-                finally:
-                    # do something no matter if an Exception was raised or not
-                    print("Cleanup...")
-            </code></pre>
-            <dt>Handling multiple exceptions</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                try:
-                    # Division by zero error
+                    # Code that might raise an exception
                     result = 10 / 0
                 except ZeroDivisionError:
-                    print("Divided by zero!")
-                except TypeError:
-                    print("Incorrect type used in operation.")
+                    # Code to handle the specific exception
+                    print("Cannot divide by zero!")
+            </code></pre>
+            <dt>Note that syntax errors, like <code>print("hello)</code> can not be handled, as they occur in parsing stage, i.e. before the code is executed.</dt>
+        </dl>
+    </section>
+    <section id="Syntax"><h3>Syntax</h3>
+        <pre><code rel="Syntax" class="python" data-noescape>
+            try:
+                # Code that may raise an exception
+            except <em>ExceptionType</em>:
+                # Code to handle the specific exception
+            else:
+                # Code that should run only if the try block was successful
+            finally:
+                # Always executes, regardless of whether an exception occurred
+                # (useful for cleaning up resources such as closing files or network connections)
+        </code></pre>
+        <dl class="fa" style="font-size: 1em">
+            <dt><b>try</b> block contains code that might raise an exception. If an exception is raised, the program moves to the <code>except</code> block.</dt>
+            <dt><b>except</b> block handles the exception. You can have multiple except blocks to handle different types of exceptions separately (e.g., <code>ZeroDivisionError</code>, <code>FileNotFoundError</code>).</dt>
+            <dt><b>else</b> block is optional and runs only if no exception is raised in the <code>try</code>block. It is useful for code that should run when everything goes as expected.</dt>
+            <dt><b>finally</b> block is also optional and runs no matter what, whether or not an exception occurred. It is typically used for cleanup actions, such as closing files or network connections.</dt>
+        </dl>
+    </section>
+    <section id="SyntaxExample"><h3>Example</h3>
+        <dl class="fa" style="min-width:80vw">
+            <pre><code rel="Python" class="python" style="min-height: 60vh;">
+                try:
+                    # Code which can raise an exception
+                    user_number = int(input("Enter a number: "))
+                except ValueError:
+                    # This block will execute if the user input cannot be converted to an integer
+                    # (e.g., if a non-numeric value is entered)
+                    print("You did not enter a number!")
+                except Exception as e:
+                    # This block will execute if any other unexpected error occurs
+                    print(f"An unexpected error occurred: {e}")
                 else:
-                    print("Operation successful.")
+                    # This block will execute only if no exception was raised in the try block
+                    print("Your number is ", user_number)
                 finally:
+                    # This block will always execute, regardless of whether an exception occurred or not
                     print("Cleanup...")
             </code></pre>
         </dl>
     </section>
-    <section><h3>Handling any exception</h3>
+    <section id="CommonExceptionTypes"><h3>Common Exception Types</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Python has many built-in exception types, including:</dt>
+            <dd><b>ZeroDivisionError</b>: Occurs when dividing by zero</dd>
+            <dd><b>TypeError</b>: Occurs when an operation is performed on an inappropriate data type</dd>
+            <dd><b>ValueError</b>: Occurs when a function receives an argument of the correct type but inappropriate value</dd>
+            <dd><b>FileNotFoundError</b>: Occurs when trying to access a non-existent file</dd>
+            <dd><b>IndexError</b>: Occurs when trying to access an index that is out of range</dd>
+            <dd><b>KeyError</b>: Occurs when a dictionary key is not found</dd>
+            <dd><b>ImportError</b>: Occurs when an import statement fails</dd>
+            <dt>Reference: <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">Exception hierarchy @python.org</a></dt>
+        </dl>
+    </section>
+    <section id="CatchingMultipleExceptions"><h3>Catching Multiple Exceptions</h3>
         <dl class="fa" style="width: 80vw;">
-            <dt>Syntax:</dt>
+            <dt>You can handle different exceptions with separate except blocks:</dt>
             <pre><code rel="Syntax" class="shell" data-noescape>
                 try:
-                    # code, which can raise an exception
-                except Exception as e:
-                    # do something if any exception was raised
-            </code></pre>
-            <dt>Example:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 50vh;">
-                def get_user_number():
-                    user_number = int(input("Enter a number: "))
-                    # we forgot to return user_number, thus None is returned
-
-                try:
-                    x = get_user_number()
-                    res = 10/x
-                    print(f"Result is {res}")
+                    number = int(input("Enter a number: "))
+                    result = 10 / number
+                    print(f"Result: {result}")
                 except ValueError:
-                    print("You did not enter a number!")
+                    print("That's not a valid number!")
                 except ZeroDivisionError:
-                    print("Enter a number different from zero (0)!")
+                    print("Cannot divide by zero!")
                 except Exception as e:
-                    print(f"Oops! Something went wrong! ({e})")
+                    # This block will execute if any other unexpected error occurs
+                    print(f"An unexpected error occurred: {e}")
             </code></pre>
         </dl>
     </section>
-</section>
-
-<section id="ExceptionObject"><h1>Exception Object</h1></section>
-<section><h2>Exception Object</h2>
-    <section>
+    <section id="TheElseClause"><h3>The else Clause</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>The exception object contains details about the error that occurred, including the error message and the type of exception.</dt>
-            <dt>By capturing and interacting with this object, developers can:</dt>
-            <dd>Access detailed information about the error, including custom data.</dd>
-            <dd>Differentiate between exception types using the object's class.</dd>
-            <dd>Log or display error information in a user-friendly manner.</dd>
-            <dd>Implement custom logic based on attributes of the exception.</dd>
-            <dt>example:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+            <dt>The else clause executes when no exceptions are raised in the try block</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 try:
-                    res = 10/'a'
-                    print(f"Result is {res}")
-                except ZeroDivisionError as e:
-                    print(e)
-                except Exception as e:
-                    print(e)
-
-                # unsupported operand type(s) for /: 'int' and 'str'
+                    number = int(input("Enter a number: "))
+                except ValueError:
+                    print("That's not a valid number!")
+                else:
+                    # This runs only if no exceptions occurred
+                    print(f"You entered: {number}")
+            </code></pre>
+        </dl>
+    </section>
+    <section id="TheFinallyClause"><h3>The finally Clause</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>The finally clause executes regardless of whether an exception occurred</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                try:
+                    # Try to read file
+                    file = open("data.txt", "r")
+                    content = file.read()
+                except FileNotFoundError:
+                    print("The file does not exist.")
+                finally:
+                    # This runs whether an exception occurred or not
+                    # Great for cleanup operations
+                    file.close() if 'file' in locals() else None
             </code></pre>
         </dl>
     </section>
 </section>
 
-
-<section id="RaisingExceptions"><h1>Raising Exceptions</h1></section>
-<section><h2>Raising Exceptions</h2>
-    <section><h3>The <code>raise</code> statement</h3>
+<section id="RaisingExceptions"><h1>Raising Custom Exceptions</h1></section>
+<section><h2>Raising Custom Exceptions</h2>
+    <section id="TheRaiseStatement"><h3>The <code>raise</code> statement</h3>
         <dl class="fa">
-            <dt>The <code><a href="https://docs.python.org/3/reference/simple_stmts.html#raise">raise</a></code> statement allows the programmer to force a specified exception to occur.</dt>
+            <dt>You can raise exceptions explicitly using the <code><a href="https://docs.python.org/3/reference/simple_stmts.html#raise">raise</a></code> statement:</dt>
             <dd>Raising exceptions can improve code robustness and provide informative feedback to users.</dd>
             <dt>You can pass to <code>raise</code> an <em>ExceptionType</em> to be raised</dt>
             <pre><code rel="Python" class="python" style="min-height: 60vh;">
                 def get_user_age():
                     while True:
                         try:
-                            age = int(input("Enter your age (between 1 and 99): "))
-                            if 0 < age < 100:
-                                return age
-                            else:
+                            age = int(input("Enter your age: "))
+                            if age < 0:
                                 raise ValueError("Age must be between 1 and 99")
-                        except ValueError as e:
-                            print(e)
-                            print("Please enter a valid integer for your age.")
+                            return age
+                        except ValueError:
+                            print("Please enter a valid age.")
 
 
-                # Get the valid age
                 user_age = get_user_age()
 
                 # Continue with your program using the valid age
                 print(f"You are {user_age} years old.")
+
             </code></pre>
             <code></code>
         </dl>
     </section>
-    <section><h3><code>raise</code> without arguments</h3>
+    <section id="DefineAndRaiseCustomExceptions"><h3>Define And Raise Custom Exceptions</h3>
         <dl class="fa">
-            <dt>You can skip the <em>ExceptionType</em> and write just <code>raise</code></dt>
-            <dd>In that case, the last error will be re-raised</dd>
-            <dt>A common case for <code>raise</code> without argument is when you want the error to be thrown as normally, but to take some actions (logging, rollback, etc.) before that</dt>
+            <dt>We can use the <code>raise</code> statement to trigger custom errors when necessary.</dt>
+            <dt>To define a custom exception, create a new class that inherits from the built-in <code>Exception</code> class:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 80vh;">
+                # define custom exception
+                class UserNameError(Exception):
+                    """Raised when a username is less than 3 characters long."""
 
-        </dl>
-        <pre><code rel="Python" class="python" style="min-height: 10vh;">
-            try:
-              db_insert()
-            except:
-              rollback()
-              raise
-            else:
-              commit()
-        </code></pre>
-    </section>
-    <section><h3>Define Custom Error Classes</h3>
-        <dl class="fa">
-            <dt>A common use-case for <code>raise</code> statement is when we want to raise a custom error type.</dt>
-            <dt>To define custom error type we can create a new class that inherits from the built-in Exception class or a subclass of it:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                class CustomError(Exception):
-                    pass
-            </code></pre>
-            <dt>Customize the constructor (Optional):</dt>
-            <dd>Define a __init__ method to initialize the exception object with custom attributes or messages:</dd>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                class InvalidDataError(Exception):
-                    def __init__(self, message, data):
-                        super().__init__(message)  # Call the parent's constructor
-                        self.data = data  # Store additional information
-            </code></pre>
-            <dt>Provide a clear and informative docstring (Optional but recommended):</dt>
-            <dd>Explain the purpose of the exception class and when it's raised:
-            </dd>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                class InsufficientFundsError(Exception):
-                    """Raised when an account has insufficient funds for a transaction."""
+                    def __init__(self, username):
+                        super().__init__(
+                            f"Username '{username}' is too short (must be at least 3 characters)"
+                        )
 
+
+                try:
+                    user_name = input("Enter your name: ")
+                    if len(user_name) < 3:
+                        raise UserNameError(user_name)
+                except UserNameError as e:
+                    print(e)
+                except Exception as e:
+                    print(f"Oops! Something went wrong! ({e})")
+
+                ### Example usage
+                # Enter your name: ab
+                # Username 'ab' is too short (must be at least 3 characters)
             </code></pre>
         </dl>
-    </section>
-    <section><h3>Raise Custom Exception: Example</h3>
-        <pre><code rel="Python" class="python" style="min-height: 60vh;">
-            # define custom exception
-            class UserNameError(Exception):
-                """Raised when a username is less than 3 characters long."""
-
-                def __init__(self, username):
-                    super().__init__(f"Username '{username}' is too short (must be at least 3 characters)")
-                    self.username = username  # Store additional information
-
-            try:
-                user_name = input('Enter your name: ')
-                if len(user_name)&lt;3:
-                    raise UserNameError(user_name)
-            except UserNameError as e:
-                print(e)
-            except Exception as e:
-                print(f'Oops! Something went wrong! ({e})')
-
-            # Enter your name: ab
-            # Username 'ab' is too short (must be at least 3 characters)
-
-        </code></pre>
     </section>
 </section>
 
+<section class="main-section-title" id="BestPractices"><h1>Best Practices</h1></section>
+<section class="sub-sections"><h2>Best Practices</h2>
+    <section>
+        <dl class="fa" style="min-width:80vw">
+            <dt><b>Be specific</b>: Catch only the exceptions you expect and can handle</dt>
+            <dt><b>Don't catch all exceptions</b>: Avoid bare except: statements that catch everything</dt>
+            <dt><b>Keep try blocks small</b>: Only include code that might raise exceptions</dt>
+            <dt><b>Handle exceptions appropriately</b>: Don't hide errors without addressing them</dt>
+            <dt><b>Use finally for cleanup</b>: Resource cleanup belongs in finally blocks</dt>
+        </dl>
+    </section>
+</section>
 
 <section><h1>Resources</h1></section>
 <section><h2>Resources</h2>
     <section><h3>Blogs, wiki, docs</h3>
         <dl class="fa">
-            <dt><a href="https://wiki.python.org/moin/HandlingExceptions">Handling Exceptions @wiki.python.org</a></dt>
-            <dt><a href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions @ The Python Tutorial</a></dt>
+            <dt><a href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions @The Python Tutorial</a></dt>
         </dl>
     </section>
 </section>
