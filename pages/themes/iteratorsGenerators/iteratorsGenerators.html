@@ -274,7 +274,6 @@
     </section>
     <section><h3>Example: generator for sequence of consecutive integers</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt></dt>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 def number_generator(start, end):
                     current = start
@@ -289,93 +288,34 @@
             </code></pre>
         </dl>
     </section>
+    <section><h3>Example: generator for Fibonacci_numbers</h3>
+        <pre><code rel="Python" class="python" style="min-height: 1vh;">
+            def fibonacci_generator(n):
+            a = 0
+            b = 1
+
+            for _ in range(n):
+                yield a
+                a, b = b, a + b
+
+
+            for number in fibonacci_generator(10):
+            print(number, end="")
+
+        </code></pre>
+    </section>
 
 </section>
-
+<!--
 <section data-min="5"><h1>Generators Examples</h1></section>
 <section><h2>Generators Examples</h2>
-    <section><h3>Custom Generator vs Custom Iterator</h3>
-        <pre><code rel="Python" class="python" style="min-height: 97vh;">
-            def foo_generator():
-                yield 1
-                yield 2
-
-            class FooIterator():
-                def __init__(self) -> None:
-                    self.current  = 1
-                    self.max    = 2
-
-                def __iter__(self):
-                    return self
-
-                def __next__(self):
-                    if self.current<=self.max:
-                        value = self.current
-                        self.current+=1
-                        return value
-                    else:
-                        raise StopIteration
-
-            foo_gen = foo_generator()
-            foo_iter = FooIterator()
-
-            print('Generator test:')
-            for x in foo_gen:
-                print(x, end=",")
-
-            print('\nIterator test:')
-            for x in foo_iter:
-                print(x, end=",")
-
-            # Generator test:
-            # 1,2,
-            # Iterator test:
-            # 1,2,
-        </code></pre>
-        <!-- <p>Play with the full example @repl.it: <a href="https://repl.it/@IvaPopova/Custom-Generator-vs-Custom-Iterator">Custom-Generator-vs-Custom-Iterator</a></p> -->
-    </section>
-    <section><h3>Example - integer numbers generator in range</h3>
-        <pre><code rel="Python" class="python" style="min-height: 10vh;">
-            #define the generator function:
-            def numbers_generator(start,end):
-                """Generates numbers from start (inclusive) to end (inclusive)."""
-                num  = start
-                while num<=end:
-                    yield num
-                    num += 1
-
-            my_numbers = numbers_generator(1,10)
-            # iterate over our generator:
-            for x in my_numbers:
-                print(x, end=",")
-
-            # 1,2,3,4,5,6,7,8,9,10,
-        </code></pre>
-    </section>
-    <section><h3>Example - nested list flatten generator</h3>
-        <pre><code rel="Python" class="python" style="min-height: 40vh;">
-            def flatten(nested):
-                """Flattens a nested list into a single generator of elements."""
-                for sublist in nested:
-                    for element in sublist:
-                        yield element
-
-            nested = [[1, 2], [3, 4], [5]]
-
-            print( list(flatten(nested)) )
-
-            # [1, 2, 3, 4, 5]
-        </code></pre>
-    </section>
     <section><h3 class="advanced">Naive Cyrillic names generator:</h3>
         <script src="https://gist.github.com/ProgressBG-Python-Course/eeb24adfc2cf814a669230198244564b.js"></script>
-        <!-- </a> -->
-        <!-- <a href="https://repl.it/@IvaPopova/naiverandomnamesiterator">naive_random_names_iterator @repl.it</a> -->
     </section>
-</section>
+</section> -->
 
-<section data-min="5"><h1 class="advanced">Generator comprehensions</h1></section>
-<section><h2 class="advanced">Generator comprehensions</h2>
+<section data-min="5"><h1>Generator comprehensions</h1></section>
+<section><h2>Generator comprehensions</h2>
     <section>
         <dl class="fa" style="min-width:80vw">
             <dt>Generator comprehensions in Python are a concise way to create generators.</dt>
@@ -401,6 +341,32 @@
             </code></pre>
         </dl>
     </section>
+    <section><h3>Example: Process large log file with generator</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Consider a scenario where you need to process a log file and find only those lines that contain the substring 'error'.</dt>
+            <dt>Sample code without using a generator expression:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                error_lines = []  # Create a list to store error lines
+
+                with open('./syslog') as file:
+                    for line in file:
+                        if 'error' in line:
+                            error_lines.append(line)  # Add matching lines to the list
+
+                for line in error_lines:
+                    print(line)
+
+            </code></pre>
+            <dt>Loading the entire file into memory as a list of lines is inefficient and may exceed system memory, especially for large log files (several GBs). Instead, a generator processes one line at a time, reducing memory usage.</dt>
+
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                error_lines = (line for line in open('./syslog') if 'error' in line)
+                for line in error_lines:
+                    print(line)
+
+            </code></pre>
+        </dl>
+    </section>
     <section><h3>Use Cases</h3>
         <dl class="fa" style="min-width:80vw">
             <dt><b>Handling Large Data Sets</b>: Generators are memory-efficient because they yield items one at a time, only generating a value when requested. This makes them particularly useful for processing large data sets where loading the entire data set into memory (e.g., as a list) would be impractical or impossible due to memory constraints.</dt>
@@ -410,7 +376,7 @@
         </dl>
     </section>
 </section>
-
+<!--
 <section data-min="10"><h1>Generator comprehensions examples:</h1></section>
 <section><h2 class="advanced">Generator comprehensions examples:</h2>
     <section><h3>Process large log file</h3>
@@ -476,7 +442,7 @@
             print(total_sales_amount)
         </code></pre>
     </section>
-</section>
+</section> -->
 
 
 <section id="hw"><h1>Homework</h1></section>
