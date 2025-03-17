@@ -83,7 +83,7 @@
             <dt>Key Concepts:</dt>
 
             <dd><b>First-Class Functions</b> : Functions can be assigned to variables, passed as arguments, and returned from other functions.</dd>
-            <dd><b>Pure Functions</b> : Functions that always return the same output for the same input and have no side effects.</dd>
+            <dd><b>Pure Functions</b> : Functions that always return the same output for the same input and have no side effects. I.e.  no additions to the primary purpose of the function - to compute and return a value.</dd>
             <dd><b>Higher-Order Functions</b> : Functions that take other functions as arguments or return functions ().</dd>
             <dd><b>Immutability</b> : Avoiding changes to data structures and preferring immutable data.</dd>
             <dd><b>Lambda Functions</b> : Anonymous functions for short operations (lambda x: x * 2).</dd>
@@ -312,68 +312,6 @@
 
 </section> -->
 
-<section><h1>The <code>filter()</code> Function</h1></section>
-<section><h2>The <code>filter()</code> Function</h2>
-    <section>
-        <a href="./images/filter.png"><img src="./images/filter.png" alt="./images/filter.png"></a>
-    </section>
-    <section>
-        <dl class="fa">
-            <dt><a href="https://docs.python.org/3/library/functions.html#filter"><code>filter()</code></a> is a built-in function that allows to process an iterable and extract those items that satisfy a given condition</dt>
-        </dl>
-        <pre><code rel="Syntax" class="shell" data-noescape>
-            filter(<em>function</em>, <em>iterable</em>)
-        </code></pre>
-        <dl class="fa">
-            <dt><em>function</em> - a function definition. Should return a Boolean value</dt>
-            <dt><em>iterable</em> - a sequence (list, tupple, range or string) or any iterable object.</dt>
-            <dt>The filter() function returns an iterator that lazily evaluates each item in the iterable it processes. When you pass a function and an iterable to filter(), it applies the function to each item of the iterable and yields only those items for which the function returns True.</dt>
-            <dt>Example: List of even numbers - without lambda</dt>
-            <pre><code rel="Python" class="python">
-                def is_even(x):
-                    return True if x!=0 and x%2==0 else False
-
-                even_numbers = filter(is_even, range(10))
-
-                print( list(even_numbers) )
-
-                # [2, 4, 6, 8]
-            </code></pre>
-            <dt>Example: List of even numbers - with lambda</dt>
-            <pre><code rel="Python" class="python">
-                even_numbers = filter(lambda x: x%2==0 if x!=0 else False, range(10))
-
-                print( list(even_numbers) )
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>More examples</h3>
-        <dl class="fa">
-            <dt>Example: filter empty strings</dt>
-            <pre><code rel="Python" class="python">
-                names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
-                not_empty_names = filter(lambda s: s, names)
-
-                print( list(not_empty_names) )
-            </code></pre>
-            <dt>Example: Names, starting with 'A'</dt>
-            <pre><code rel="Python" class="python">
-                names = ["Ivan", "Alex", "Maria", "Angel", ""]
-                filtered_names = filter(lambda s: s and s[0]=="A", names)
-
-                print( list(filtered_names) )
-            </code></pre>
-            <dt>Note that we can use list comprehenstions insead of filter</dt>
-            <pre><code rel="Python" class="python">
-                names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
-                not_empty_names = [ name for name in names if name]
-
-                print( list(not_empty_names) )
-            </code></pre>
-        </dl>
-    </section>
-</section>
-
 <section><h1>The <code>map()</code> Function</h1></section>
 <section><h2>The <code>map()</code> Function</h2>
     <section>
@@ -431,6 +369,81 @@
     </section>
 </section>
 
+<section><h1>The <code>filter()</code> Function</h1></section>
+<section><h2>The <code>filter()</code> Function</h2>
+    <section>
+        <a href="./images/filter.png"><img src="./images/filter.png" alt="./images/filter.png"></a>
+    </section>
+    <section>
+        <dl class="fa">
+            <dt><a href="https://docs.python.org/3/library/functions.html#filter"><code>filter()</code></a> is a built-in function that allows to process an iterable and extract those items that satisfy a given condition</dt>
+        </dl>
+        <pre><code rel="Syntax" class="shell" data-noescape>
+            filter(<em>function</em>, <em>iterable</em>)
+        </code></pre>
+        <dl class="fa">
+            <dt><em>function</em> - a function definition. Should return a Boolean value</dt>
+            <dt><em>iterable</em> - a sequence (list, tupple, range or string) or any iterable object.</dt>
+            <dt>When you pass a function and an iterable to filter(), it applies the function to each item of the iterable and yields only those items for which the function returns True.</dt>
+            <dt>The filter() function returns an iterator that lazily evaluates each item in the iterable it processes</dt>
+            <dt>Example: List of even numbers with named function</dt>
+            <pre><code rel="Python" class="python">
+                def is_even(x):
+                    return x % 2 == 0
+
+
+                evens = filter(is_even, range(1, 11))
+
+                print(list(even_numbers))
+
+
+                # [2, 4, 6, 8, 10]
+            </code></pre>
+            <dt>Example: List of even numbers with lambda function</dt>
+            <pre><code rel="Python" class="python">
+                evens = filter(lambda x: x % 2 == 0, range(1, 11))
+                print(list(evens))
+
+                # [2, 4, 6, 8, 10]
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>More examples</h3>
+        <dl class="fa">
+            <dt>Example: filter empty strings.</dt>
+            <dd>If None is used for filter function, it defaults to Identity function - filters out elements that are False</dd>
+            <pre><code rel="Python" class="python">
+                names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
+                not_empty_names = filter(None, names)
+
+                print(list(not_empty_names))
+                ["Ivan", "Alex", "Maria", "Angel"]
+            </code></pre>
+            <dd>Note that we can use list comprehenstions insead of filter</dd>
+            <pre><code rel="Python" class="python">
+                names = ["Ivan", "", "Alex", "", "Maria", "Angel", ""]
+                not_empty_names = [ name for name in names if name]
+
+                print( list(not_empty_names) )
+            </code></pre>
+            <dt>Example: Names, starting with 'A'</dt>
+            <pre><code rel="Python" class="python">
+                names = ["Ivan", "Alex", "Maria", "Angel", ""]
+                filtered_names = filter(lambda name: name.startswith("A"), names)
+
+                print(list(filtered_names))
+            </code></pre>
+            <dd>With list comprehension</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                names = ["Ivan", "Alex", "Maria", "Angel", ""]
+                filtered_names = [name for name in names if name.startswith("A")]
+
+                print(list(filtered_names))
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
 <section><h1>The <code>reduce()</code> Function</h1></section>
 <section><h2>The <code>reduce()</code> Function</h2>
     <section>
@@ -464,6 +477,10 @@
 
                 #55
             </code></pre>
+            <dd>Note, that in practice you can use the sum function:</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                print(sum(range(11)))
+            </code></pre>
             <dt>Example: sum the prices of all products</dt>
             <pre style="width: 80vw;"><code rel="Python" class="python">
                 products = [
@@ -477,26 +494,71 @@
 
                 print(total_price)
             </code></pre>
+            <dd>With sum function and list comprehension:</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                total_price = sum([p["price"] for p in products])
+            </code></pre>
         </dl>
     </section>
     <section><h3 class="advanced">Example: map - reduce</h3>
         <dl class="fa">
             <dt>Often in practice filter, map and reduce are used in combination</dt>
-            <dt>Consider next example, which returns the sum of variable number of lists items positionally</dt>
+            <dt>Consider next example, which returns the sum of variable number of lists items positionally (element wise)</dt>
             <pre><code rel="Python" class="python">
-                l1 = [1,2,3]
-                l2 = [1,2,3]
-                l3 = [1,2,3]
+                from functools import reduce
 
-                l = map(lambda *t: reduce(lambda a,b: a+b, t) , l1, l2,l3)
-                print( list(l) )
+                l1 = [1, 2, 3]
+                l2 = [1, 2, 3]
+                l3 = [1, 2, 3]
+
+                res = map(lambda *t: reduce(lambda a, c: a + c, t), l1, l2, l3)
+                print(list(res))
 
                 # [3, 6, 9]
             </code></pre>
             <dt>*t parameter in lambda collects in a tuple (t) all arguments. For example, on the first iteration, *t would collect the first element of each list into the tuple t=(1, 1, 1).</dt>
-            <dt>The reduce function applies its lambda to the tuple t,   summing all its elements.</dt>
+            <dt>The reduce function applies its lambda to the tuple t, summing all its elements.</dt>
         </dl>
+    </section>
+</section>
 
+
+<section class="main-section-title"><h1>map/filter vs Comprehensions</h1></section>
+<section class="sub-sections"><h2>map/filter vs Comprehensions</h2>
+    <section><h3>Why to use map/filter</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>While list/dictionary/set comprehensions can replace most uses of map and filter, there are still reasons why these functions remain useful:</dt>
+            <dd>Working with multiple iterables: map() can apply a function to elements from multiple sequences in parallel:</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                list(map(lambda x, y: x + y, [1, 2, 3], [4, 5, 6]))  # [5, 7, 9]
+            </code></pre>
+            <dd>Memory efficiency with large data: map() returns an iterator, not a list, so it's lazy-evaluated:</dd>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                # This doesn't build the whole list in memory
+                result = map(process_function, very_large_dataset)
+            </code></pre>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                filtered = filter(lambda x: x > 1000, huge_dataset)  # Iterator, not list
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Why to use Comprehensions</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Readability for simpler operation:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                squares = [x**2 for x in numbers]  # vs. map(lambda x: x**2, numbers)
+            </code></pre>
+            <dt>When you need a list immediately: Comprehensions produce the full result at once</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                squares = [x**2 for x in range(10)]  # Ready to use list
+            </code></pre>
+            <dt>Combining mapping and filtering: Comprehensions handle this elegantly:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                even_squares = [x**2 for x in numbers if x % 2 == 0]
+                # vs
+                even_squares = map(lambda x: x**2, filter(lambda x: x % 2 == 0, numbers))
+            </code></pre>
+        </dl>
     </section>
 </section>
 

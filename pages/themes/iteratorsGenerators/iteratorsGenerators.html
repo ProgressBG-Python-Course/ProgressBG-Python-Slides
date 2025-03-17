@@ -215,10 +215,8 @@
 <section><h2>Generators</h2>
     <section><h3>Overview</h3>
         <dl class="fa">
-            <dt>Generators are a special type of iterator created using functions with the yield statement. </dt>
+            <dt>Generators are a simple and powerful tool for creating iterators.</dt>
             <dt>They provide a concise way to implement iterators without the boilerplate code of the iterator protocol.</dt>
-            <dt>Generators are iterators, meaning they can be used in for loops.</dt>
-            <dt>Example:</dt>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 def number_generator(start, end):
                     current = start
@@ -233,22 +231,10 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3 class="advanced">How a generator function works?</h3>
-        <dl class="fa">
-            <dt>When a generator function is called, it doesn't execute the function body immediately. Instead:</dt>
-            <dd>It returns a generator object</dd>
-            <dd>Each time next() is called on the generator, the function executes until the next yield statement</dd>
-            <dd>The yielded value is returned by next()</dd>
-            <dd>The function's state is saved for the next call</dd>
-            <dd>When the function exits, StopIteration is raised</dd>
-
-
-            <a href="./images/generator_vs_normal_function.png"><img src="./images/generator_vs_normal_function.png" alt="generator_vs_normal_function.png" style="width: 50vw;"></a>
-        </dl>
-    </section>
     <section><h3>Create Generator function</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Creating generator is like creating a normal function, but using <code class="note">yield</code> instead of <code>return</code></dt>
+            <dt>When the generator function is called, it returns a generator object.</dt>
         </dl>
         <pre><code rel="Python" class="python" style="min-height: 60vh;">
             def foo_generator():
@@ -271,6 +257,38 @@
             # 2
             # generator end
         </code></pre>
+    </section>
+    <section><h3>How a generator function works?</h3>
+        <dl class="fa">
+            <dt>When a generator function is called, it doesn't execute the function body immediately. Instead:</dt>
+            <dd>It returns a generator object</dd>
+            <dd>Each time next() is called on the generator, the function executes until the next yield statement</dd>
+            <dd>The yielded value is returned by next()</dd>
+            <dd>The function's state is saved for the next call</dd>
+            <dd>When the function exits, StopIteration is raised</dd>
+            <pre><code rel="Python" class="python" style="min-height: 50vh;">
+                def simple_generator():
+                    print("Start")
+                    yield 1
+                    print("Resume")
+                    yield 2
+                    print("Resume")
+                    yield 3
+                    print("Done")
+
+
+                gen = simple_generator()
+
+                print(next(gen))  # Start -> Yields 1
+                print(next(gen))  # Resumes -> Yields 2
+                print(next(gen))  # Resumes -> Yields 3
+                print(next(gen))  # Raises StopIteration
+            </code></pre>
+        </dl>
+    </section>
+
+    <section><h3>How a generator function works?</h3>
+         <a href="./images/generator_vs_normal_function.png"><img src="./images/generator_vs_normal_function.png" alt="generator_vs_normal_function.png" style="width: 80vw;"></a>
     </section>
     <section><h3>Example: generator for sequence of consecutive integers</h3>
         <dl class="fa" style="min-width:80vw">

@@ -81,18 +81,29 @@
         <dl class="fa">
             <dt>Modules allows to split a long program into several files</dt>
             <dd>for instance - to put function/class definitions in one or more files, and the main program to be written in a separate file.</dd>
-            <dt>Each module creates its own namespace.</dt>
-            <dt>A module is a Python file containing definitions and statements.</dt>
+            <dt>A module in Python is simply a file containing Python definitions and statements. The file name is the module name with the suffix .py added.</dt>
             <dd class="note">Module == Python file</dd>
-
+            <dt>To create a module, you just write Python code in a .py file</dt>
             <pre><code rel="Terminal" class="shell" data-noescape>
                 ├── my_app
                 │   ├── app.py           # the main file
-                │   ├── helper_module.py # a module file
+                │   ├── my_module.py     # a module file
             </code></pre>
+            <pre><code rel="my_module.py" class="python" style="min-height: 1vh;">
+                def greet(name):
+                    return f"Hello, {name}!"
+            </code></pre>
+            <dt>To use this module in another Python script you must import it:</dt>
+            <pre><code rel="app.py" class="python" style="min-height: 1vh;">
+                import my_module
+
+                # Using the function from the module
+                print(my_module.greet("World"))  # Output: Hello, World!
+            </code></pre>
+            <dt>Note that a module creates its own namespace, so we must prefix the imported names with module name</dt>
         </dl>
     </section>
-    <section><h3>Import module: <code class="note">import <em>X</em></code></h3>
+    <section><h3>Import entire module: <code class="note">import <em>X</em></code></h3>
         <dl class="fa">
             <dt>To use a module, you have to import it first.</dt>
             <dt>As a module generates its own namespace, you have to prefix the imported names with the module name:</dt>
@@ -111,13 +122,6 @@
                 user_name = helper_module.get_user_name()
                 helper_module.greet(user_name)
             </code></pre>
-        </dl>
-    </section>
-    <section><h3>Module Execution</h3>
-        <dl class="fa">
-            <dt>A module can contain executable statements as well as names definitions (funciton, classes). Usually the statements are intended to initialize the module.</dt>
-            <dt>Statements in a module are executed only the first time the module name is encountered in an import statement.</dt>
-            <dt>But as a module is just a Python file, we can execute it as a standalone program.</dt>
         </dl>
     </section>
     <section><h3>Module alias: <code class="note">import X as Y</code></h3>
@@ -156,11 +160,28 @@
     </section>
     <section><h3>Where <code>import</code> looks for a module?</h3>
         <dl class="fa">
-            <dt>The directory containing the input script</dt>
-            <dt>the directories specified in the <span class="note">PYTHONPATH</span> environment variable</dt>
-            <dt>The installation-dependent default.</dt>
+            <dt>When you import a module, Python searches for it in:</dt>
+            <dd>The current directory (the directory from which you're running your Python script or starting the Python interpreter.)</dd>
+            <dd>the directories specified in the <span class="note">PYTHONPATH</span> environment variable</dd>
+            <dd>Standard library directories</dd>
+            <dt>You can check the search path:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import sys
+                print(sys.path)
+            </code></pre>
         </dl>
     </section>
+    <section><h3>Module Execution and Caching</h3>
+        <dl class="fa">
+            <dt>When you import a module, Python executes all the code in that module</dt>
+            <dt>Python imports a module only once per interpreter session. Subsequent import statements use the cached module</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import my_module  # Executes the module code
+                import my_module  # Does nothing, uses cached module
+            </code></pre>
+        </dl>
+    </section>
+
 
     <!-- <section><h3>Absolute and Relative Imports</h3>
         <dl>

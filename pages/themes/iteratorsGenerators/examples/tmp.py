@@ -1,22 +1,59 @@
-# def number_generator(start, end):
-#     current = start
-#     while current < end:
-#         yield current
-#         current += 1
+# class WordsFromSentence:
+#     def __init__(self, sentence):
+#         self.words = sentence.split() if sentence else []
+#         self.index = 0
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if self.index >= len(self.words):
+#             raise StopIteration
+
+#         self.index += 1
+#         return self.words[self.index - 1]
 
 
-# for num in number_generator(1, 5):
-#     print(num, end=",")
+# def words_generator(sentence):
+#     words = sentence.split() if sentence else []
+#     for word in words:
+#         yield word
 
 
-def fibonacci_generator(n):
-    a = 0
-    b = 1
+# for w in WordsFromSentence("this is a test"):
+#     print(w)
 
-    for _ in range(n):
-        yield a
-        a, b = b, a + b
+# for w in words_generator("this is a test"):
+#     print(w)
 
 
-for number in fibonacci_generator(10):
-    print(number, end="")
+# def simple_generator():
+#     print("Start")
+#     yield 1
+#     print("Resume")
+#     yield 2
+#     print("Resume")
+#     yield 3
+#     print("Done")
+
+
+# gen = simple_generator()
+
+# print(next(gen))  # Start -> Yields 1
+# print(next(gen))  # Resumes -> Yields 2
+# print(next(gen))  # Resumes -> Yields 3
+# print(next(gen))  # Raises StopIteration
+
+
+def foo_generator():
+    print("generator start")
+
+    # yield is almost like return, but it freezes the execution
+    yield 1
+    yield 2
+
+    print("generator end")
+
+
+foo_gen = foo_generator()
+print(foo_gen)
