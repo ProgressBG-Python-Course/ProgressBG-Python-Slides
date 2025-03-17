@@ -117,8 +117,25 @@
     </section> -->
     <section><h3>PEP8: Style Guide for Python Code</h3>
         <dl class="fa">
-            <dt>PEP8 is the de facto coding style guide for Python.</dt>
-            <dt><a href="https://www.python.org/dev/peps/pep-0008/">PEP 8 @python.org</a></dt>
+            <dt><a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> is the de facto coding style guide for Python.</dt>
+            <dd>PEP = Python Enhancement Proposal</dd>
+            <dt>It provides guidelines for writing clean, readable, and consistent Python code. Key points include:</dt>
+            <dd><b>Indentation</b>: Use 4 spaces per indentation level.</dd>
+            <dd><b>Maximum Line Length</b>: 79 characters for code, 72 for comments.</dd>
+            <dd><b>Blank Lines</b>: Separate functions and classes with two blank lines.</dd>
+            <dd><b>Imports</b>: Place imports at the top, grouped as standard library, third-party, and local.</dd>
+            <dd><b>Whitespace</b>: Avoid unnecessary spaces inside parentheses, brackets, and braces.</dd>
+            <dd><b>Naming Conventions</b>:<br>
+                <ul style="list-style-type: none; margin-left: 2em;">
+                    <li><i>Variables & functions</i>: lower_case_with_underscores</li>
+                    <li><i>Classes</i>: CapWords</li>
+                    <li><i>Constants</i>: UPPER_CASE_WITH_UNDERSCORES</li>
+                </ul><br>
+            </dd>
+            <dd><b>Comments</b>: Keep them meaningful and concise.</dd>
+            <dd><b>Docstrings</b>: Use triple quotes for module, class, and function documentation.</dd>
+            <dd><b>Boolean Comparisons</b>: Use <code>if x is None</code> instead of <code>if x == None</code>.</dd>
+            <dd><b>Exception Handling</b>: Use <code>try-except</code> with specific exceptions.</dd>
         </dl>
     </section>
     <section><h3>Indentation</h3>
@@ -245,9 +262,9 @@
         <dl class="fa" style="min-width:80vw">
             <dt>Regularly Lint Your Code</dt>
             <dd>Make linting a regular part of your development process to catch issues early and often.</dd>
-            <dt>Integrate Linting into Your Development Workflow (CI/CD Pipeline)</dt>
             <dt>Use Linting as a Learning Tool</dt>
             <dd>Especially for new developers, linting can be an excellent way to learn best practices and coding standards in Python.</dd>
+            <dt>Integrate Linting into Your Development Workflow (CI/CD Pipeline)</dt>
         </dl>
     </section>
 </section>
@@ -299,6 +316,11 @@
         </dl>
     </section>
 </section>
+<section><h2>Resources</h2>
+    <section><h3>Video: Python Linting in VS Code</h3>
+        <iframe width="1218" height="685" src="https://www.youtube.com/embed/dF1wWo2aJCo" title="Python Linting in VS Code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+</section>
 
 
 <section><h1>Document your code</h1></section>
@@ -348,7 +370,7 @@
             <dt>A CHANGELOG file (or section in README) should present a short overview of the changes in the code base for the latest versions.</dt>
         </dl>
     </section>
-    <section><h3>Python documentation tools</h3>
+    <section><h3 class="advanced">Python documentation tools</h3>
         <dl class="fa">
             <dt><a href="http://www.sphinx-doc.org/en/master/">Sphinx</a> - <span>is a tool that makes it easy to create intelligent and beautiful documentation</span></dt>
             <dt>Sphinx is well integrated with <a href="http://docs.readthedocs.io/en/latest/index.html">Read The Docs</a> - free documentation hosting for the open source community</dt>

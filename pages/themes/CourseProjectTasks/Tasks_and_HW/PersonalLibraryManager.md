@@ -82,12 +82,32 @@ Develop a Personal Library Management application that allows users to organize 
 - Create Requirements.txt file for listing all dependencies
 - Create README.md with installation and usage instructions
 
-## Evaluation Criteria
+### Timeline
+
+- Submission deadline: *3 weeks after course completion*
+
+## Evaluation Criteria and Grading
 
 - Functionality (60%): Does the application work as described? Are all required features implemented?
 - Code Quality (30%): Is the code well-structured, readable, and maintainable?
-- Documentation (10%): Is the code well-documented? Is the project report clear and comprehensive?
+- Documentation (10%): Is the code well-documented? Is the README clear and comprehensive?
 
-## Timeline
+### Grading Formula (2-6 Scale)
 
-- Submission deadline: 3 weeks after course completion
+The final grade will be calculated using this formula:
+
+**Grade = 2 + 4 × (Weighted Score ÷ 100)**
+
+Where:
+
+- Weighted Score = (Functionality × 0.6) + (Code Quality × 0.3) + (Documentation × 0.1)
+- Each component is evaluated on a scale of 0-100%
+- Final grade is rounded to the nearest 0.5
+
+Example calculation:
+
+- Functionality: 80% × 0.6 = 48%
+- Code Quality: 70% × 0.3 = 21%
+- Documentation: 90% × 0.1 = 9%
+- Weighted Score: 48% + 21% + 9% = 78%
+- Grade = 2 + 4 × (78 ÷ 100) = 2 + 3.12 = 5.12 = 5.0 (Very Good)
