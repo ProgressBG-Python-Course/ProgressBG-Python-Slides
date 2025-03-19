@@ -199,124 +199,148 @@
 </section>
 
 
-<section class="main-section-title" id="introduction-to-linting"><h1>Code Productivity: Linting and Formating</h1></section>
-<section class="sub-sections"><h2>Overview of Linting</h2>
-    <section><h3>What and Why?</h3>
+<section class="main-section-title" id="LintingAndFormating"><h1>Code Productivity: Linting and Formatting</h1></section>
+<section class="sub-sections"><h2>Code Productivity: Linting and Formatting</h2>
+    <section><h3>The Problem: Code Quality at Scale</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>Linting is the process of running a program that will analyse code for potential errors and bad practices.</dt>
-            <dt><b>Code Quality and Maintenance</b>: Linting helps in keeping the code quality high and makes maintenance easier by ensuring consistency and adherence to coding standards.</dt>
-            <dt><b>Early Bug Detection</b>: It assists in identifying potential errors and bugs at an early stage, saving time and resources in the development cycle.</dt>
-            <dt><b>Improved Readability</b>: Enforcing a consistent coding style improves readability and understanding of the code, which is particularly beneficial in team environments.</dt>
-            <dt>The most popular linting tools for Python are Pylint and Flake8. </dt>
-            <dt>Pylint: A highly configurable tool that checks for errors, enforces a coding standard, and looks for code smells. It can also be customized with plugins.</dt>
-            <dt>Flake8: A wrapper around PyFlakes, pycodestyle, and Ned Batchelder’s McCabe script, offering an easy way to check your code against coding style (PEP 8), programming errors, and complexity.</dt>
+            <dt>As Python projects grow in size and complexity, maintaining consistent code quality becomes increasingly challenging. Developers face several issues:</dt>
+            <dd>Inconsistent code style across team members</dd>
+            <dd>Hard-to-catch bugs and anti-patterns</dd>
+            <dd>Time wasted on manual code reviews for style issues</dd>
+            <dd>Difficulty onboarding new team members to coding standards</dd>
+            <dt>That's why Python Developers use linters and formatters. These tools not only help maintain code quality but also significantly improve developer productivity and collaboration</dt>
+        </dl>
+    </section>
+    <section><h3>Linting: Your First Line of Defense</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Linting is the process of analyzing code to detect potential errors, bugs, stylistic issues, and suspicious constructs without actually executing the code.</dt>
+            <dt>Benefits of Linting:</dt>
+            <dd>Early detection of bugs and potential issues</dd>
+            <dd>Enforcement of coding standards</dd>
+            <dd>Reduction in technical debt</dd>
+            <dd>Improvement in code readability and maintainability</dd>
+            <dd>Educational tool for developers to learn best practices</dd>
+            <dt>Traditional Python linters are <a href="https://github.com/pylint-dev/pylint">Pylint</a> and <a href="https://github.com/PyCQA/flake8">Flake8</a></dt>
+        </dl>
+    </section>
+    <section><h3>Formatting: Consistency Without Debate</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Code formatting is the automatic restructuring of code layout to meet a consistent style, without changing its functionality.</dt>
+            <dt>Benefits of Formatting:</dt>
+            <dd>Eliminates style debates in code reviews</dd>
+            <dd>Creates consistent codebase appearance</dd>
+            <dd>Reduces cognitive load when reading code</dd>
+            <dd>Saves time previously spent on manual formatting</dd>
+            <dt>Traditional Python formatters are <a href="https://github.com/psf/black">Black</a> and <a href="https://github.com/google/yapf">YAPF</a></dt>
+        </dl>
+    </section>
+</section>
+<section><h2>The Modern Approach: Ruff</h2>
+    <section><h3>What is Ruff?</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt><a href="https://github.com/astral-sh/ruff">Ruff</a> is an extremely fast Python <span class="note">linter and formatter</span>, written in Rust, that has been gaining significant adoption since its first stable release in 2024.</dt>
+            <dt>Key features of ruff: </dt>
+            <dd>Combines linting and formatting in one tool</dd>
+            <dd>10-100x faster than traditional Python linters</dd>
+            <dd>Compatible with Pylint, Flake8, and Black rules</dd>
+            <dd>Provides automatic fixes for many issues</dd>
+            <dd>Highly configurable through simple configuration files</dd>
+        </dl>
+    </section>
+    <section><h3>Setup Ruff</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>VSCode Extension Method (Recommended for VSCode-only use):</dt>
+            <dd>Install the <a href="https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff">Ruff Extension</a>.</dd>
+            <dd>This extension will handle the installation of Ruff itself and provide integration with VSCode</dd>
+            <dt>Pip Installation Method (CLI)</dt>
+            <dd>Install Ruff with pip install ruff</dd>
+            <dd>Then install the Ruff VSCode extension to connect the two</dd>
+            <dd>Installing via pip as well gives you more flexibility if you ever need to use Ruff from the command line or in scripts:</dd>
+            <pre><code rel="Terminal" class="bash">
+                # Install Ruff
+                pip install ruff
 
-        </dl>
-    </section>
-</section>
-<section class="sub-sections"><h2>Setting Up Pylint</h2>
-    <section><h3>Pylint: Installation</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Install Pylint (Optional if you intend to use it only with VSCode which has extension for it)</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                pip install pylint
-            </code></pre>
-            <dt>Running the Linter</dt>
-            <dd>Once installed, you can run Pylint on a Python file or project like so:</dd>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                pylint myfile.py
-                pylint myproject/
-            </code></pre>
-            <dt>Enabling Pylint in VSCode</dt>
-            <dd>Install the official "Pylint" extension by Microsoft.</dt>
-            <dd>You can customize Pylint's behavior by creating a <code>.pylintrc</code> file in your project's root directory. This file allows you to enable or disable checks, set preferred coding standards, and more.</dd>
-            <dd>Reference: <a href="https://code.visualstudio.com/docs/python/linting">Linting Python in Visual Studio Code</a></dd>
-        </dl>
-    </section>
-</section>
-<section class="sub-sections"><h2>Example: A Simple Linted Python Script</h2>
-    <section><h3>Improving Code with Linting Feedback</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>The following code snippet demonstrates common issues detected by linters:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                def testFunction():
-                  a=1
-                  b=2
-                  print(a)
-                  print(b
-            </code></pre>
-            <dt>After running Pylint the script is improved as follows:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                def test_function():
-                    a = 1
-                    b = 2
-                    print(a)
-                    print(b)
-            </code></pre>
-            <dd>This corrected script follows PEP 8 style guidelines, such as using snake_case for function names, adding spaces around the equals sign, and ensuring parentheses are properly closed.</dd>
-        </dl>
-    </section>
-</section>
-<section class="sub-sections"><h2>Best Practices for Linting</h2>
-    <section><h3>Effective Linting Strategies</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Regularly Lint Your Code</dt>
-            <dd>Make linting a regular part of your development process to catch issues early and often.</dd>
-            <dt>Use Linting as a Learning Tool</dt>
-            <dd>Especially for new developers, linting can be an excellent way to learn best practices and coding standards in Python.</dd>
-            <dt>Integrate Linting into Your Development Workflow (CI/CD Pipeline)</dt>
-        </dl>
-    </section>
-</section>
-<section class="sub-sections"><h2>Automating Code Formatting with Black</h2>
-    <section><h3>Introduction</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>What is black?</dt>
-            <dd>Black is a <b>highly opinionated</b> code formatter for Python that formats code in a uniform way.</dd>
-            <dd> It adheres closely to PEP 8 standards, with some additional rules to ensure code readability and reduce bikeshedding over formatting styles in collaborative projects.</dd>
-            <dt>Install Black in your dev environment (Optional if you intend to use it only with VSCode which has extension for it)</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                pip install black
-            </code></pre>
-            <dt>Or install the VSCode extension "Black Formatter" by Microsoft</dt>
-            <dt>Reference: <a href="https://code.visualstudio.com/docs/python/formatting">Formatting Python in VS Code</a></dt>
+                # Run linting
+                ruff check .
 
+                # Run linting with automatic fixes
+                ruff check --fix .
+
+                # Format code
+                ruff format .
+            </code></pre>
         </dl>
     </section>
-    <section><h3>Using Black with VSCode</h3>
+    <section><h3>Configure Ruff</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>Set black as default formatter</dt>
-            <dd>you can set it as the default formatter for all Python files by setting "editor.defaultFormatter" in your User settings.json file, under a [python] scope.</dd>
-            <pre><code rel="User settings.json" class="bash">
-                "[python]": {
-                  "editor.defaultFormatter": "ms-python.black-formatter"
+            <dt>Create a <code>pyproject.toml</code> file in your project root.</dt>
+            <pre><code rel="Terminal" class="bash" style="min-height: 70vh;">
+                [tool.ruff]
+                # Enable flake8-bugbear rules
+                select = ["E", "F", "B"]
+
+                # Line length
+                line-length = 88
+
+                # Enable auto-fixing
+                fixable = ["ALL"]
+
+                # Ignore specific rules
+                ignore = []
+
+                # Exclude files and directories
+                exclude = [
+                    ".git",
+                    ".mypy_cache",
+                    ".ruff_cache",
+                    "venv",
+                    "__pycache__",
+                ]
+
+                [tool.ruff.format]
+                # Use double quotes for strings
+                quote-style = "double"
+                # Use spaces for indentation
+                indent-style = "space"
+                # Enable naming convention rules
+                select = ["N"]
+            </code></pre>
+            <dt>Reference: <a href="https://docs.astral.sh/ruff/configuration/">Configuring Ruff</a></dt>
+        </dl>
+    </section>
+    <section><h3>Configure VSCode Settings</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>You can configure Ruff to format Python code on-save by enabling the editor.formatOnSave action in settings.json, and setting Ruff as your default formatter:</dt>
+            <pre><code rel="settings.json" class="json">
+                {
+                  "[python]": {
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "charliermarsh.ruff"
+                  }
                 }
             </code></pre>
-            <dt>Format your code</dt>
-            <dd>You can format your code by right-clicking on the editor and selecting Format Document, or by using the <kbd>Ctrl+Shift+I</kbd> keyboard shortcut.</dd>
-            <dd>You can also add the following setting to your User settings.json file to enable formatting on save for your code:</dd>
-            <pre><code rel="Terminal" class="bash">
-                "[python]": {
-                    "editor.formatOnSave": true
-                  }
+
+
+            <dt>You can configure Ruff to fix lint violations on-save by enabling the source.fixAll action in settings.json:</dt>
+            <pre><code rel="settings.json" class="json">
+                {
+                    "[python]": {
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll": "explicit"
+                    }
+                    }
+                }
             </code></pre>
         </dl>
     </section>
-    <section><h3>Pylint vs. Black: Which One should I Use?</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>While both Pylint and Black are valuable tools for Python development, they serve distinct purposes:</dt>
-            <dt>Pylint:</dt>
-            <dd>Focuses on code analysis and linting, identifying potential errors, stylistic inconsistencies, and best practice violations.</dd>
-            <dd>Offers detailed reports and suggestions for improvement.</dd>
-            <dd>Highly customizable to various style guides and project needs.</dd>
-            <dt>Black:</dt>
-            <dd>Focuses on automatic code formatting according to a specific style guide (PEP 8 by default).</dd>
-            <dd>Enforces consistent formatting for improved readability and reduced style-related conflicts.</dd>
-            <dd>Offers limited customization options.</dd>
-        </dl>
-    </section>
+
 </section>
+
+
 <section><h2>Resources</h2>
+    <section><h3>Video: ruff - ultra-fast Python Linting & Formatting | Django example</h3>
+        <iframe width="1164" height="480" src="https://www.youtube.com/embed/yLYaQq6KbKs" title="ruff - ultra-fast Python Linting &amp; Formatting | Django example" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
     <section><h3>Video: Python Linting in VS Code</h3>
         <iframe width="1218" height="685" src="https://www.youtube.com/embed/dF1wWo2aJCo" title="Python Linting in VS Code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </section>

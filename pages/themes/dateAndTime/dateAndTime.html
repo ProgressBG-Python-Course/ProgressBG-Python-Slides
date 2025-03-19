@@ -99,11 +99,8 @@
 
 <section data-min="50" class="main-section-title"><h1>Datetime module - Overview</h1></section>
 <section class="sub-sections"><h2>Datetime module - Overview</h2>
-    <dl class="fa" style="font-size:.8em">
+    <dl class="fa" style="font-size:1em">
         <dt>The built-in <a href="https://docs.python.org/3/library/datetime.html">datetime module</a> supplies classes for manipulating dates and times in both simple and complex ways.</dt>
-
-
-
         <dt>class <span class="note">datetime.date</span></dt>
         <dd>An idealized naive date, assuming the current Gregorian calendar always was, and always will be, in effect. </dd>
         <dd>Attributes: year, month, and day.</dd>
@@ -149,26 +146,19 @@
     <section>
         <dl class="fa">
             <dt>The datetime module provides various attributes to access individual components of a date and time, such as year, month, day, hour, minute, second, and microsecond.</dt>
-            <pre><code rel="Python" class="python" style="min-height: 60vh;">
+            <pre><code rel="Python" class="python" style="min-height: 40vh;">
                 from datetime import datetime
 
                 now = datetime.now()
 
-                year = now.year
-                month = now.month
-                day = now.day
-                hour = now.hour
-                minute = now.minute
-                second = now.second
-                microsecond = now.microsecond
+                print("Year:", now.year)
+                print("Month:", now.month)
+                print("Day:", now.day)
+                print("Hour:", now.hour)
+                print("Minute:", now.minute)
+                print("Second:", now.second)
+                print("Microsecond:", now.microsecond)
 
-                print("Year:", year)
-                print("Month:", month)
-                print("Day:", day)
-                print("Hour:", hour)
-                print("Minute:", minute)
-                print("Second:", second)
-                print("Microsecond:", microsecond)
             </code></pre>
         </dl>
     </section>
@@ -205,16 +195,17 @@
             <pre><code rel="Python" class="python" style="min-height: 40vh;">
                 from datetime import datetime
 
-                user_birthdate_str='30.12.2000'
-                user_birthdate=datetime.strptime(user_birthdate_str,"%d.%m.%Y")
+                user_birthdate_str = "03.04.2000"
+                user_birthdate = datetime.strptime(user_birthdate_str, "%m.%d.%Y")
 
-                print(f'user birth year: {user_birthdate.year}')
-                print(f'user birth month: {user_birthdate.month}')
-                print(f'user birth day: {user_birthdate.day}')
+                print(f"user birth year: {user_birthdate.year}")
+                print(f"user birth month: {user_birthdate.month}")
+                print(f"user birth day: {user_birthdate.day}")
 
-                #user birth year: 2000
-                #user birth month: 12
-                #user birth day: 30
+                # user birth year: 2000
+                # user birth month: 3
+                # user birth day: 4
+
             </code></pre>
         </dl>
     </section>
@@ -429,7 +420,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3 class="advanced">Converting Between Timezones</h3>
+    <section><h3>Converting Between Timezones</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Converting Between Timezones</dt>
             <dd>Converting datetime objects from one timezone to another is easily done with the astimezone method.</dd>
