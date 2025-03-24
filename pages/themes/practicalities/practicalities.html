@@ -271,41 +271,59 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Configure Ruff</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Create a <code>pyproject.toml</code> file in your project root.</dt>
+    <section><h3 class="advanced">Configure Ruff</h3>
+        <dl class="fa">
+            <dt>Ruff works well out-of-the-box with sensible defaults, but you can configure it to suit your project's specific needs.</dt>
+            <dt>Ruff's configuration lives in a <code>pyproject.toml</code> file, which must be in your project root folder.</dt>
+            <dt>Example of Ruff's configuration:</dt>
             <pre><code rel="Terminal" class="bash" style="min-height: 70vh;">
                 [tool.ruff]
-                # Enable flake8-bugbear rules
-                select = ["E", "F", "B"]
+                # Set the maximum allowed line length to 80 characters
+                line-length = 80
 
-                # Line length
-                line-length = 88
+                # Select which rules to enable
+                # "ALL" enables every single rule that Ruff supports
+                select = [
+                    "ALL",
+                ]
 
-                # Enable auto-fixing
-                fixable = ["ALL"]
+                # Specify which rules to ignore
+                ignore = [
+                    "D100",   # Ignore missing module docstrings (top-level docstrings in files)
+                    "T201",   # Ignore warnings about print statements (useful for debugging/learning)
+                ]
 
-                # Ignore specific rules
-                ignore = []
-
-                # Exclude files and directories
+                # Exclude files and directories from being checked
+                # These are typically system directories or generated code
                 exclude = [
                     ".git",
                     ".mypy_cache",
                     ".ruff_cache",
                     "venv",
+                    ".venv",
                     "__pycache__",
                 ]
 
+                # Configuration for the linting component of Ruff
+                [tool.ruff.lint]
+                # Allow Ruff to automatically fix all fixable violations
+                # This makes it easy to clean up code with a single command
+                fixable = ["ALL"]
+
+                # Configuration for the formatting component of Ruff
                 [tool.ruff.format]
-                # Use double quotes for strings
+                # Use double quotes for strings (similar to Black's default style)
                 quote-style = "double"
-                # Use spaces for indentation
-                indent-style = "space"
-                # Enable naming convention rules
-                select = ["N"]
             </code></pre>
             <dt>Reference: <a href="https://docs.astral.sh/ruff/configuration/">Configuring Ruff</a></dt>
+        </dl>
+    </section>
+    <section><h3 class="advanced">TOML syntax</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>TOML (Tom's Obvious, Minimal Language) is a configuration file format designed to be easy to read and write. Created as an alternative to formats like JSON, YAML, and INI.</dt>
+            <dt>TOML syntax isn't natively recognized by VSCode as a language, meaning that you might not get syntax highlighting and other language-specific features out of the box.</dt>
+            <dt>To enable TOML support, install the <a href="https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml">Even Better TOML</a> extension from the VSCode marketplace.</dt>
+            <dt>This extension provides syntax highlighting, formatting, and other TOML-specific features.</dt>
         </dl>
     </section>
     <section><h3>Configure VSCode Settings</h3>
@@ -320,7 +338,6 @@
                 }
             </code></pre>
 
-
             <dt>You can configure Ruff to fix lint violations on-save by enabling the source.fixAll action in settings.json:</dt>
             <pre><code rel="settings.json" class="json">
                 {
@@ -333,7 +350,6 @@
             </code></pre>
         </dl>
     </section>
-
 </section>
 
 

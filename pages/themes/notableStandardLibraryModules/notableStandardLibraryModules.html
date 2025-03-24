@@ -50,7 +50,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Notable Standard Library Modules</h1></section>
+<section><h1>Notable Standard Library Modules - the sys Module</h1></section>
 <section data-transition="zoom">
     <!-- linkedin badge -->
     <!--<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>-->
@@ -204,16 +204,15 @@
             from functools import reduce
 
             x = 1000
-            l = [1,2,3,4,5,6,7,8,9,10]
+            l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
             int_object_memory = sys.getsizeof(x)
             list_object_memory = sys.getsizeof(l)
-            list_elements_memory = reduce( lambda a,el: a+sys.getsizeof(el), l, 0)
+            list_elements_memory = sum(sys.getsizeof(el) for el in l)
 
-            print(int_object_memory)    # 28
-            print(list_object_memory)   # 136
-            print(list_elements_memory) # 280
-
+            print(int_object_memory)  # 28
+            print(list_object_memory)  # 136
+            print(list_elements_memory)  # 280
         </code></pre>
     </section>
     <section><h3>Terminate the script</h3>
@@ -352,99 +351,6 @@
             </code></pre>
             <dt>argparse handles positional arguments (here, <code>message</code>) that are required, and optional arguments (here, <code>--repeat</code>) that the user can specify to alter the script's behavior.</dt>
             <dt>The argparse module automatically generates help and usage messages and issues errors when users give the program invalid arguments.</dt>
-        </dl>
-    </section>
-</section>
-
-<section class="main-section-title" id="typing-in-python"><h1>Typing in Python</h1></section>
-<section class="sub-sections"><h2>Introduction to Type Hints</h2>
-    <section><h3>The Evolution of Typing in Python</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Python is a dynamically typed language, which means that the type of a variable is
-            determined at runtime.</dt>
-            <dt>However, Python 3.5 introduced optional type hints, allowing developers to statically indicate the types of variables, function parameters, and return types.</dt>
-            <dt>This addition aids in code clarity and type checking with tools like Mypy and VSCode.</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh; min-width: 80vw;">
-                # Example without type hints
-                def add(a, b):
-                    return a + b
-
-                # Example with type hints
-                def add(a: int, b: int) -> int:
-                    return a + b
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>Basic Type Hints</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Type hints are annotations that specify the expected type of variables and function
-            returns.</dt>
-            <dt>They are purely for documentation and tools, and do not affect the Python runtime behavior.</dt>
-            <dt>They enhance code readability and can be used by static type checkers.</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh; min-width: 80vw;">
-                # Specifying variable types
-                age: int = 25
-                name: str = "Alice"
-
-                # Function annotations
-                def greet(name: str) -> str:
-                    return f"Hello, {name}"
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>Complex Types</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Lists, Dictionaries, and More</dt>
-            <dd>Python's `typing` module extends type hints to more complex data structures like
-            lists, dictionaries, and custom types. This allows for detailed type specifications,
-            improving the robustness of type checking.</dd>
-            <pre><code rel="Python" class="python" style="min-height: 10vh; min-width: 80vw;">
-                from typing import List, Dict, Tuple, Optional
-
-                # Complex type annotations
-                numbers: List[int] = [1, 2, 3]
-                user_data: Dict[str, str] = {'name': 'John', 'age': '22'}
-                coordinates: Tuple[int, int, int] = (10, 20, 30)
-                nickname: Optional[str] = None
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3 class="advanced">Custom Types</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Defining and Using Custom Types</dt>
-            <dd>For more complex data structures or specific use cases, custom types (also known as
-            type aliases) can be defined. These are especially useful for readability and when
-            working with complex nested types.</dd>
-            <pre><code rel="Python" class="python" style="min-height: 10vh; min-width: 80vw;">
-                from typing import Union, Callable
-
-                # Custom type using Union
-                Number = Union[int, float]
-
-                # Using custom types in annotations
-                def multiply(number: Number, factor: Number) -> Number:
-                    return number * factor
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>Static Type Checking in VSCode</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>Visual Studio Code (VSCode) supports Python type hints directly through extensions like Python and Pylance.</dt>
-            <dt>These extensions provide real-time feedback, highlighting type mismatches and potential errors as you code.</dt>
-            <dt>Configuring VSCode to use these extensions enhances productivity and code quality by leveraging static type checking.</dt>
-            <dt>If you have installed the Python and Pylance extensions, type checking is enabled by default.</dt>
-            <dd>If it did not work - check in settings if <code>"python.languageServer"</code> is set to Pylance.</dd>
-            <dd>Optionally, enable "python.analysis.typeCheckingMode" to "basic" or "strict".</dd>
-            <pre><code rel="Python" class="python" style="min-height: 10vh; min-width: 80vw;">
-
-
-
-                # Example VSCode will highlight as incorrect
-                def greet(name: str) -> str:
-                    return f"Hello, {name}"
-
-                greet(23) # Type error highlighted by Pylance
-            </code></pre>
         </dl>
     </section>
 </section>
