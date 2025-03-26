@@ -91,7 +91,7 @@
     </section>
 </section>
 
-<section class="main-section-title" id="debugging_python_applications"><h1>Debugging with print and logging</h1></section>
+<section class="main-section-title" id="DebugWithPrint"><h1>Debugging with Print Statements</h1></section>
 <section class="sub-sections"><h2>Debugging with Print Statements</h2>
     <section id="using_print_statements">
         <dl class="fa">
@@ -126,11 +126,13 @@
         </dl>
     </section>
 </section>
-<section class="sub-sections"><h2>Debugging with Logging module</h2>
+
+<section class="main-section-title" id="DebugWithLogger"><h1>The Logging Module</h1></section>
+<section class="sub-sections"><h2 class="advanced">The Logging Module</h2>
     <section id="using_logging_module"><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>The logging module provides a flexible framework for logging messages from Python applications.</dt>
-            <dt>While print statements and debugger tools like pdb are helpful for inspecting code execution during development, logging offers a more systematic and flexible approach to tracking the flow of execution, identifying errors, and monitoring the behavior of an application in production environments. Here's why logging is beneficial for debugging:</dt>
+            <dt>While print statements and debugger tools  are helpful for inspecting code execution during development, logging offers a more systematic and flexible approach to tracking the flow of execution, identifying errors, and monitoring the behavior of an application in production environments. Here's why logging is beneficial for debugging:</dt>
             <dd><b>Persistent Output</b>: Unlike print statements, which output information to the console during runtime, logging allows you to store messages in files or other destinations, providing a persistent record of the application's behavior. This is particularly useful for debugging issues that occur intermittently or in production environments where real-time monitoring is necessary.</dd>
             <dd><b>Multiple Log</b> Levels: The logging module in Python supports different log levels (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL), allowing you to categorize messages based on their severity. This enables developers to focus on relevant information during debugging while filtering out less important details.</dd>
             <dd><b>Configuration Options</b>: Python's logging module provides extensive configuration options, allowing you to customize log formatting, output destinations (e.g., files, streams, sockets), and filtering mechanisms. This flexibility makes it easy to adapt logging to different debugging scenarios and environments.</dd>
@@ -195,8 +197,6 @@
             </code></pre>
         </dl>
     </section>
-</section>
-<section class="sub-sections"><h2>Logging Levels and their Hierarchy</h2>
     <section id="logging_levels"><h3>Logging Levels</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>DEBUG</dt>
@@ -242,8 +242,6 @@
             </code></pre>
         </dl>
     </section>
-</section>
-<section class="sub-sections"><h2>Logging Format</h2>
     <section id="logging_format_definition">
         <dl class="fa" style="min-width:80vw">
             <dt>The Logging Format controls the structure and style of log messages, including timestamp, log level, and message content.</dt>
@@ -251,7 +249,7 @@
             <dt>Typical elements include timestamp, log level, module name, function name, and message content.</dt>
 
             <dt>Example - set up logging with a custom format:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+            <pre><code rel="Python" class="python" style="min-height: 65vh;">
                 import logging
 
                 # Configure logging with custom format
@@ -263,12 +261,18 @@
                 logging.warning("Warning message")
                 logging.error("Error message")
                 logging.critical("Critical message")
+
+
+                # 2025-03-26 12:19:48,626 - DEBUG - Debug message
+                # 2025-03-26 12:19:48,626 - INFO - Info message
+                # 2025-03-26 12:19:48,626 - WARNING - Warning message
+                # 2025-03-26 12:19:48,627 - ERROR - Error message
+                # 2025-03-26 12:19:48,627 - CRITICAL - Critical message
+
             </code></pre>
         </dl>
     </section>
-</section>
-<section class="sub-sections"><h2>Modular Logging</h2>
-    <section id="modular_logging_definition">
+    <!-- <section id="modular_logging_definition"><h3 class="advanced">Modular Logging</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Modular logging is a logging approach where each module uses its own logger object to emit log messages.</dt>
             <dt>In large applications, different modules may need independent logging behavior, such as setting different logging levels, formatting, and output destinations.  </dt>
@@ -299,7 +303,7 @@
                 logger.critical('Critical message')
             </code></pre>
         </dl>
-    </section>
+    </section> -->
 </section>
 
 
@@ -360,7 +364,7 @@
     </section>
 </section>
 
-<section><h1 class="advanced">pdb - The Python Debugger</h1></section>
+<!-- <section><h1 class="advanced">pdb - The Python Debugger</h1></section>
 <section><h2 class="advanced">pdb - The Python Debugger</h2>
     <section id="using_debugger"><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
@@ -384,12 +388,12 @@
             </code></pre>
         </dl>
     </section>
-</section>
+</section> -->
 
 
 
-<section class="main-section-title" id="unittest_debugging"><h1>Debugging Best Practices</h1></section>
-<section class="sub-sections"><h2>Writing Unit Tests</h2>
+<!-- <section class="main-section-title" id="unittest_debugging"><h1 class="advanced">Writing Unit Tests</h1></section>
+<section class="sub-sections"><h2 class="advanced">Writing Unit Tests</h2>
     <section id="unittest_intro"><h3>What is Unit Testing?</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Definition</dt>
@@ -402,7 +406,7 @@
             <dd>In Python, the unittest module provides a framework for writing and running unit tests.</dd>
         </dl>
     </section>
-    <section id="writing_unittests"><h3>Writing Unit Tests in Pyhton</h3>
+    <section id="writing_unittests"><h3>Writing Unit Tests in Python</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>TestCase Class</dt>
             <dd>Test cases are defined by subclassing unittest.TestCase.</dd>
@@ -448,7 +452,6 @@
             <dt>Example</dt>
             <dd>Suppose we have a Python module named `test_example.py` containing unit test classes and methods:</dd>
 
-            <!-- -------------- Optional code block for programming code --------------- -->
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 import unittest
 
@@ -468,8 +471,8 @@
             <dd>Most IDEs, such as Visual Studio Code, provide built-in support for running and debugging unit tests.</dd>
         </dl>
     </section>
-</section>
-<section class="sub-sections"><h2>Using Version Control (git)</h2>
+</section> -->
+<!-- <section class="sub-sections"><h2>Using Version Control (git)</h2>
     <section><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Version control systems like Git enable tracking changes, facilitating collaboration and error recovery.</dt>
@@ -502,7 +505,7 @@
             </code></pre>
         </dl>
     </section>
-</section>
+</section> -->
 
 
 

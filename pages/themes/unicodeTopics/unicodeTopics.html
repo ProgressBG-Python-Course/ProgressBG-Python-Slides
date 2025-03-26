@@ -128,10 +128,10 @@
         <dl class="fa">
             <dt>Unicode encompasses virtually all characters used widely in computers today.</dt>
             <dt>As of Unicode version 15.1, there are 149,878 characters with code points, covering 161 modern and historical scripts, as well as multiple symbol sets.</dt>
-            <dt>Even <a href="https://en.wikipedia.org/wiki/Emoji#Unicode_blocks">Emoji</a>!</dt>
+            <dt>Even <a href="https://unicode.org/emoji/charts/full-emoji-list.html">Emojis</a> 😂 !</dt>
             <dt>Reference: <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">List of Unicode characters</a> @wikipedia</dt>
         </dl>
-        <div style="position: relative; top:-3em; left: 9em;">
+        <div style="position: relative; top:3em; left: -3em;">
 			<div style="font-size: 7em;letter-spacing:0em; color: #E2C7C7; position: absolute; top:-0.4em; left:0; right: 0;"><span>☕</span></div>
 			<div style="font-size: 3em;letter-spacing:3em; color: #C7C7E2; position:absolute; ">
 				<span style="position:absolute; top:1em;left: 3em; bottom: 0;">a</span>
@@ -200,8 +200,16 @@
 </section>
 
 <section><h1>Encode-Decode</h1></section>
-<section id="encode-decode-flow"><h2>Encode-Decode Flow</h2>
-    <section>
+<section><h2>Encode-Decode</h2>
+    <section><h3>Overview</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Encoding and Decoding refer to the process of converting data between different formats, typically from text to byte representations and vice versa.</dt>
+            <dt>This is important when handling data for various applications, such as reading and writing files or network transmission where data must be in byte format</dt>
+            <dt>Encoding is the process of converting a string (text) into a specific byte format using a certain character encoding, like UTF-8 or ASCII.</dt>
+            <dt>Decoding is the reverse process of encoding, where a byte object is converted back into a string using the same encoding format</dt>
+        </dl>
+    </section>
+    <section id="encode-decode-flow"><h3>Encode-Decode Flow</h3>
         <a href="images/Python_encode_decode.png"><img src="images/Python_encode_decode.png"></a>
         <dl class="fa">
             <dt>In byte streams, we have <b>only bytes</b>, but we can interpret them, i.e. to decode, as characters using  some character table</dt>
@@ -381,7 +389,7 @@
     </section>
 </section>
 
-
+<!--
 <section class="main-section-title"><h1 class="advanced">Base64</h1></section>
 <section class="sub-sections"><h2 class="advanced">Base64</h2>
     <section><h3>Overview</h3>
@@ -462,7 +470,7 @@
 
         </code></pre>
     </section>
-</section>
+</section> -->
 
 <section><h1>Resources</h1></section>
 <section><h2>Resources</h2>

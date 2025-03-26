@@ -317,17 +317,16 @@
             </code></pre>
         </dl>
     </section>
-
     <section id="CreatingDirectories"><h3>Creating Directories</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Creating a Directory</dt>
             <dd>To create a directory in Python, you can use the <a href="https://docs.python.org/3/library/os.html#os.mkdir">os</a> module's <a href="https://docs.python.org/3/library/os.html#os.mkdir">mkdir()</a> function.</dd>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 import os
-                os.makedir("parent_directory")
+                os.mkdir("parent_directory")
             </code></pre>
             <dt>Creating Nested Directories</dt>
-            <dd>You can create nested directories by specifying the full path when calling the <a href="https://docs.python.org/3/library/os.html#os.makedirs">mkdir()</a> function.</dd>
+            <dd>You can create nested directories by specifying the full path when calling the <a href="https://docs.python.org/3/library/os.html#os.makedirs">makedirs()</a> function.</dd>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 import os
                 os.makedirs("parent_directory/child_directory")
@@ -358,13 +357,25 @@
 
 <section id="filesManipulations"><h1>Files Manipulations</h1></section>
 <section><h2>Files Manipulations</h2>
+    <section><h3>Prerequisites: binary vs text files</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt><b>Text Files</b></dt>
+            <dd>Contain human-readable characters (e.g., .txt, .csv, .json).</dd>
+            <dd>Data is stored in encoded format, e.g. UTF-8 (will be discussed in later topics).</dd>
+            <dd>Uses string operations (str).</dd>
+            <dt><b>Binary Files</b></dt>
+            <dd>Store raw data (e.g., .jpg, .png, .exe, .mp4).</dd>
+            <dd>Data is handled as bytes (bytes or bytearray) instead of strings.</dd>
+            <dd>No encoding/decoding is performed.</dd>
+        </dl>
+    </section>
     <section><h3><code>open()</code> function</h3>
         <dl class="fa">
             <dt>For basic files operations, like reading, writing and appending to files we can use the built-in <code>file</code> object and its methods.</dt>
             <dt>To get a corresponding file object we must use the <a href="https://docs.python.org/3/library/functions.html#open">open()</a> built-in function.</dt>
             <dt>Syntax:</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;" data-noescape>
-                fh = open(<em>file_path</em>, mode="<em>mode</em>", encoding="<em>encoding</em>")
+                file = open(file_path, <em>mode</em>="r", <em>encoding</em>="None")
             </code></pre>
             <dt>Open file by the given <em>file_path</em> and return a corresponding file object</dt>
             <dt><em>mode</em>: </dt>
@@ -374,86 +385,105 @@
             <dd>'b' - open in binary mode.</dd>
             <dd>'+' - open for updating (reading and writing).</dd>
             <dt><em>encoding</em>: specifies the encoding of the file. It's optional and defaults to the system's default encoding if not provided.</dt>
-            <dt class="note">After the work with the file is done, you have to call fh.close() in order to release the fh</dt>
+            <dt class="note">After the work with the file is done, you have to call file.close() in order to release the file</dt>
         </dl>
     </section>
     <section><h3>open file - workflow</h3>
         <dl class="fa" style="min-width:80vw">
             <dt><i>Variant 1</i>: manually open and close the file</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                fh = open(file_path, mode="mode", encoding=encoding)
-                try:
-                    # Code to read from or write to the file
-                finally:
-                    fh.close()
+                file = open(file_path, mode="mode", encoding=encoding)
+
+                # Code to read from or write to the file
+
+                file.close() # file must be closed!
             </code></pre>
-            <dd>try-except is used to ensure that even if an exception occurs during the file operations, the file will still be closed properly.</dd>
             <dt><i>Variant 2 <b>(prefered)</b></i>: by <code>with</code> statement, which creates context manager: </dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                with open(file_path, mode="r", encoding=encoding) as fh:
+                with open(file_path, mode="mode", encoding=encoding) as file:
                     # Code to read from the file
                     pass
             </code></pre>
-            <dd>after the code block within the <code>with</code> statement is executed, Python automatically calls the close() method on the file handle, ensuring that the file is properly closed regardless of whether an exception occurred or not. This automatic cleanup is one of the key benefits of using with.</dd>
+            <dd>after the code block within the <code>with</code> statement is executed, Python automatically calls the close() method on the file handle, ensuring that the file is properly closed regardless of whether an exception occurred or not.</dd>
+            <dd>This automatic cleanup is one of the key benefits of using <code>with</code></dd>
+        </dl>
+    </section>
+    <section><h3>Handling Exceptions</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Handling exceptions prevents unexpected crashes, ensures proper cleanup of resources, and provides clear error feedback.</dt>
+            <dt>Note, that when using the <code>with</code> statement we do not need finally block, as the context manager will automatically clear the resources.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                try:
+                    with open("example.txt", "r") as file:
+                        content = file.read()
+                except FileNotFoundError:
+                    print("File not found!")
+                except PermissionError:
+                    print("Permission denied!")
+                except Exception as e:
+                    print(f"Unexpected error: {e}")
+            </code></pre>
         </dl>
     </section>
     <section><h3>Read from file</h3>
         <dl class="fa">
-            <dt><code>fh.read(<i>size</i>)</code></dt>
-            <dd>Reads file content and stores it in variable </dd>
+            <dt><a href="https://docs.python.org/3/library/io.html#io.TextIOBase.read"><code>file.read(<i>size</i>)</code></a></dt>
+            <dd>Reads file as a single string.</dd>
             <dd>When size is omitted or negative, <span class="note">the entire contents of the file will be read and returned</span> (python will not take care if the file is twice as large as your machine’s memory)</dd>
-            <dd>If <i>size</i> is given at most <i>size</i> characters (in text mode) or size bytes (in binary mode) are read and returned.</dd>
             <pre><code rel="Python" class="python">
-                with open('test_file.txt','r') as fh:
-                    # read whole file content:
-                    contents =fh.read()
+                with open("test_file.txt", "r") as file:
+                    # read entire file content:
+                    contents = file.read()
 
                 print(contents)
             </code></pre>
-            <dt><code>fh.readline()</code></dt>
+            <dt><a href="https://docs.python.org/3/library/io.html#io.TextIOBase.readline"><code>file.readline(<i>size</i>)</code></a></dt>
             <dd>Reads and returns a single line from the file (including the ending new line character)</dd>
-            <dd>fh.readline() returns an empty string, when the end of the file has been reached</dd>
-            <dt><code>fh.readlines()</code></dt>
-            <dd>Reads all the lines of a file in a list. You can do the same with <code>list(fh)</code></dd>
+            <dd>file.readline() returns an empty string, when the end of the file has been reached</dd>
             <pre><code rel="python" class="python">
-                with open('test_file.txt', 'r') as fh:
-                    # Read one line at a time using readline():
-                    line = fh.readline()
-                    while line:
-                        print(line.strip())  # Strip to remove newline character
-                        line = fh.readline()
+                with open("test_file.txt", "r") as file:
+                    # Read first line
+                    first_line = file.readline()
+                    print("First line:", first_line.strip()) # strip() to remove trailing newline
 
-                # Alternatively, read all lines into a list using readlines():
-                with open('test_file.txt', 'r') as fh:
-                    lines = fh.readlines()
+                    # Read second line
+                    second_line = file.readline()
+                    print("Second line:", second_line.strip()) # strip() to remove trailing newline
+            </code></pre>
+            <dt><a href="https://docs.python.org/3/library/io.html#io.IOBase.readlines"><code>file.readlines(<i>size</i>)</code></a></dt>
+            <dd>Reads all the lines of a file in a list.</code></dd>
+            <pre><code rel="python" class="python">
+                with open("test_file.txt", "r") as file:
+                    lines = file.readlines()  # get list of all lines
                     for line in lines:
-                        print(line.strip())  # Strip to remove newline character
+                        print(line.strip())  # strip() to remove trailing newline
             </code></pre>
         </dl>
     </section>
-    <section><h3>memory-efficient read</h3>
+    <section><h3>Memory-efficient read line by line</h3>
         <dl class="fa">
-            <dt>To read large files safely line by line without consuming excessive memory, you can iterate over the file object itself. This approach ensures that only one line is loaded into memory at a time, which is memory-efficient:</dt>
+            <dt>To read large files safely line by line without consuming excessive memory, you can iterate over the file object itself (the file object is an iterator).</dt>
+            <dt>This approach ensures that only one line is loaded into memory at a time, which is memory-efficient:</dt>
             <pre><code rel="Python" class="python">
-                with open('large_file.txt', 'r') as file:
-                for line in file:
-                    # Process each line here
-                    print(line.strip())  # Example: Print the line (stripped of newline characters)
-
+                with open("./test_file.txt", "r") as file:
+                    for line in file:
+                        print(line.strip())  # strip() to remove trailing newline
             </code></pre>
+            <dt>You should almost always use file iteration (for line in file) instead of readlines(). It's more memory-efficient, more Pythonic, and works seamlessly with files of any size.
+                The only time you might use readlines() is when you absolutely need all lines as a list for a specific manipulation.</dt>
         </dl>
     </section>
     <section id="writing-to-files"><h3>Writing to Files</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>There are different modes for opening files for writing:</dt>
-            <dd>'w': Write mode. Opens the file for writing. If the file exists, it truncates it (<span class="note">removes its contents</span>) before writing. If the file does not exist, it creates a new file.</dd>
-            <dd>'a': Append mode. Opens the file for writing, but appends new data to the end of the existing file. If the file does not exist, it creates a new file.</dd>
-            <dt><b>Writing Data</b>: Once the file is opened, you can use methods like write() or writelines() to write data to the file.</dt>
+            <dd><b>'w': Write mode</b>. Opens the file for writing. If the file exists, it truncates it (<span class="note">removes its contents</span>) before writing. If the file does not exist, it creates a new file.</dd>
+            <dd><b>'a': Append mode</b>. Opens the file for writing, but appends new data to the end of the existing file. If the file does not exist, it creates a new file.</dd>
+            <dt>Once the file is opened, you can use methods like write() or writelines() to write data to the file.</dt>
             <dd><code>write()</code>: Writes a string to the file.</dd>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                with open("test_file.txt", mode="w", encoding="utf-8") as fh:
-                    fh.write("Hello, world!\n")
-                    fh.write("This is a new line.")
+                with open("test_file.txt", mode="w", encoding="utf-8") as file:
+                    file.write("Hello, world!\n")
+                    file.write("This is a new line.")
 
                 #output:
                 #Hello, world!
@@ -464,27 +494,12 @@
                 data = ['Hello, world!', 'This is a new line.']
                 lines = [f"{line}\n" for line in data]
 
-                with open("test_file.txt", mode="w", encoding="utf-8") as fh:
-                    fh.writelines(lines)
+                with open("test_file.txt", mode="w", encoding="utf-8") as file:
+                    file.writelines(lines)
             </code></pre>
-            <dt>Note that, you must provide new line separator.</dt>
+            <dd class="note">Note that, you must provide new line separator.</dd>
         </dl>
     </section>
-    <section><h3>Error Handling</h3>
-        <dl class="fa" style="min-width:80vw">
-            <dt>When writing to files, it's crucial to handle exceptions that may occur, such as PermissionError or FileNotFoundError.</dt>
-            <pre><code rel="Python" class="python" style="min-height: 10vh;">
-                try:
-                    with open("test_file.txt", mode="w", encoding="utf-8") as fh:
-                        fh.write("Hello, world!")
-                except FileNotFoundError:
-                    print("File not found.")
-                except PermissionError:
-                    print("Permission denied.")
-            </code></pre>
-        </dl>
-    </section>
-
     <section><h3>Remove a file </h3>
       <dl class="fa">
         <dt><code>os.remove(file_path)</code></dt>
@@ -512,7 +527,47 @@
     </section>
 </section>
 
+<section class="main-section-title"><h1>Best Practices for File Handling in Python</h1></section>
+<section class="sub-sections"><h2>Best Practices for File Handling in Python</h2>
+    <section>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Use <code>with open()</code> - ensures automatic file closing.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                with open("file.txt", "r") as file:
+                    content = file.read()
+            </code></pre>
 
+            <dt>Handle exceptions - prevents crashes and improves reliability.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                try:
+                    with open("file.txt", "r") as file:
+                        content = file.read()
+                except (FileNotFoundError, PermissionError) as e:
+                    print(f"Error: {e}")
+            </code></pre>
+
+            <dt>Use the right mode (<code>r</code>, <code>w</code>, <code>a</code>, <code>rb</code>, <code>wb</code>) - avoids accidental data loss.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                with open("file.txt", "a") as file:  # Appending instead of overwriting
+                    file.write("New data\n")
+            </code></pre>
+
+            <dt>Read large files efficiently - avoids excessive memory usage.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                with open("large_file.txt", "r") as file:
+                    for line in file:
+                        process(line)  # Reads one line at a time
+            </code></pre>
+
+            <dt>Check file existence before deleting - prevents errors.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                import os
+                if os.path.exists("file.txt"):
+                    os.remove("file.txt")
+            </code></pre>
+        </dl>
+    </section>
+</section>
 <!--
 <section data-min="20"><h1>stat system call</h1></section>
 <section><h2 class="advanced">stat system call</h2>
@@ -543,96 +598,17 @@
   </section>
 </section> -->
 
-<section id="hw"><h1>Exercises</h1></section>
-<section><h2>Prerequisites</h2>
+
+
+<section id="hw"><h1>HW</h1></section>
+<section id="task1"><h2>Tasks</h2>
     <dl class="fa">
-        <dt>The tasks bellow needs some test data.</dt>
-        <dt>You can download the <a href="Task_and_HW.zip">Task_and_HW.zip</a> in order to get the data and the pre-given folder structure.</dt>
+        <dt>The tasks are given in next <a href="https://gist.github.com/ProgressBG-Python-Course/9d7f55f7411d4f13762c807654e6d0e2">gist file</a></dt>
+        <dt>You can copy it and work directly on it. Just put your code under "### YOUR CODE HERE".</dt>
     </dl>
 </section>
-<section><h2>Task1: Simple Backup</h2>
-    <section><h3>The Task</h3>
-        <p>Create a simple backup function to archive the content in one folder (src) into other folder (dest), while setting a timestamp into dest filenames, as explained in the function docstring below</p>
-        <pre><code rel="Python" class="python">
-            def backup(src, dest):
-              """Backup files in src folder into dest folder.
-                Do not remove the files in source folder.
-                To each file attach suffix with curent timestamp in the form
-                '2018-04-12_18-30-45'
 
-              Args:
-                  src (string): Source folder
-                  dest (string): Destination folder
 
-              Example:
-                /src/track5.mp3 => /dest/track5.mp3_2018-04-12_18-30-45
-              """
-        </code></pre>
-    </section>
-    <section><h3>Hints</h3>
-        <dl class="fa">
-            <dt>To get the current timestamp, you can use next function:</dt>
-        </dl>
-        <pre><code rel="Python" class="python">
-            def get_timestamp():
-              #get the current local date-time
-              now = datetime.datetime.today()
-
-              # get the timestamp as a string with given format
-              timestamp = datetime.datetime.strftime(now, '%Y-%m-%d_%H_%M_%S')
-
-              return timestamp
-        </code></pre>
-    </section>
-    <!-- <section><h3>Solution</h3>
-        <p>Note, that the solution, presented here is for exercise purpose. You do not want to use it in production code! Later, we will discuss the safer technique.</p>
-        <p><a href="https://pastebin.com/MAPV3P0M">Get the code!</a></p>
-    </section> -->
-</section>
-<!-- <section><h2>Task2: Simple Cataloger</h2>
-    <section><h3>The Task</h3>
-        <p>Distribute files in one folder (src) into a corresponding sub-folders,
-        according to their file-type, as explained in the function docstring bellow</p>
-        <pre><code rel="Python" class="python">
-            def cataloger(src):
-            """Distribute files in the src folder into a corresponding sub-folders,
-            according to their file-type.
-
-            Each catalogue, is a subfolder made by a filename extension
-
-            Examples:
-             /data/notes1.txt => /data/txt/notes1.txt
-             /data/notes2.txt => /data/txt/notes2.txt
-             /data/picture1.png => /data/png/picture1.png
-             /data/track1.mp3 => /data/mp3/track1.mp3
-
-            Args:
-                src (string): source folder
-            """
-        </code></pre>
-    </section>
-    <section><h3>Hints</h3>
-        <dl class="fa">
-            <dt>To extract the file extension, you can use the <code>os.path.splitext()</code> method from the <a href="https://docs.python.org/3/library/os.path.html">os.path</a> module</dt>
-        </dl>
-        <pre><code rel="Python" class="python">
-            import os.path
-
-            filename = "/data/new/test.txt"
-            extension = os.path.splitext(filename)[1][1:]
-
-            print(extension)
-        </code></pre>
-    </section>
-</section> -->
-
-<!-- <section><h3>Submission</h3>
-    <dl class="fa">
-        <dt>Please, prefix your filenames/archive with your name initials, before sending.</dt>
-        <dd>For instance: <b>iep_task1.py</b> or <b>iep_tasks.rar</b></dd>
-        <dt>Send files to <a href="mailto:progressbg.python.course@gmail.com?Subject=___MainSectionTitle___">progressbg.python.course@gmail.com</a></dt>
-    </dl>
-</section> -->
 
 <section class="disclaimer" data-background="/ProgressBG-Python-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
      <p>These slides are based on</p>
