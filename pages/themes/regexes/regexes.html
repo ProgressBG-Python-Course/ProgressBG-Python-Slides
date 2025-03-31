@@ -80,12 +80,12 @@
     <section><h3>Overview</h3>
         <dl class="fa">
             <dt>Regular Expression (shortly Regex) is a <span class="note">string pattern</span>, which can match or not other strings.</dt>
-            <dd>You can think of it a as a kind of search mechanism.</dd>
+            <dd>You can think of it a as a super-powered "Find" (Ctrl+F or Cmd+F) feature. Instead of just finding literal text (like "cat"), you can define complex patterns (like "find any three-letter word starting with 'c' and ending with 't'"</dd>
             <dt>Regular Expressions are coming from the <span class="note">regular language</span> defined by <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Kleene</a> in the early 1950s.</dt>
             <dt>Nowadays, almost all programming languages implements the concept of Regex.</dt>
             <dd>Also text editors (like VSCode), IDEs, Databases, CLI toos and more implements them</dd>
             <dt>Example - using regex in Python:</dt>
-            <pre><code rel="Python" class="python" style="min-height: 50vh;">
+            <pre><code rel="Python" class="python" style="min-height: 55vh;">
                 import re
 
                 # regex that matches sequences of 8 or more word characters (letters, numbers, underscores)
@@ -583,7 +583,7 @@
 <section><h2>Regular Expression Objects Methods</h2>
     <section><h3><a href="https://docs.python.org/3/library/re.html#re.Pattern.search">regex.search(string[, start[, end]]))</a></h3>
         <dl class="fa">
-            <dt>Scan through string looking for the  where this regular expression produces a match.</dt>
+            <dt>Scan through string looking for where this regular expression produces a match.</dt>
             <dt>If match produced => returns a corresponding <a href="https://docs.python.org/3/library/re.html#match-objects">match object</a></dt>
             <dt>If string does not matches the pattern => return <span class="note">None</span></dt>
             <dt>optional parameters:</dt>
@@ -678,16 +678,26 @@
         <p>More methods: <a href="https://docs.python.org/3/library/re.html#match-objects">Match Object</a></p>
     </section>
     <section><h3><a href="https://docs.python.org/3/library/re.html#match-objects">Match Object</a> Methods - example</h3>
-        <pre><code rel="Python" class="python" style="min-height: 1vh;">
-            text = "123abc456abc"
-            rx = re.compile('(\d+)(abc)')
+        <pre><code rel="Python" class="python" style="min-height: 65vh;">
+            import re
 
-            res = rx.match(text)
-            if res:
-                print("res.group():", res.group()) #123abc
-                print("res.groups():", res.groups()) #('123', 'abc')
-            else:
-                print("No match!")
+            text = "Name: Maria, Age: 30"
+            pattern = r"Name: (\w+), Age: (\d+)"  # Capture name and age
+
+            match = re.search(pattern, text)
+
+            if match:
+                print("Full match:", match.group(0))
+                print("Name (Group 1):", match.group(1))
+                print("Age (Group 2):", match.group(2))
+                print("All groups:", match.groups())
+
+            # OUTPUT
+            # Full match: Name: Maria, Age: 30
+            # Name (Group 1): Maria
+            # Age (Group 2): 30
+            # All groups: ('Maria', '30')
+
         </code></pre>
     </section>
 </section>

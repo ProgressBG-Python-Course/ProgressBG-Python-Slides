@@ -1,4 +1,4 @@
-import threading
+import multiprocessing
 import os
 import time
 import requests
@@ -6,27 +6,18 @@ import requests
 
 def download_image(url, index, folder):
     """Download an image and save it to the specified folder."""
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
-    }
-    response = requests.get(url, headers=headers, stream=True)
-
-    if response.status_code != 200:
-        print(f"Failed to download {url} - HTTP {response.status_code}")
-        return
-
+    response = requests.get(url, stream=True)
     file_path = os.path.join(folder, f"image_{index}.jpg")
 
-    # Write image to file in chunks
     with open(file_path, "wb") as file:
         for chunk in response.iter_content(1024):
             file.write(chunk)
 
-    print(f"Downloaded: {file_path} ({file_size} bytes)")
+    print(f"Downloaded: {file_path}")
 
 
 def download_without_threading(urls, folder):
-    """Sequential download without threading."""
+    """Sequential download without multiprocessing."""
     start_time = time.time()
     for i, url in enumerate(urls):
         download_image(url, i, folder)
@@ -34,17 +25,17 @@ def download_without_threading(urls, folder):
 
 
 def download_with_threading(urls, folder):
-    """Download using threading."""
+    """Download using multiprocessing."""
     start_time = time.time()
-    threads = []
+    processes = []
 
     for i, url in enumerate(urls):
-        thread = threading.Thread(target=download_image, args=(url, i, folder))
-        threads.append(thread)
-        thread.start()
+        process = multiprocessing.Process(target=download_image, args=(url, i, folder))
+        processes.append(process)
+        process.start()
 
-    for thread in threads:
-        thread.join()
+    for process in processes:
+        process.join()
 
     return time.time() - start_time
 
@@ -61,20 +52,22 @@ if __name__ == "__main__":
 
     # Directories to save images
     sequential_path = os.path.join(os.getcwd(), "downloaded_images_sequential")
-    threading_path = os.path.join(os.getcwd(), "downloaded_images_threading")
+    multiprocessing_path = os.path.join(
+        os.getcwd(), "downloaded_images_multiprocessing"
+    )
     os.makedirs(sequential_path, exist_ok=True)
-    os.makedirs(threading_path, exist_ok=True)
+    os.makedirs(multiprocessing_path, exist_ok=True)
 
     print(f"Running tests on {len(urls)} images...")
 
-    print("\nRunning without threading...")
+    print("\nRunning without multiprocessing...")
     single_time = download_without_threading(urls, sequential_path)
 
-    print("\nRunning with threading...")
-    multi_time = download_with_threading(urls, threading_path)
+    print("\nRunning with multiprocessing...")
+    multi_time = download_with_threading(urls, multiprocessing_path)
 
     # Compare the results
     print("\nResults:")
-    print(f"Without threading: {single_time:.2f} seconds")
-    print(f"With threading: {multi_time:.2f} seconds")
+    print(f"Without multiprocessing: {single_time:.2f} seconds")
+    print(f"With multiprocessing: {multi_time:.2f} seconds")
     print(f"Speedup: {single_time / multi_time:.2f}x")

@@ -1,15 +1,11 @@
 class Person:
-  def __init__(self, name, age):
-    self.name = name
-    self.age = age
+    def __init__(self, name):
+        self.name = name
 
 
-maria = Person("Maria Popova", 25)
+maria = Person("Maria")
 
-print(hasattr(maria,"name"))
-print(hasattr(maria,"surname"))
+age = getattr(maria, "age", "Not specified")
+print(age)
 
-print(getattr(maria, "age"))
-
-setattr(maria, "surname", "Popova")
-print(getattr(maria, "surname"))
+# Output: Not specified
