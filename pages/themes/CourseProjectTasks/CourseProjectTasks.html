@@ -95,6 +95,50 @@
     </section>
 </section>
 
+
+<section class="main-section-title"><h1>Basic Steps for Creating a Python Project</h1></section>
+<section class="sub-sections"><h2>Basic Steps for Creating a Python Project</h2>
+    <section><h3>Create a Project Directory Structure</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Create the project root folder</dt>
+            <dt>Next, create the folder structure:</dt>
+            <pre><code rel="Terminal" class="bash">
+                project_name/
+                ├── src/                # Source code
+                │   ├── __init__.py
+                │   ├── main.py
+                │   ├── module.py
+                ├── docs/               # Documentation (optional)
+                ├── requirements.txt    # Dependencies
+                ├── .gitignore          # Ignore unnecessary files
+                ├── README.md           # Project description
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Init Git project</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Create git repository:</dt>
+            <pre><code rel="Terminal" class="bash">
+                git init
+            </code></pre>
+            <dt>Note that before you make any commit, it's better to create a <code>.gitignore</code> file to specify which files or directories should be ignored by Git.</dt>
+            <dd>You can use for starter: <a href="https://github.com/github/gitignore/blob/main/Python.gitignore">Python.gitignore</a></dd>
+        </dl>
+    </section>
+    <section><h3>Install and save dependencies</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Remember to activate your virtual environment, before installing project dependencies: </dt>
+            <pre><code rel="Terminal" class="bash">
+                .venv\Scripts\activate
+            </code></pre>
+            <dt>After you install a project dependency, make sure to save it in <code>requirements.txt</code> file, by:</dt>
+            <pre><code rel="Terminal" class="bash">
+                pip freeze > requirements.txt
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
 <section class="disclaimer" data-background="/ProgressBG-Python-Slides/outfit/images/for_slides/the_end_on_sand.jpg">
      <p>These slides are based on</p>
      <p>customised version of </p>
