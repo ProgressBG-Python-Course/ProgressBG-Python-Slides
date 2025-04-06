@@ -18,6 +18,8 @@
         link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-Python-Slides/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-Python-Slides/lib/reveal.js/css/print/paper.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
+
+
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
@@ -253,28 +255,31 @@
            <dd>Matches zero or more occurrences of the preceding character or group.</dd>
            <pre><code rel="Python" class="python" style="min-height: 1vh;">
                pattern = re.compile(r'ab*c')
-               result = pattern.match('ac')      # Matches
-               result = pattern.match('abc')     # Matches
-               result = pattern.match('abbc')    # Matches
-               result = pattern.match('a')       # Matches
+
+               result = pattern.search('a')       # Doesn't match
+               result = pattern.search('ac')      # Matches
+               result = pattern.search('abc')     # Matches
+               result = pattern.search('abbc')    # Matches
            </code></pre>
            <dt>+</dt>
            <dd>Matches one or more occurrences of the preceding character or group.</dd>
            <pre><code rel="Python" class="python" style="min-height: 1vh;">
                pattern = re.compile(r'ab+c')
-               result = pattern.match('ac')      # Doesn't match
-               result = pattern.match('abc')     # Matches
-               result = pattern.match('abbc')    # Matches
-               result = pattern.match('a')       # Doesn't match
+
+               result = pattern.search('a')       # Doesn't match
+               result = pattern.search('ac')      # Doesn't match
+               result = pattern.search('abc')     # Matches
+               result = pattern.search('abbc')    # Matches
            </code></pre>
            <dt>?</dt>
            <dd>Matches zero or one occurrence of the preceding character or group.</dd>
            <pre><code rel="Python" class="python" style="min-height: 1vh;">
                pattern = re.compile(r'ab?c')
-               result = pattern.match('ac')      # Matches
-               result = pattern.match('abc')     # Matches
-               result = pattern.match('abbc')    # Doesn't match
-               result = pattern.match('a')       # Doesn't match
+
+               result = pattern.search('a')       # Doesn't match
+               result = pattern.search('ac')      # Matches
+               result = pattern.search('abc')     # Matches
+               result = pattern.search('abbc')    # Doesn't match
            </code></pre>
        </dl>
     </section>
@@ -283,27 +288,30 @@
             <dt>{n}</dt>
             <dd>Matches exactly <code>n</code> occurrences of the preceding character or group.</dd>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
-                pattern = re.compile(r'a{2}b')
-                result = pattern.match('aab')     # Matches
-                result = pattern.match('ab')      # Doesn't match
-                result = pattern.match('aaab')    # Doesn't match
+                pattern = re.compile(r'ab{2}c')
+
+                pattern.search("abc")           # Doesn't match
+                pattern.search("abbc")          # Matches
+                pattern.search("abbbc")         # Doesn't match
             </code></pre>
             <dt>{n,}</dt>
             <dd>Matches <code>n</code> or more occurrences of the preceding character or group.</dd>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
-                pattern = re.compile(r'a{2,}b')
-                result = pattern.match('aab')     # Matches
-                result = pattern.match('aaab')    # Matches
-                result = pattern.match('ab')      # Doesn't match
+                pattern = re.compile(r'ab{2,}c')
+
+                pattern.search("abc")           # Doesn't match
+                pattern.search("abbc")          # Matches
+                pattern.search("abbbc")         # Matches
             </code></pre>
             <dt>{n,m}</dt>
             <dd>Matches at least <code>n</code> and at most <code>m</code> occurrences of the preceding character or group.</dd>
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
-                pattern = re.compile(r'a{2,3}b')
-                result = pattern.match('aab')     # Matches
-                result = pattern.match('aaab')    # Matches
-                result = pattern.match('aaaab')   # Doesn't match
-                result = pattern.match('ab')      # Doesn't match
+                pattern = re.compile(r'ab{2,3}c')
+
+                result = pattern.search("abc")     # Doesn't match
+                result = pattern.search("abbc")    # Matches
+                result = pattern.search("abbbc")   # Matches
+                result = pattern.search("abbbbc")  # Doesn't match
             </code></pre>
         </dl>
     </section>
