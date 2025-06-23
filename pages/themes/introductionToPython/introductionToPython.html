@@ -292,9 +292,11 @@
                 ├── HW
                 └── Labs
             </code></pre>
-            <dt>In Windows File Explorer, right click on 'PythonCourse' folder and select "Open with"=>"Visual Studio Code"</dt>
+            <dt>To open a folder in VSCode as a workspace, you can </dt>
+            <dd>In Windows File Explorer, right click on 'PythonCourse' folder and select "Open with"=>"Visual Studio Code"</dd>
+            <dd>Open VSCode. Go to File > Open Folder... and select the folder you want.</dd>
             <dt>Now you have a single-folder workspace!</dt>
-            <a href="./images/vsCode/PythonCourseWorkspace.png"><img src="./images/vsCode/PythonCourseWorkspace.png" alt="PythonCourseWorkspace"></a>
+            <a href="./images/vsCode/HW _Workspace.png"><img src="./images/vsCode/HW _Workspace.png" alt="PythonCourseWorkspace"></a>
         </dl>
     </section>
     <!-- <section><h3>Prepare your Workspace - demo</h3>
@@ -310,16 +312,24 @@
     <section><h3>Create and execute a Python file</h3>
         <dl class="fa">
             <dt><b>Create</b> a Python File:</dt>
-            <dd>Right click on 'PythonCourse/Labs' folder in VS Code Sidebar.</dd>
+            <dd>In Sidebar, right click in the empty space in Explorer sidebar, or on the folder.</dd>
             <dd>Select: "New File" and in the input box enter the name: <code>say_hello.py</code> and press enter.</dd>
+            <dd>if you see "Do you want to install the recommended 'Python' extension from Microsoft for the Python language?" - then install it.</dd>
             <a href="./images/vsCode/CreateNewFile.png"><img src="./images/vsCode/CreateNewFile.png" alt="CreateNewFile"></a>
             <dt><b>Write</b> down this code (<span class="note">put your name in the quotes</span>):</dt>
             <pre><code rel="Python" class="python">
                 my_name = "Iva"
                 print("Hello " + my_name)
             </code></pre>
-            <dt><b>Run</b> Python Code</dt>
-            <dd>Right click anywhere on the editor window and select "<strong>Run Python File in Terminal</strong>" (or simply press F5).<br><span class="note">Note, this command will be present, only if you've been installed the extension: <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">python by microsoft</a></span></dd>
+           </dl>
+    </section>
+    <section><h3>Execute your Python Program</h3>
+        <dl class="fa">
+            <dt>Make sure your .py file is open.</dt>
+            <dt>Then you have 3 options to run it:</dt>
+            <dd>Click Run Python File triangle at top-right.</dd>
+            <dd>Press <kbd>Ctrl+Shift+P</kbd> → type "Run Python File" → select it.</dd>
+            <dd>Right-click in the editor → Run Python File in Terminal.</dd>
         </dl>
     </section>
     <!-- <section><h3>Create and execute a Python file - demo</h3>
@@ -331,10 +341,11 @@
     <section><h3>Setup 'Run with Python' Task</h3>
         <dl class="fa">
             <dt>It's more flexible and convenient to run Python program by setting <a href="https://code.visualstudio.com/docs/editor/tasks">VSCode task</a>. After that we can run Python Program by pressing <kbd>CTRL+SHIFT+B</kbd>  </dt>
-            <dt>In 'PythonCourse' folder create new folder <code>.vscode</code> (if there is no one) and in it create the file <code>.tasks.json</code></dt>
+            <dt>In main Workspace folder create new folder <code>.vscode</code> (if there is no one) and create the file <code>tasks.json</code></dt>
             <a href="./images/vsCode/setupTasksJson.png"><img src="./images/vsCode/setupTasksJson.png" alt="setupTasksJson"></a>
             <dt>Paste <a href="https://gist.githubusercontent.com/ProgressBG-Python-Course/d89219c0033a24d61a4b2345d5bd4632/raw/129e99bc9490b5536978af0972e34d05587f5c0c/tasks.json">tasks.json</a> code in '.vscode/tasks.json' file: </dt>
             <!-- <script src="https://gist.github.com/WWWCourses/b0dcd6c2f052ae19a79006e496aa53e6.js"></script> -->
+             <dt>Close the <code>tasks.json</code> and open your .py file. And then just use <kbd>CTRL+SHIFT+B</kbd></dt>
         </dl>
     </section>
     <!-- <section><h3>Select Python version</h3>
