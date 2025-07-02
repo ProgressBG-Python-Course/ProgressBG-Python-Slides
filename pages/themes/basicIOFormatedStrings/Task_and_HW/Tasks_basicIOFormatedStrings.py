@@ -71,15 +71,18 @@
 # Enter name of item 3: Eggs
 # Enter price of item 3: 3.59
 #
-#           Shopping Items:
-# Milk                          1.99
-# Bread                         2.49
-# Eggs                          3.59
+# |------------------------------|
+# |       Shopping Items:        |
+# |------------------------------|
+# |Milk                      1.99|
+# |Bread                     2.49|
+# |Eggs                      3.59|
+# |------------------------------|
 
 # ---------------------------------- Task 5 ---------------------------------- #
 ### Description:
 #  Ask the user for the current temperature in Celsius.
-#  Convert this temperature to Fahrenheit using the formula: $F = (C \times 9/5) + 32$.
+#  Convert this temperature to Fahrenheit using the formula: F = (C * 9/5) + 32.
 #  Print both the Celsius and Fahrenheit temperatures, formatted to one decimal place,
 #  using an f-string.
 
