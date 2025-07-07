@@ -1,9 +1,9 @@
 # ---------------------------------- Task 1 ---------------------------------- #
-""" DESCRIPTION:
-    Write a program that asks the user to enter three numbers: start, stop, and step.
-    Create a range object using these values and convert it to a list named 'numbers'.
+"""DESCRIPTION:
+Write a program that asks the user to enter three numbers: start, stop, and step.
+Create a range object using these values and convert it to a list named 'numbers'.
 
-    TIP: Use the range(start, stop, step) function and list() to convert it to a list.
+TIP: Use the range(start, stop, step) function and list() to convert it to a list.
 """
 
 ### YOUR CODE HERE
@@ -28,26 +28,25 @@
     Create a new list 'sliced_list' containing elements from 'start' to 'end' (excluding 'end').
 
     TIP:
-        Use: input_list = list(map(int, user_input.split())) to convert the input string
-        into a list of integers.
+        Use: input_list = user_input.split() to convert the space-separated input string into a list.
 
 """
 
 ### YOUR CODE HERE
-# user_input = input('Enter numbers separated by spaces: ')
-# input_list = list(map(int, user_input.split()))
+# user_input = input("Enter numbers separated by spaces: ")
+# input_list = user_input.split()
 
-# start_index = int(input('Enter start index: '))
-# stop_index = int(input('Enter stop index: '))
+# start_index = int(input("Enter start index: "))
+# stop_index = int(input("Enter stop index: "))
 
 # sliced_list = input_list[start_index:stop_index]
-# print( f'Sliced list: {sliced_list}')
+# print(f"Sliced list: {sliced_list}")
 
 ### EXPECTED OUTPUT:
 # Enter numbers separated by spaces: 1 2 3 4 5 6 7 8 9
 # Enter start index: 2
 # Enter end index: 6
-# Sliced list: [3, 4, 5, 6]
+# Sliced list: ['3', '4', '5', '6']
 
 # ---------------------------------- Task 3 ---------------------------------- #
 """ DESCRIPTION:
@@ -60,11 +59,11 @@
 """
 
 ### YOUR CODE HERE
-# numbers = list(range(1,51))
+# numbers = list(range(1, 51))
 # evens = numbers[1::2]
 
-# print(f'Original list: {', '.join(map(str, numbers[:3]))}, ..., {numbers[-1]}')
-# print(f'Even numbers: {', '.join(map(str, evens[:3]))}, ..., {evens[-1]}')
+# print(f"Original list: {numbers}")
+# print(f"Even numbers: {evens}")
 
 ### EXPECTED OUTPUT:
 # Original list: [1, 2, 3, ..., 50]

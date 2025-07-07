@@ -1,9 +1,9 @@
 # ---------------------------------- Task 1 ---------------------------------- #
-""" DESCRIPTION:
-    Write a program that asks the user to enter three numbers: start, stop, and step.
-    Create a range object using these values and convert it to a list named 'numbers'.
+"""DESCRIPTION:
+Write a program that asks the user to enter three numbers: start, stop, and step.
+Create a range object using these values and convert it to a list named 'numbers'.
 
-    TIP: Use the range(start, stop, step) function and list() to convert it to a list.
+TIP: Use the range(start, stop, step) function and list() to convert it to a list.
 """
 
 ### Your code here
@@ -29,7 +29,7 @@
 # Enter numbers separated by spaces: 1 2 3 4 5 6 7 8 9
 # Enter start index: 2
 # Enter end index: 6
-# Sliced list: [3, 4, 5, 6]
+# Sliced list: ['3', '4', '5', '6']
 
 # ---------------------------------- Task 3 ---------------------------------- #
 """ DESCRIPTION:
