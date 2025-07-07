@@ -110,7 +110,7 @@ TIP: Use the range(start, stop, step) function and list() to convert it to a lis
 	The names, should be stored into a list 'names'.
     Create another list 'sorted_name' which will have names, sorted alphabetically. Do not change the original 'names' list.
 
-    TIP: use list.sort() method to sort a list. Note, that the sort() method works "in-place",
+    TIP: use sorted() function to get a new sorted list, without modifying the original.
 """
 
 ### Your code here
