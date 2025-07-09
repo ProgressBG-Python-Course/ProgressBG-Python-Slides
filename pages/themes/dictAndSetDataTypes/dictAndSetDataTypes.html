@@ -568,23 +568,29 @@
         </code></pre>
     </section>
     <section id="SetsAdd"><h3>Adding Elements to a Set</h3>
-        <p>Use <code>.add(element)</code> to insert a new element into a set. If the element already exists, nothing changes.</p>
-        <pre><code>my_set = {1, 2, 3}
-            my_set.add(4)
-            print(my_set)  # {1, 2, 3, 4}
+        <dl class="fa" style="min-width:80vw">
+            <dt>Use <code>.add(element)</code> to insert a new element into a set. If the element already exists, nothing changes.</dt>
+            <pre><code rel="Python" class="python">
+                my_set = {1, 2, 3}
+                my_set.add(4)
+                print(my_set)  # {1, 2, 3, 4}
 
-            my_set.add(2)
-            print(my_set)  # {1, 2, 3, 4}
-        </code></pre>
+                my_set.add(2)
+                print(my_set)  # {1, 2, 3, 4}
+            </code></pre>
+        </dl>
     </section>
     <section id="SetsRemove"><h3>Removing Elements from a Set</h3>
-        <p>Use <code>.remove(element)</code> to delete an element. Raises an error if the element is not found.</p>
-        <pre><code>my_set = {1, 2, 3}
-            my_set.remove(2)
-            print(my_set)  # {1, 3}
+        <dl class="fa" style="min-width:80vw">
+            <dt>Use <code>.remove(element)</code> to delete an element. Raises an error if the element is not found.</dt>
+            <pre><code rel="Python" class="python"></code>
+                my_set = {1, 2, 3}
+                my_set.remove(2)
+                print(my_set)  # {1, 3}
 
-            my_set.remove(5)  # KeyError
-        </code></pre>
+                my_set.remove(5)  # KeyError
+            </code></pre>
+        </dl>
     </section>
     <section><h3>Sets vs Dictionaries</h3>
         <dl class="fa">
