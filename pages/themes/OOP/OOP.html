@@ -305,7 +305,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Class Attributes</h3>
+    <section><h3 class="advanced">Class Attributes</h3>
         <dl class="fa">
             <dt>Class Attributes are defined outside any methods and are typically placed at the top, just under the class header.</dt>
             <dt>They <b>are shared across all instances of the class</b>.</dt>
@@ -328,7 +328,7 @@
             print(Person.name, Person.age)	# Anonymous 100
         </code></pre>
     </section>
-    <section><h3>Instance Attributes shadows Class Attributes</h3>
+    <section><h3 class="advanced">Instance Attributes shadows Class Attributes</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>If you change a class attribute value using the class name, it affects all instances. However, if you modify it using an instance, it affects only that instance.</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
@@ -347,7 +347,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Class Attributes - use case 1</h3>
+    <section><h3 class="advanced">Class Attributes - use case 1</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Class attributes are ideal for values that are common to all instances of a class.</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
@@ -366,7 +366,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Class Attributes - use case 2</h3>
+    <section><h3 class="advanced">Class Attributes - use case 2</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Class attributes are ideal for defining constants.</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
@@ -384,7 +384,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Class Attributes - use case 3</h3>
+    <section><h3 class="advanced">Class Attributes - use case 3</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Class attributes are ideal for default values.</dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
@@ -465,24 +465,31 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>more on self</h3>
+    <section><h3>More on "self"</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>When a method is invoked from an object, <span class="note">Python automatically passes the object reference to the first parameter in the method definition</span>.</dt>
-            <pre><code rel="Python" class="python" style="min-height: 50vh;">
+            <dt>When a method is invoked from an object, <span class="note">Python automatically passes the object reference to the first parameter in the method definition</span>. You can name it anything you like, but the convention is to use <code>self</code>.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 80vh;">
                 class A:
                     def method1(self, obj):
                         print(self)
                         print(obj)
                         print(self==obj)
 
-
+                # create an object of class A
                 a = A()
 
-                # lets check if a == self
+                # call method1 on the object a
                 a.method1(a)
 
-                # &lt;__main__.A object at 0x7fa44994df40&gt;
-                # &lt;__main__.A object at 0x7fa44994df40&gt;
+                # is equivalent to:
+                A.method1(a, a)
+
+                # Output:
+                # self=<__main__.A object at 0x7fe2b7a4ea50>
+                # obj=<__main__.A object at 0x7fe2b7a4ea50>
+                # True
+                # self=<__main__.A object at 0x7fe2b7a4ea50>
+                # obj=<__main__.A object at 0x7fe2b7a4ea50>
                 # True
             </code></pre>
         </dl>
@@ -609,6 +616,52 @@
 
 <section id="OopBasicsExamples"><h1>OOP Basics: Examples</h1></section>
 <section><h2>OOP Basics: Examples</h2>
+    <section><h3>Car Class</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>This code defines a Car class with attributes such as manufacturer, model, year, color, and mileage.</dt>
+            <dt>It includes methods to simulate accelerating and braking the car, along with a string representation of the car's details</dt>
+        </dl>
+        <pre><code rel="Python" class="python" style="min-height: 99vh;">
+            class Car:
+                """Represents a car with specific attributes and functionalities."""
+
+                def __init__(self, manufacturer, model, year, color, mileage):
+                    """Initializes a Car object with the given attributes."""
+                    self.manufacturer = manufacturer
+                    self.model = model
+                    self.year = year
+                    self.color = color
+                    self.mileage = mileage
+
+                def accelerate(self, speed_increase):
+                    """Simulates accelerating the car by increasing its speed."""
+                    # Add safety checks and speed limits here
+                    print(f"Car is accelerating, speed increased by {speed_increase} mph.")
+
+                def brake(self, speed_decrease):
+                    """Simulates braking the car by decreasing its speed."""
+                    # Add safety checks and minimum speed requirement here
+                    print(f"Car is braking, speed decreased by {speed_decrease} mph.")
+
+                def __str__(self):
+                    """Returns a formatted string of the car's details. Called automatically by print()"""
+                    return f"Manufacturer: {self.manufacturer}\nModel: {self.model}\nYear: {self.year}\nColor: {self.color}\nMileage: {self.mileage}"
+
+            # Example usage:
+            my_car = Car("Toyota", "Camry", 2020, "Silver", 30000)
+            my_car.accelerate(20)
+            my_car.brake(10)
+            print(my_car)
+
+            # Car is accelerating, speed increased by 20 mph.
+            # Car is braking, speed decreased by 10 mph.
+            # Manufacturer: Toyota
+            # Model: Camry
+            # Year: 2020
+            # Color: Silver
+            # Mileage: 30000
+        </code></pre>
+    </section>
     <section><h3>Employee Class</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>The following example defines an Employee class to represent an employee with attributes (name, emp_id, salary, department).</dt>
@@ -690,51 +743,10 @@
             # Department: Finance
         </code></pre>
     </section>
-    <section><h3>Car Class</h3>
+    <section><h3>TASK: Find top 3 highest paid employees</h3>
         <dl class="fa" style="min-width:80vw">
-            <dt>This code defines a Car class with attributes such as manufacturer, model, year, color, and mileage.</dt>
-            <dt>It includes methods to simulate accelerating and braking the car, along with a string representation of the car's details</dt>
+            <dt>Using the "Find employee with the highest salary" example, modify the code to find and print the top 3 highest paid employees.</dt>
         </dl>
-        <pre><code rel="Python" class="python" style="min-height: 99vh;">
-            class Car:
-                """Represents a car with specific attributes and functionalities."""
-
-                def __init__(self, manufacturer, model, year, color, mileage):
-                    """Initializes a Car object with the given attributes."""
-                    self.manufacturer = manufacturer
-                    self.model = model
-                    self.year = year
-                    self.color = color
-                    self.mileage = mileage
-
-                def accelerate(self, speed_increase):
-                    """Simulates accelerating the car by increasing its speed."""
-                    # Add safety checks and speed limits here
-                    print(f"Car is accelerating, speed increased by {speed_increase} mph.")
-
-                def brake(self, speed_decrease):
-                    """Simulates braking the car by decreasing its speed."""
-                    # Add safety checks and minimum speed requirement here
-                    print(f"Car is braking, speed decreased by {speed_decrease} mph.")
-
-                def __str__(self):
-                    """Returns a formatted string of the car's details. Called automatically by print()"""
-                    return f"Manufacturer: {self.manufacturer}\nModel: {self.model}\nYear: {self.year}\nColor: {self.color}\nMileage: {self.mileage}"
-
-            # Example usage:
-            my_car = Car("Toyota", "Camry", 2020, "Silver", 30000)
-            my_car.accelerate(20)
-            my_car.brake(10)
-            print(my_car)
-
-            # Car is accelerating, speed increased by 20 mph.
-            # Car is braking, speed decreased by 10 mph.
-            # Manufacturer: Toyota
-            # Model: Camry
-            # Year: 2020
-            # Color: Silver
-            # Mileage: 30000
-        </code></pre>
     </section>
 </section>
 
@@ -743,6 +755,7 @@
     <section><h3>Overview</h3>
         <dl class="fa">
             <dt>Inheritance is a fundamental concept in object-oriented programming (OOP) that allows a new class to inherit properties and methods from an existing class</dt>
+            <dt>You can think of Inheritance like an "IS-A" relationship in natural languages. Like a dog IS-A animal, a car IS-A vehicle, or a teacher IS-A person. The child class (dog) inherits all the properties and behaviors of the parent class (animal) while adding its own specific characteristics</dt>
             <dt>The mechanism of Inheritance allows programmers to create new (derived) class that is built upon existing (base) class, extending (if needed) its behaviour.</dt>
             <dt>The primary benefit of inheritance is code reusability.</dt>
         </dl>
@@ -913,6 +926,51 @@
                 # The actual __age value remains the same (private attributes are not directly accessible)
                 print(maria)  # Output: name = Maria Popova; __age = 25
 
+            </code></pre>
+        </dl>
+    </section>
+    <section><h3>Encapsulation: Example</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Consider the following example, which do not use Encapsulation (Dangerous):</dt>
+            <pre><code rel="Python" class="python">
+                class BankAccount:
+                    def __init__(self, balance):
+                        self.balance = balance  # Public - anyone can modify
+
+                account = BankAccount(1000.0)
+
+                # Anyone can directly modify the balance - DANGEROUS!
+                account.balance = 999999.99  # Unauthorized modification
+                account.balance = -500       # Negative balance allowed
+                account.balance = "hacked"   # Wrong data type
+            </code></pre>
+            <dt>With Encapsulation (Safe):</dt>
+            <pre><code rel="Python" class="python">
+                class BankAccount:
+                    def __init__(self, balance):
+                        self.__balance = balance  # Private - cannot be modified directly
+
+                    def deposit(self, amount):
+                        if amount > 0:
+                            self.__balance += amount
+                            print(f"Deposited {amount}. New balance is {self.__balance}.")
+                        else:
+                            print("Invalid deposit amount.")
+
+                    def withdraw(self, amount):
+                        if 0 < amount <= self.__balance:
+                            self.__balance -= amount
+                            print(f"Withdrew {amount}. New balance is {self.__balance}.")
+                        else:
+                            print("Insufficient funds.")
+
+                    def get_balance(self):
+                        return self.__balance
+
+                account = BankAccount(1000)
+                account.deposit(500)    # Works: balance = 1500
+                account.withdraw(200)   # Works: balance = 1300
+                account.withdraw(2000)  # Blocked: "Insufficient funds" msg
             </code></pre>
         </dl>
     </section>
