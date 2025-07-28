@@ -89,7 +89,8 @@
 <section><h2>Exceptions Handling</h2>
     <section id="Overview"><h3>Overview</h3>
         <dl class="fa">
-            <dt>An exception is an error that occurs during the execution of a program.</dt>
+            <dt>An exception is an error that occurs <span class="note">during the execution</span> of a program.</dt>
+            <dd>Note that syntax errors, like <code>print("hello)</code> can not be handled, as they occur in parsing stage, i.e. before the code is executed.</dd>
             <dt>Exception handling allows a program to:</dt>
             <dd>Avoid crashes by handling unexpected errors.</dd>
             <dd>Provide user-friendly feedback instead of cryptic error messages.</dd>
@@ -103,7 +104,6 @@
                     # Code to handle the specific exception
                     print("Cannot divide by zero!")
             </code></pre>
-            <dt>Note that syntax errors, like <code>print("hello)</code> can not be handled, as they occur in parsing stage, i.e. before the code is executed.</dt>
         </dl>
     </section>
     <section id="Syntax"><h3>Syntax</h3>
@@ -239,7 +239,7 @@
             <code></code>
         </dl>
     </section>
-    <section id="DefineAndRaiseCustomExceptions"><h3>Define And Raise Custom Exceptions</h3>
+    <section id="DefineAndRaiseCustomExceptions"><h3 class="advanced">Define And Raise Custom Exceptions</h3>
         <dl class="fa">
             <dt>We can use the <code>raise</code> statement to trigger custom errors when necessary.</dt>
             <dt>To define a custom exception, create a new class that inherits from the built-in <code>Exception</code> class:</dt>
@@ -276,7 +276,7 @@
     <section>
         <dl class="fa" style="min-width:80vw">
             <dt><b>Be specific</b>: Catch only the exceptions you expect and can handle</dt>
-            <dt><b>Don't catch all exceptions</b>: Avoid bare except: statements that catch everything</dt>
+            <dt><b>Don't catch all exceptions</b>: Avoid bare except statements that catch everything</dt>
             <dt><b>Keep try blocks small</b>: Only include code that might raise exceptions</dt>
             <dt><b>Handle exceptions appropriately</b>: Don't hide errors without addressing them</dt>
             <dt><b>Use finally for cleanup</b>: Resource cleanup belongs in finally blocks</dt>
@@ -285,7 +285,15 @@
 </section>
 
 <section><h1>Resources</h1></section>
-<section><h2>Resources</h2>
+<section><h2>Video tutorials</h2>
+    <section><h3>Python Tutorial: Using Try/Except Blocks for Error Handling</h3>
+        <iframe width="1218" height="685" src="https://www.youtube.com/embed/NIWwJbo-9_8" title="Python Tutorial: Using Try/Except Blocks for Error Handling" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+    <section><h3 class="advanced">Exception Handling Tips in Python ⚠ Write Better Python Code Part 7</h3>
+        <iframe width="1218" height="685" src="https://www.youtube.com/embed/ZsvftkbbrR0" title="Exception Handling Tips in Python ⚠ Write Better Python Code Part 7" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
+</section>
+<section><h2>Readings</h2>
     <section><h3>Blogs, wiki, docs</h3>
         <dl class="fa">
             <dt><a href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions @The Python Tutorial</a></dt>
