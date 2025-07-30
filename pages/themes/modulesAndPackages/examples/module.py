@@ -4,3 +4,5 @@ def foo():
 
 def bar():
   print("Bar")
+
+print(f'__file__:{__file__}')

@@ -1,3 +1,3 @@
-import sys
+import module
 
-print(sys.version)
+print(f'__file__ in main:{__file__}')
