@@ -286,7 +286,6 @@
             </code></pre>
         </dl>
     </section>
-
     <section><h3>How a generator function works?</h3>
          <a href="./images/generator_vs_normal_function.png"><img src="./images/generator_vs_normal_function.png" alt="generator_vs_normal_function.png" style="width: 80vw;"></a>
     </section>
@@ -322,7 +321,21 @@
 
         </code></pre>
     </section>
+    <section><h3>Example - nested list flatten generator</h3>
+        <pre><code rel="Python" class="python" style="min-height: 40vh;">
+            def flatten(nested):
+                """Flattens a nested list into a single generator of elements."""
+                for sublist in nested:
+                    for element in sublist:
+                        yield element
 
+            nested = [[1, 2], [3, 4], [5]]
+
+            print( list(flatten(nested)) )
+
+            # [1, 2, 3, 4, 5]
+        </code></pre>
+    </section>
 </section>
 <!--
 <section data-min="5"><h1>Generators Examples</h1></section>
@@ -394,7 +407,8 @@
         </dl>
     </section>
 </section>
-<!--
+
+
 <section data-min="10"><h1>Generator comprehensions examples:</h1></section>
 <section><h2 class="advanced">Generator comprehensions examples:</h2>
     <section><h3>Process large log file</h3>
@@ -460,7 +474,7 @@
             print(total_sales_amount)
         </code></pre>
     </section>
-</section> -->
+</section>
 
 
 <section id="hw"><h1>Homework</h1></section>
@@ -473,8 +487,6 @@
         </section>
     </section>
 </section>
-
-
 
 
 
