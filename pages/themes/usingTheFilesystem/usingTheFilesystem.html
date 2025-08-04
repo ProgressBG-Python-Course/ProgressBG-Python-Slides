@@ -107,7 +107,7 @@
             </code></pre>
             <dt>Root path</dt>
             <dd>Windows can have many root directories designated with letters, such as C: or D:</dd>
-            <dd>In Linux and macOS there is only one root directory, designated as <b>/</b> and  </dd>
+            <dd>In Linux and macOS there is only one root directory, designated as <b>/</b> </dd>
         </dl>
     </section>
     <section><h3>CWD - Current Working Directory</h3>
@@ -151,7 +151,7 @@
     <section><h3>Absolute vs Relative Paths</h3>
         <a href="./images/absolute_vs_relative_path.png"><img src="./images/absolute_vs_relative_path.png" alt="absolute_vs_relative_path.png" style="min-height: 50vh;"></a>
         <dl class="fa" style="min-width:80vw">
-            <dt>The `.` path name represents the CWD</dt>
+            <dt>The `.`  refers to the current directory (often implied, so you can omit it). For example <code>.\fizz</code> is the same as <code>fizz</code></dt>
             <dt>The `..` path name represents the parent directory, which is the directory one level up from the CWD</dt>
         </dl>
     </section>
@@ -287,7 +287,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>List the entire directory content</h3>
+    <section><h3 class="advanced">List the entire directory content</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>To list the entire directory content, including subfolders, you can use the the <a href="https://docs.python.org/3/library/os.html#os.walk">os.walk</a> function:</dt>
             <dt>Next example demonstrate how to list the entire content of CWD:</dt>
@@ -401,8 +401,10 @@
             <dt><i>Variant 2 <b>(prefered)</b></i>: by <code>with</code> statement, which creates context manager: </dt>
             <pre><code rel="Python" class="python" style="min-height: 10vh;">
                 with open(file_path, mode="mode", encoding=encoding) as file:
-                    # Code to read from the file
+                    # Code to read from or write to the file
                     pass
+
+                # file is automatically closed here
             </code></pre>
             <dd>after the code block within the <code>with</code> statement is executed, Python automatically calls the close() method on the file handle, ensuring that the file is properly closed regardless of whether an exception occurred or not.</dd>
             <dd>This automatic cleanup is one of the key benefits of using <code>with</code></dd>

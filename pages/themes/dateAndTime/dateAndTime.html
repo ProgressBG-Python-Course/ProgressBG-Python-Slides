@@ -141,6 +141,25 @@
     </section>
 </section>
 
+<section class="main-section-title"><h1>Creating a Specific Date and Time</h1></section>
+<section class="sub-sections"><h2>Creating a Specific Date and Time</h2>
+    <section>
+        <dl class="fa" style="min-width:80vw">
+            <dt>You can construct a datetime object  by providing the year, month, day, hour, etc.</dt>
+            <pre><code rel="Python" class="python" style="min-height: 1vh;">
+                from datetime import datetime
+
+                user_birthday = datetime(year=1999, month=10, day=17, hour=12, minute=30, second=45)
+                print(f'Specific Date and Time: {user_birthday}')
+
+                # OUTPUT:
+                # Specific Date and Time: 1999-10-17 12:30:45
+            </code></pre>
+            <dt>Reference: <a href="https://docs.python.org/3/library/datetime.html#datetime-objects">datetime Objects @python.docs</a></dt>
+        </dl>
+    </section>
+</section>
+
 <section data-min="50" class="main-section-title"><h1>Date and Time Components</h1></section>
 <section class="sub-sections"><h2>Date and Time Components</h2>
     <section>
@@ -158,7 +177,6 @@
                 print("Minute:", now.minute)
                 print("Second:", now.second)
                 print("Microsecond:", now.microsecond)
-
             </code></pre>
         </dl>
     </section>
@@ -253,8 +271,8 @@
         </dl>
     </section>
 </section>
-<section class="sub-sections"><h2>Date Arithmetic with <code>dateutil</code> module</h2>
-    <section><h3>Overview</h3>
+<section class="sub-sections"><h2 class="advanced">Date Arithmetic with <code>dateutil</code> module</h2>
+    <section><h3 class="advanced">Overview</h3>
         <dl class="fa">
             <dt>The third-party <a href="https://dateutil.readthedocs.io/en/stable/">dateutil</a> module provides powerful extensions to the standard datetime module. </dt>
             <dt>To use it, you must install it first.</dt>
@@ -264,7 +282,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Example</h3>
+    <section><h3 class="advanced">Example</h3>
         <dl class="fa">
             <dt>The <code>relativedelta</code> class from dateutil takes care of the complex date calculations, including months and leap years:</dt>
         </dl>
@@ -310,7 +328,7 @@
         </dl>
     </section>
 </section>
-<section class="sub-sections"><h2>Working with timezones via <code>pytz</code> module</h2>
+<!-- <section class="sub-sections"><h2>Working with timezones via <code>pytz</code> module</h2>
     <section><h3>Overview</h3>
         <dl class="fa">
             <dt>The <a href="https://pypi.org/project/pytz/">pytz</a> third-party module brings the <a href="https://en.wikipedia.org/wiki/Tz_database">Olson tz database</a> into Python. This library allows accurate and cross platform timezone calculations using Python 2.4 or higher. </dt>
@@ -377,7 +395,7 @@
             </code></pre>
         </dl>
     </section>
-</section>
+</section> -->
 <section class="sub-sections"><h2>Working with timezones via <code>zoneinfo</code> module</h2>
     <section><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
@@ -390,6 +408,7 @@
                 current = datetime.now(ZoneInfo("Europe/Sofia"))
                 print(current)
             </code></pre>
+            <dt><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List of tz database time zones</a></dt>
         </dl>
     </section>
     <section><h3>Find the current time of a certain timezone</h3>
@@ -478,7 +497,7 @@
         </code></pre>
     </section>
     <section><h3>When will my birthday be on given weekday name?</h3>
-        <pre><code rel="Python" class="python" style="min-height: 90vh;">
+        <pre><code rel="Python" class="python" style="min-height: 100vh;">
             import datetime
 
             def find_years_with_weekday(date, target_weekday, search_period):
@@ -511,7 +530,7 @@
 
         </code></pre>
     </section>
-    <section><h3>Calculates the Western Easter date for given period</h3>
+    <!-- <section><h3>Calculates the Western Easter date for given period</h3>
         <p>Using the Samuel Butcher Algorithm, published in <a href="https://en.wikipedia.org/wiki/Computus">Computus @ wikipedia</a>.</p>
         <pre><code rel="Python" class="python" style="min-height: 50vh;">
             import datetime
@@ -540,7 +559,7 @@
             print('\n'.join(easter_dates))
             print('*'*50)
         </code></pre>
-    </section>
+    </section> -->
     <section><h3>Calculates the Western Easter date for given period using dateutil.easter</h3>
         <p>The <a href="https://pypi.org/project/python-dateutil/">dateutil</a> package provides <a href="https://dateutil.readthedocs.io/en/stable/easter.html">easter</a> module, supporting Western, Ortodox and Julian Calendars.</p>
         <pre><code rel="Python" class="python" style="min-height: 70vh;">
