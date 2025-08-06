@@ -94,7 +94,21 @@
             <dt>Python provides several built-in modules for data serialization, including:</dt>
             <dd><b>CSV (Comma-Separated Values)</b>: a common format for data serialization, particularly for tabular data.</dd>
             <dd><b>JSON (JavaScript Object Notation)</b>: a lightweight data interchange format commonly used for transmitting data between a server and a web application. Python provides the json module for encoding and decoding JSON data.</dd>
+            <dd><b>XML (eXtensible Markup Language)</b>: a markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable. Python provides the xml module for working with XML data.</dd>
             <dd><b>Pickle</b>: a Python-specific serialization format that can serialize and deserialize virtually any Python object. It is highly efficient but Python-specific, meaning that pickled data may not be compatible with other programming languages.</dd>
+        </dl>
+    </section>
+    <section><h3>JSON vs CSV vs XML</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>JSON</dt>
+            <dd>JSON is a lightweight data interchange format that is easy to read and write for humans and machines. It is widely used for data exchange between web applications and servers.</dd>
+            <dd>JSON supports complex data structures, including nested objects and arrays, making it suitable for representing hierarchical data.</dd>
+            <dt>CSV</dt>
+            <dd>CSV is a simple text format that represents tabular data in a comma-separated format. It is commonly used for storing and exchanging structured data in spreadsheets and databases.</dd>
+            <dd>CSV is best suited for flat, tabular data without complex relationships.</dd>
+            <dt>XML</dt>
+            <dd>XML is a markup language that provides a flexible way to represent structured data. It uses tags to define elements and attributes to describe properties of those elements.</dd>
+            <dd>XML is more verbose than JSON or CSV, making it less efficient for large datasets but suitable for representing complex hierarchical structures.</dd>
         </dl>
     </section>
 </section>
@@ -309,9 +323,9 @@
     </section>
 </section>
 
-<section class="main-section-title" id="handling-csv-data-in-python"><h1>Handling CSV Data in Python</h1></section>
-<section class="sub-sections"><h2>Reading and Writing CSV Files</h2>
-    <section><h3>CSV format overview</h3>
+<section class="main-section-title" id="handling-csv-data-in-python"><h1 class="advanced">Handling CSV Data in Python</h1></section>
+<section class="sub-sections"><h2 class="advanced">Reading and Writing CSV Files</h2>
+    <section><h3 class="advanced">CSV format overview</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>CSV (Comma-Separated Values) format is a widely used data file format that stores tabular data (numbers and text) in plain text.</dt>
             <dt>Characteristics:</dt>
@@ -328,7 +342,7 @@
             </code></pre>
         </dl>
     </section>
-    <section id="reading-and-writing-csv-files"><h3>Reading and Writing CSV Files</h3>
+    <section id="reading-and-writing-csv-files"><h3 class="advanced">Reading and Writing CSV Files</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Using the <a href="https://docs.python.org/3/library/csv.html">csv</a> Module</dt>
             <dd>The <a href="https://docs.python.org/3/library/csv.html">csv</a> module in Python provides functionality to read and write CSV files.</dd>
@@ -355,7 +369,7 @@
             </code></pre>
         </dl>
     </section>
-    <section><h3>Parsing CSV: Example</h3>
+    <section><h3 class="advanced">Parsing CSV: Example</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Let's have next data in "sample_data.csv" file:</dt>
             <pre><code rel="sample_data.csv" class="python">
@@ -416,6 +430,48 @@
     </section>
 </section>
 
+<section class="main-section-title"><h1 class="advanced">Handling XML Data in Python</h1></section>
+<section class="sub-sections"><h2 class="advanced">Handling XML Data in Python</h2>
+    <section><h3 class="advanced">Example</h3>
+        <dl class="fa" style="min-width:80vw">
+            <dt>Let's have next data in "sample_data.xml" file:</dt>
+            <pre><code rel="sample_data.xml" class="xml">
+                &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                &lt;data&gt;
+                    &lt;item&gt;
+                        &lt;name&gt;apple&lt;/name&gt;
+                        &lt;price&gt;1.80&lt;/price&gt;
+                    &lt;/item&gt;
+                    &lt;item&gt;
+                        &lt;name&gt;orange&lt;/name&gt;
+                        &lt;price&gt;2.10&lt;/price&gt;
+                    &lt;/item&gt;
+                    &lt;item&gt;
+                        &lt;name&gt;bananas&lt;/name&gt;
+                        &lt;price&gt;1.60&lt;/price&gt;
+                    &lt;/item&gt;
+                &lt;/data&gt;
+            </code></pre>
+            <dt>we can parse them with:</dt>
+            <pre><code rel="Python" class="python" style="min-height: 10vh;">
+                import xml.etree.ElementTree as ET
+
+                # Parse the XML file
+                tree = ET.parse('sample_data.xml')
+                root = tree.getroot()
+
+                # Iterate through items and print their names and prices
+                for item in root.findall('item'):
+                    name = item.find('name').text
+                    price = item.find('price').text
+                    print(f'Name: {name}, Price: {price}')
+            </code></pre>
+        </dl>
+    </section>
+</section>
+
+
+<!--
 <section class="main-section-title"><h1>CSV vs JSON</h1></section>
 <section class="sub-sections"><h2>CSV vs JSON</h2>
     <section><h3>CSV pros and cons</h3>
@@ -454,7 +510,7 @@
             <dd>You need to import or export data from spreadsheet tools or databases frequently.</dd>
         </dl>
     </section>
-</section>
+</section> -->
 
 
 <!-- <section><h1>Handling CSV Data in Python</h1></section>
