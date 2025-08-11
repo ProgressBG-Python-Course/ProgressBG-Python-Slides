@@ -166,9 +166,9 @@
     </section>
 </section>
 
-<section class="main-section-title" id="BasicConceptsProcessedAndThreads">
-    <h1>Basic Concepts: Processed and Threads</h1></section>
-<section class="sub-sections"><h2>Basic Concepts: Processed and Threads</h2>
+<section class="main-section-title" id="BasicConceptsProcessesAndThreads">
+    <h1>Basic Concepts: Processes and Threads</h1></section>
+<section class="sub-sections"><h2>Basic Concepts: Processes and Threads</h2>
     <section><h3>Processes</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Processes are independent execution units that contain their own state information, use separate memory spaces, and communicate with each other through inter-process communication (IPC) mechanisms like pipes, sockets, or shared memory.</dt>
@@ -194,7 +194,7 @@
 
                     # A simple but computationally intensive task
                     result = 0
-                    for i in range(10000000):  # 10 million iterations
+                    for i in range(10_000_000):
                         result += n * (math.sin(i * 0.00001) * math.cos(i * 0.00002))
 
                     return f"Input: {n}, Result: {result:.6f}"
@@ -297,6 +297,7 @@
                         for chunk in response.iter_content(1024):
                             file.write(chunk)
 
+                    file_size = os.path.getsize(file_path)
                     print(f"Downloaded: {file_path} ({file_size} bytes)")
 
 

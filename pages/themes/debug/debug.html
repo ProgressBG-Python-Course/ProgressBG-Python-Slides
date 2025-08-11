@@ -106,28 +106,29 @@
             <pre><code rel="Python" class="python" style="min-height: 1vh;">
                 def factorial(n):
                     result = 1
-                    for i in range(1, n+1):
-                        result *= i
+                    for i in range(1, n + 1):
+                        result *= n
 
                         # trace the values of i and result:
                         print(f"i: {i}, result: {result}")
 
                     return result
 
+
                 print(factorial(5))
 
-                # i: 1, result: 1
-                # i: 2, result: 2
-                # i: 3, result: 6
-                # i: 4, result: 24
-                # i: 5, result: 120
-                # 120
+                # i: 1, result: 5
+                # i: 2, result: 25
+                # i: 3, result: 125
+                # i: 4, result: 625
+                # i: 5, result: 3125
+                # 3125
             </code></pre>
         </dl>
     </section>
 </section>
 
-<section class="main-section-title" id="DebugWithLogger"><h1>The Logging Module</h1></section>
+<!-- <section class="main-section-title" id="DebugWithLogger"><h1>The Logging Module</h1></section>
 <section class="sub-sections"><h2 class="advanced">The Logging Module</h2>
     <section id="using_logging_module"><h3>Overview</h3>
         <dl class="fa" style="min-width:80vw">
@@ -272,7 +273,7 @@
             </code></pre>
         </dl>
     </section>
-    <!-- <section id="modular_logging_definition"><h3 class="advanced">Modular Logging</h3>
+    <section id="modular_logging_definition"><h3 class="advanced">Modular Logging</h3>
         <dl class="fa" style="min-width:80vw">
             <dt>Modular logging is a logging approach where each module uses its own logger object to emit log messages.</dt>
             <dt>In large applications, different modules may need independent logging behavior, such as setting different logging levels, formatting, and output destinations.  </dt>
@@ -303,8 +304,8 @@
                 logger.critical('Critical message')
             </code></pre>
         </dl>
-    </section> -->
-</section>
+    </section>
+</section> -->
 
 
 <section><h1>Debug Python with VS Code</h1></section>
