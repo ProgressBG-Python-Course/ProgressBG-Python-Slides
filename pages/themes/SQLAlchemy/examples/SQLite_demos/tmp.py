@@ -1,39 +1,24 @@
-import sqlite3
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-connection = sqlite3.connect("python_course.db")
+engine = create_engine("sqlite:///example.db", pool_size=2, max_overflow=0)
+Session = sessionmaker(bind=engine)
 
-cursor = connection.cursor()
-# cursor.execute('''
-# CREATE TABLE IF NOT EXISTS employees (
-#     id INTEGER PRIMARY KEY,
-#     name TEXT NOT NULL,
-#     position TEXT NOT NULL,
-#     office TEXT,
-#     age INTEGER,
-#     start_date TEXT
-# )
-# ''')
-# connection.commit()
+s1 = Session()
+s2 = Session()
 
-# cursor.execute('''
-# INSERT INTO employees (name, position, office, age, start_date)
-# VALUES ('Ivan Ivanov', 'Software Engineer', 'Sofia', 30, '2022-01-01')
-# ''')
-# connection.commit()
+dbapi1 = s1.connection().connection
+dbapi2 = s2.connection().connection
 
-# cursor.execute('SELECT * FROM employees')
-# rows = cursor.fetchall()
-# for row in rows:
-#     print(row)
+print("Session1 DBAPI id:", id(dbapi1))
+print("Session2 DBAPI id:", id(dbapi2))
 
-# Update data
-cursor.execute('''
-UPDATE employees SET age = 31 WHERE name = 'Ivan Ivanov'
-''')
-# connection.commit()
+# Keep both sessions open
+# Borrowing a third connection would block because pool_size=2, max_overflow=0
+s3 = Session()
+dbapi3 = s3.connection().connection
+print("Session3 DBAPI id:", id(dbapi3))  # would raise error or block if pool exhausted
 
-# Delete data
-cursor.execute('''
-DELETE FROM employees WHERE name = 'Ivan Ivanov'
-''')
-connection.commit()
+s1.close()
+s2.close()
+s3.close()
